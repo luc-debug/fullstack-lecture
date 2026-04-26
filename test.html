@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Mini User Dashboard – Strukturierte Version</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 { text-align: center; }
+    #dashboard { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-top: 20px; }
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      padding: 16px;
+      width: 200px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: scale(1.05); }
+    .active { border-left: 6px solid green; }
+    .inactive { border-left: 6px solid red; }
+    .stats { text-align: center; margin-bottom: 16px; }
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+  </style>
+</head>
+<body>
+
+<h1>Mini User Dashboard</h1>
+<div class="stats" id="stats"></div>
+<div id="dashboard"></div>
+<div style="text-align:center; margin-top:20px;">
+  <button id="toggleActive">Nur aktive User</button>
+</div>
+
+<script>
+  /* ===============================
+     Unteraufgabe 1: Destructuring & Default Values
+     Erklärung: Wir extrahieren die Properties der Benutzerobjekte und geben Standardwerte, falls sie fehlen
+  =============================== */
+  const users = [
+    { name: "Max", age: 25, isActive: true, role: "Admin" },
+    { name: "Anna", age: 22, isActive: false, role: null },
+    { name: "Tom", age: 30, isActive: true, role: "User" },
+    { name: "Lisa", age: 28, isActive: false }
+  ];
+
+  let showOnlyActive = false;
+  const dashboard = document.getElementById("dashboard");
+  const stats = document.getElementById("stats");
+  const toggleBtn = document.getElementById("toggleActive");
+
+  /* ===============================
+     Unteraufgabe 3: Array-Methoden (filter & reduce)
+     Wir zählen aktive Benutzer und filtern je nach Button
+  =============================== */
+  function getFilteredUsers() {
+    return showOnlyActive ? users.filter(u => u.isActive) : users;
+  }
+
+  function getActiveCount() {
+    return users.reduce((count, u) => u.isActive ? count +1 : count, 0);
+  }
+
+  /* ===============================
+     Unteraufgabe 9 & 4: Ternary Operator & Short-Circuit
+     Statusanzeige und aktive/inaktive Klassen
+  =============================== */
+  function createUserCard(user) {
+    // Unteraufgabe 1: Destructuring + Nullish Coalescing
+    const { name = "Gast", age = "n/a", isActive = false, role } = user;
+    const displayRole = role ?? "User"; // Unteraufgabe 5
+
+    const card = document.createElement("div");
+    card.className = "card " + (isActive ? "active" : "inactive");
+
+    card.innerHTML = `
+      <h3>${name}</h3>
+      <p>Alter: ${age}</p>
+      <p>Rolle: ${displayRole}</p>
+      <p>Status: ${isActive ? "✅ Aktiv" : "❌ Inaktiv"}</p>
+    `;
+    return card;
+  }
+
+  /* ===============================
+     Unteraufgabe 2: Arrow Functions & Event Handling
+     Button klickt → Filter umschalten
+  =============================== */
+  toggleBtn.addEventListener("click", () => {
+    showOnlyActive = !showOnlyActive;
+    toggleBtn.textContent = showOnlyActive ? "Alle User" : "Nur aktive User";
+    renderDashboard();
+  });
+
+  /* ===============================
+     Haupt-Funktion zum Rendern des Dashboards
+     Alle Unteraufgaben sichtbar und klar referenziert
+  =============================== */
+  function renderDashboard() {
+    dashboard.innerHTML = "";
+
+    const filteredUsers = getFilteredUsers(); // Unteraufgabe 3
+    const activeCount = getActiveCount();     // Unteraufgabe 3
+
+    // Statistik
+    stats.innerHTML = `Benutzer gesamt: ${users.length} | Aktiv: ${activeCount}`;
+
+    // Unteraufgaben 1,4,5,6,9 werden hier sichtbar
+    filteredUsers.forEach(user => {
+      const card = createUserCard(user);
+      dashboard.appendChild(card);
+    });
+  }
+
+  // ===============================
+  // Initiales Rendern
+  // ===============================
+  renderDashboard();
+
+</script>
+
+</body>
+</html>
