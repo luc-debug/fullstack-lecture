@@ -12,7 +12,22 @@ style: |
 
 # Frontend Tooling
 
-_Vorabbemerkung: Die folgenden Konzepte sind allgemein für JavaScript. Sie lassen sich somit auf alle CMSs (zum Beispiel Wordpress, TYPO3), SPA (React) oder MPAs (zum Beispiel ASP .NET CORE) anwenden. Denn am Ende ist es egal womit DU deine Webseite baust: JavaScript wird immer im Browser ausgeführt_
+---
+
+## Inhaltsverzeichnis
+
+1. [Einleitung](#einleitung)
+2. [Build Tooling](#build-tooling)
+   - [Transpiler](#transpiler)
+   - [Polyfills](#polyfills)
+   - [Bundler](#bundler)
+     - [Dependency Graph](#dependency-graph)
+     - [Cache Busting](#cache-busting)
+     - [Source Maps](#source-maps)
+3. [Source Code Quality Tooling](#source-code-quality-tooling)
+   - [Linter](#linter)
+   - [Formatter](#formatter)
+4. [Zusammenfassung: Vites Toolchain](#zusammenfassung-vites-toolchain)
 
 ---
 
