@@ -16,6 +16,22 @@ _Vorabbemerkung: Die folgenden Konzepte sind allgemein für JavaScript. Sie lass
 
 ---
 
+## Legened
+🧰: Aufgabe
+- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werde
+- 🟡 Mittel: Erfordert etwas mehr Aufwand oder spezifisches Wissen
+- 🔴 Schwer: Erfordert umfangreiche Änderungen oder externe Unterstützung
+
+🛠️: Tool (Werkzeug); Ein stück Software das ein Problem löst
+💡: Konzept, wehes implementiert wird 
+🚫 Problem beschreibung, welches das Konzeopt löst
+✅: Lösungsbeschriebung des Problems, welches das Konzept löst
+
+
+
+
+---
+
 ## Einleitung
 
 - In der Frontend Vorlesung haben wir ein Build-Tool kennengelernt: Vite
@@ -41,7 +57,7 @@ _Vorabbemerkung: Die folgenden Konzepte sind allgemein für JavaScript. Sie lass
 
 ---
 
-### Transpiler
+### 🛠️ Transpiler
 
 🚫 Problem: keine Abwärtskompatibilität
 ✅ Lösung: Transpiler sind Tools, die modernen JavaScript-Code (**Syntax**) in eine ältere Version umwandeln, damit er in älteren Browsern funktioniert.
@@ -56,7 +72,7 @@ _Vorabbemerkung: Die folgenden Konzepte sind allgemein für JavaScript. Sie lass
 
 ---
 
-### Polyfills
+### 🛠️ Polyfills
 
 🚫 Problem: Ältere Browser kennen bestimmte **Built-in-Funktionen** nicht (z.B. `Promise`, `Array.prototype.includes`). Diese lassen sich nicht durch Syntax-Umschreibung lösen.
 ✅ Lösung: Polyfills sind Code-Snippets, die fehlende APIs in älteren Browsern nachimplementieren.
@@ -99,7 +115,7 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 ---
 
-### Bundler
+### 🛠️ Bundler
 
 #### Was ist ein Bundler?
 
@@ -107,7 +123,7 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 - Was für die Entwicklung gut ist (Modularisierung des Codes) ist für den Browser schlecht: Viele einzelne Module bedeuten viele HTTP-Requests, was durch Latenz und Connection-Limits (bei HTTP/1.1) zu langen Ladezeiten führt.
 
-> 💡 Hinweis: Auch mit HTTP/2 (Multiplexing) bleibt Bundling sinnvoll – Bundler ermöglichen zusätzlich Tree Shaking, Minification und Code Splitting, die über reine Request-Reduktion hinausgehen.
+> 💡 Hinweis: Auch mit HTTP/2 (Multiplexing) bleibt Bundling sinnvoll – Bundler ermöglichen zusätzlich Tree Shaking, Minification und Code Splitting, die über reine Request-Reduktion hinausgehen. (mehr dazu in der Web Performance Unit)
 
 - Wie eingangs schon erwähnt wurde zu Beginn der Entwicklung von JAvaScript kein OPaketverwaltung implementiert. Es gab also keine Möglichkeit, Module zu importieren. Das führte dazu, dass Entwickler ihre eigenen Lösungen für Modularität und Abhängigkeiten entwickeln mussten (z.B. durch globale Variablen oder IIFEs). Mit der Einführung von ES6-Modulen (`import`/`export`) wurde zwar eine standardisierte Syntax für Module geschaffen, aber die Browserunterstützung war anfangs begrenzt, was die Notwendigkeit von Bundlern weiter verstärkte. Bis heute können zum die zwar eraltetet aber immer noch genutzte Modulsystem CommonJS im Browser nicht verwednet werden.
 
@@ -125,7 +141,7 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 ---
 
-#### Dependency Graph:
+#### 💡 Dependency Graph:
 
 🚫 Problem: Module importieren andere Module, die wiederum weitere Module importieren – es entsteht ein komplexes Netz aus Abhängigkeiten, das manuell kaum zu überblicken ist.
 TBD: Foto aus the seniorDev
@@ -133,14 +149,14 @@ TBD: Foto aus the seniorDev
 ✅ Lösung: Bundler analysieren die Abhängigkeiten zwischen den Modulen und erstellen einen Dependency Graph, um die Reihenfolge der Bündelung zu bestimmen.
 
 
-#### Cache Busting
+#### 💡 Cache Busting
 
 🚫 Problem: Browser cachen gebündelte Dateien, was zu Problemen führen kann, wenn neue Versionen der Dateien bereitgestellt werden (z.B. nach einem Deployment).
 ✅ Lösung: Bundler können nach jedem Build Hashes in die Dateinamen einfügen (z.B. `bundle.abc123.js`), um sicherzustellen, dass der Browser die neueste Version lädt.
 
 ---
 
-#### Source Maps
+#### 💡 Source Maps
 
 🚫 Problem: Durch den Einsatz von Bundlern ist ein Problem entstanden, welches wir zuvor gar nicht hatten: Man kann den Quellcode nicht mehr so gut debuggen, da sich durch den Bundling-Prozess die erstellten Code-Dateien von den tatsächlich vom Browser interpretierten Code-Dateien **stark** unterscheiden.
 
@@ -163,8 +179,9 @@ Mittel 🟡
 
 ## Source Code Quality Tooling
 
-### Statische Codeanalyse
+### 🛠️ Linter
 
+- Linting ist ein Aspekt der statische Codeanalyse; weitere aspekte werden nicht in der Vorlesung besprochen um den Umfang nicht zu sprengen
 - Linter analysieren den Quellcode, ohne ihn auszuführen, und finden potenzielle Fehler, Code-Smells und Verstöße gegen Coding-Conventions.
   - Tools: ESLint, Biome
 
@@ -172,7 +189,7 @@ TBD Beispiele für Code Smells
 
 ---
 
-### Formatting
+### 🛠️ Formatter
 
 
 - Formatter sorgen für ein einheitliches Code-Format (Einrückung, Zeilenlänge, etc.).
@@ -185,30 +202,7 @@ TBD Beispiele für Code Smells
 TBD: Bild von Pullrequest mit Formatierung vs. ohne Formatierung
 
 
----
 
-
-
-# Performance OPtimizing
-
-#### Tree Shaking
-
-🚫 Problem: Nicht jeder importierte Code wird tatsächlich verwendet – unnötiger Code vergrößert das Bundle.
-
-✅ Lösung: Bundler können anhand des Dependency Graphs ungenutzten Code erkennen und entfernen (sog. Tree Shaking), um die Bundle-Größe zu reduzieren.
-
----
-
-#### Code Splitting
-
-🚫 Problem: Ein einziges großes Bundle bedeutet, dass der Nutzer auch Code herunterlädt, den er auf der aktuellen Seite gar nicht braucht.
-
-✅ Lösung: Bundler können den Code in kleinere Teile aufteilen, die nur bei Bedarf geladen werden:
-
-- Route Based Splitting: Code wird basierend auf den Routen der Anwendung aufgeteilt.
-- Dynamic Imports: Code wird erst geladen, wenn er tatsächlich benötigt wird, z.B. durch `import()`-Syntax.
-
----
 
 
 ---
