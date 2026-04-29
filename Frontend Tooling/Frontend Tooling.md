@@ -206,7 +206,7 @@ TBD: Bild von Pullrequest mit Formatierung vs. ohne Formatierung
 
 ## Zusammenfassung: Vites Toolchain
 
-Zurück zur Ausgangsfrage: Welche Tools hat Vite für uns zusammengebündelt?
+Zurück zur Ausgangsfrage: Welche Tools hat Vite für uns eingerichtet?
 
 ```
 Quellcode (.ts, .tsx, .css, .html)
