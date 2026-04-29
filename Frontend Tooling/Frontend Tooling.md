@@ -32,18 +32,17 @@ style: |
 ---
 
 ## Legened
+
 🧰: Aufgabe
+
 - 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werde
 - 🟡 Mittel: Erfordert etwas mehr Aufwand oder spezifisches Wissen
 - 🔴 Schwer: Erfordert umfangreiche Änderungen oder externe Unterstützung
 
 🛠️: Tool (Werkzeug); Ein stück Software das ein Problem löst
-💡: Konzept, wehes implementiert wird 
+💡: Konzept, wehes implementiert wird
 🚫 Problem beschreibung, welches das Konzeopt löst
 ✅: Lösungsbeschriebung des Problems, welches das Konzept löst
-
-
-
 
 ---
 
@@ -56,7 +55,21 @@ style: |
 
 ---
 
-- Welche anderen Tools gibt es noch?
+<div class ="columns">
+  <div>
+
+  ![alt text](iceberg.png)
+  </div>
+  <div>
+
+  - Die meisten entwickler arbeiten mit Fancy JavaScript Frameworks
+  - Ohne jedoch wirklich zu wissen was darunter ist
+  </div>
+</div>
+
+---
+
+- Welche anderen (Built)Tools gibt es noch?
 
 ![alt text](image.png)
 
@@ -134,7 +147,7 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 #### Was ist ein Bundler?
 
-🚫 Problem 
+🚫 Problem
 
 - Was für die Entwicklung gut ist (Modularisierung des Codes) ist für den Browser schlecht: Viele einzelne Module bedeuten viele HTTP-Requests, was durch Latenz und Connection-Limits (bei HTTP/1.1) zu langen Ladezeiten führt.
 
@@ -147,12 +160,12 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 ✅ Lösung: Bundler
 
 - (Module) Bundler sind Tools, die verschiedene JavaScript-Dateien und andere Ressourcen (wie CSS, Bilder) in eine oder wenige Dateien bündeln, um die Anzahl der HTTP-Requests und damit die Ladezeit zu reduzieren.
-- Tools: 
-  - Webpack:alt und langsam aber immer noch  am meisten verbeitet 
-  -  Rollup bzw. Rolldown: Rolldown ist der Nachfolger von roll up und so zimeloch State of the Art 
-  -  Parcel: Einfache Konfiguration, aber weniger flexibel als Webpack
-  -  Rspack: Webpack-Alternative mit Fokus auf Performance
-  -  tsup bzw. tsdown: Bundler spezell für Libraries
+- Tools:
+  - Webpack:alt und langsam aber immer noch am meisten verbeitet
+  - Rollup bzw. Rolldown: Rolldown ist der Nachfolger von roll up und so zimeloch State of the Art
+  - Parcel: Einfache Konfiguration, aber weniger flexibel als Webpack
+  - Rspack: Webpack-Alternative mit Fokus auf Performance
+  - tsup bzw. tsdown: Bundler spezell für Libraries
 
 ---
 
@@ -162,7 +175,6 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 TBD: Foto aus the seniorDev
 
 ✅ Lösung: Bundler analysieren die Abhängigkeiten zwischen den Modulen und erstellen einen Dependency Graph, um die Reihenfolge der Bündelung zu bestimmen.
-
 
 #### 💡 Cache Busting
 
@@ -206,7 +218,6 @@ TBD Beispiele für Code Smells
 
 ### 🛠️ Formatter
 
-
 - Formatter sorgen für ein einheitliches Code-Format (Einrückung, Zeilenlänge, etc.).
   - Tools: Prettier, Biome
 
@@ -216,8 +227,7 @@ TBD Beispiele für Code Smells
 
 TBD: Bild von Pullrequest mit Formatierung vs. ohne Formatierung
 
-
-
+---
 
 ## Zusammenfassung: Vites Toolchain
 
