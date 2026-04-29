@@ -10,7 +10,12 @@ style: |
   }
 ---
 
-# Performance OPtimizing
+# Performance Optimizing
+
+
+_Vorabbemerkung: Die meisten folgenden Konzepte sind allgemein. Sie lassen sich somit auf alle CMSs (zum Beispiel Wordpress, TYPO3), SPA (zum Beispiel React) oder MPAs (zum Beispiel ASP .NET CORE) anwenden. Denn am Ende ist es egal womit DU deine Webseite baust: Am Ende wird immer ausschließlich HTML, CSS und JavaScript  im Browser ausgeführt._
+
+---
 
 ## 1. Diagnosis
 
