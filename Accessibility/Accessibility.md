@@ -4,9 +4,9 @@ paginate: true
 size: 4:3
 ---
 
-
 # Accessibility
 
+---
 
 ## Motivation
 
@@ -14,7 +14,9 @@ size: 4:3
 - Menschen ohne Einschränkungen profitieren davon, (Beispiel Keyboard navigation, keine Maus Notwendig) -> schnellere Bedienung
 - Compliance/ Regulation -> EU Richtlinie
 
+## No brainer
 
+- Semantisches HTML
 
-TBD 
+TBD
 Action Item mit A11y aufsetzen; Anschlie0end an Frontend Tooling
