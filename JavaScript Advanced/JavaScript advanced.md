@@ -18,13 +18,22 @@ style: |
 
 # Inhaltsverzeichnis
 
-[Ternary Operator](#ternary-operator)
-[Short-Circuit Evaluation](#short-circuit-evaluation)
-[Nullish Coalescing](#nullish-coalescing)
-[Optional Chaining](#optional-chaining)
-[Array Destructuring](#array-destructuring)
-[Object Destructuring](#object-destructuring)
-[Spread Operator für Objekte](#spread-operator-für-objekte)
+**Bedingte Operatoren**
+
+[1. Ternary Operator](#ternary-operator)
+[2. Short-Circuit Evaluation](#short-circuit-evaluation)
+[3. Nullish Coalescing](#nullish-coalescing)
+[4. Optional Chaining](#optional-chaining)
+
+**Daten entpacken und Objekte bearbeiten**
+[5. Destructuring](#5-destructuring)
+[5.1 Array Destructuring](#5.1-array-destructuring)
+[5.2 Object Destructuring](#5.2-object-destructuring)
+[7. Spread Operator für Objekte](#spread-operator-für-objekte)
+[8. Rest Operator](#rest-operator)
+
+**Sonstige**
+
 [Array-Methoden](#array-methoden)
 [Promises](#promises)
 
@@ -98,11 +107,7 @@ In JSX kann kein `if/else` verwendet werden, da nur **Ausdrücke** (Expressions)
 function Greeting({ isLoggedIn }) {
   return (
     <div>
-      {isLoggedIn ? (
-        <h1>Willkommen zurück!</h1>
-      ) : (
-        <h1>Bitte einloggen</h1>
-      )}
+      {isLoggedIn ? <h1>Willkommen zurück!</h1> : <h1>Bitte einloggen</h1>}
     </div>
   );
 }
@@ -121,10 +126,10 @@ function Greeting({ isLoggedIn }) {
 
 Schreibe eine Funktion `bewertung(punkte)`, die folgende Werte zurückgibt:
 
-| Punkte       | Rückgabewert     |
-|-------------|-----------------|
-| 90 oder mehr | `"Sehr gut"`    |
-| 50–89        | `"Bestanden"`   |
+| Punkte       | Rückgabewert      |
+| ------------ | ----------------- |
+| 90 oder mehr | `"Sehr gut"`      |
+| 50–89        | `"Bestanden"`     |
 | unter 50     | `"Durchgefallen"` |
 
 1. Implementiere die Funktion zuerst mit `if/else`.
@@ -149,14 +154,14 @@ Die logischen Operatoren `&&` und `||` geben in JavaScript **nicht** immer `true
 
 ```javascript
 // || gibt den ersten truthy Wert zurück (oder den letzten Wert)
-"Hallo" || "Welt"       // → "Hallo"
-0 || "Fallback"          // → "Fallback"
-"" || null || "Default"  // → "Default"
+"Hallo" || "Welt"; // → "Hallo"
+0 || "Fallback"; // → "Fallback"
+"" || null || "Default"; // → "Default"
 
 // && gibt den ersten falsy Wert zurück (oder den letzten Wert)
-"Hallo" && "Welt"       // → "Welt"
-0 && "Welt"              // → 0
-"A" && "B" && "C"        // → "C"
+"Hallo" && "Welt"; // → "Welt"
+0 && "Welt"; // → 0
+"A" && "B" && "C"; // → "C"
 ```
 
 ---
@@ -169,9 +174,9 @@ function greet(name) {
   const displayName = name || "Gast";
   console.log(`Hallo, ${displayName}!`);
 }
-greet("Anna");     // "Hallo, Anna!"
-greet("");         // "Hallo, Gast!"  ⚠️ Leerer String ist falsy!
-greet(undefined);  // "Hallo, Gast!"
+greet("Anna"); // "Hallo, Anna!"
+greet(""); // "Hallo, Gast!"  ⚠️ Leerer String ist falsy!
+greet(undefined); // "Hallo, Gast!"
 
 // Bedingte Ausführung mit &&
 const user = { name: "Max", isAdmin: true };
@@ -179,7 +184,7 @@ user.isAdmin && console.log("Admin-Panel anzeigen");
 
 // Nützlich für optionale Funktionsaufrufe
 const callback = null;
-callback && callback();  // Kein Fehler, wird einfach übersprungen
+callback && callback(); // Kein Fehler, wird einfach übersprungen
 ```
 
 > **Wichtig:** `||` behandelt `0`, `""`, `false` und `NaN` als falsy — das kann zu unerwarteten Ergebnissen führen! (→ siehe Nullish Coalescing)
@@ -254,18 +259,18 @@ Der `??`-Operator wurde in ES2020 eingeführt und löst ein Problem von `||`:
 
 ```javascript
 // || (Short-Circuit)
-0 || 42          // → 42     ⚠️
-"" || "Fallback" // → "Fallback" ⚠️
-false || true    // → true   ⚠️
-null || "Wert"   // → "Wert" ✅
+0 || 42; // → 42     ⚠️
+"" || "Fallback"; // → "Fallback" ⚠️
+false || true; // → true   ⚠️
+null || "Wert"; // → "Wert" ✅
 ```
 
 ```javascript
 // ?? (Nullish Coalescing)
-0 ?? 42          // → 0      ✅
-"" ?? "Fallback" // → ""     ✅
-false ?? true    // → false  ✅
-null ?? "Wert"   // → "Wert" ✅
+0 ?? 42; // → 0      ✅
+"" ?? "Fallback"; // → ""     ✅
+false ?? true; // → false  ✅
+null ?? "Wert"; // → "Wert" ✅
 ```
 
 </div>
@@ -274,22 +279,22 @@ null ?? "Wert"   // → "Wert" ✅
 
 ## `??` vs `||` — Wann was verwenden?
 
-| Operator | Fallback wenn...                        | Anwendungsfall                         |
-|----------|----------------------------------------|---------------------------------------|
-| `\|\|`   | `null`, `undefined`, `0`, `""`, `false`, `NaN` | Allgemeiner Fallback, „irgendwas Truthy" |
-| `??`     | nur `null` oder `undefined`             | Sichere Standardwerte, wo `0` und `""` gültig sind |
+| Operator | Fallback wenn...                               | Anwendungsfall                                     |
+| -------- | ---------------------------------------------- | -------------------------------------------------- |
+| `\|\|`   | `null`, `undefined`, `0`, `""`, `false`, `NaN` | Allgemeiner Fallback, „irgendwas Truthy"           |
+| `??`     | nur `null` oder `undefined`                    | Sichere Standardwerte, wo `0` und `""` gültig sind |
 
 ```javascript
 // Beispiel: Benutzereinstellungen
-const userVolume = 0;  // Nutzer hat Lautstärke bewusst auf 0 gesetzt
+const userVolume = 0; // Nutzer hat Lautstärke bewusst auf 0 gesetzt
 
-const volume1 = userVolume || 50;  // → 50  ❌ Nutzerwunsch ignoriert!
-const volume2 = userVolume ?? 50;  // → 0   ✅ Nutzereinstellung respektiert
+const volume1 = userVolume || 50; // → 50  ❌ Nutzerwunsch ignoriert!
+const volume2 = userVolume ?? 50; // → 0   ✅ Nutzereinstellung respektiert
 
 // Beispiel: API-Daten
 const apiResponse = { count: 0, label: "" };
-const count = apiResponse.count ?? "Nicht verfügbar";  // → 0 ✅
-const label = apiResponse.label ?? "Kein Label";        // → "" ✅
+const count = apiResponse.count ?? "Nicht verfügbar"; // → 0 ✅
+const label = apiResponse.label ?? "Kein Label"; // → "" ✅
 ```
 
 ---
@@ -360,8 +365,8 @@ Der `?.`-Operator (ES2020) ermöglicht sicheren Zugriff auf verschachtelte Eigen
 const user = {
   name: "Max",
   address: {
-    city: "Stuttgart"
-  }
+    city: "Stuttgart",
+  },
 };
 
 // Ohne Optional Chaining — Fehler wenn address undefined
@@ -369,11 +374,11 @@ const user = {
 // user.contact.email        ❌ TypeError!
 
 // Klassische Absicherung
-const email = user.contact && user.contact.email;  // → undefined
+const email = user.contact && user.contact.email; // → undefined
 
 // Mit Optional Chaining
-const email = user.contact?.email;                  // → undefined (kein Fehler!)
-const city = user.address?.city;                     // → "Stuttgart"
+const email = user.contact?.email; // → undefined (kein Fehler!)
+const city = user.address?.city; // → "Stuttgart"
 ```
 
 ---
@@ -383,20 +388,25 @@ const city = user.address?.city;                     // → "Stuttgart"
 ```javascript
 const data = {
   users: [
-    { name: "Anna", greet() { return "Hallo!"; } }
-  ]
+    {
+      name: "Anna",
+      greet() {
+        return "Hallo!";
+      },
+    },
+  ],
 };
 
 // Eigenschaftszugriff
-data.users?.[0]?.name         // → "Anna"
-data.users?.[5]?.name         // → undefined
+data.users?.[0]?.name; // → "Anna"
+data.users?.[5]?.name; // → undefined
 
 // Methodenaufruf
-data.users?.[0]?.greet?.()    // → "Hallo!"
-data.users?.[0]?.missing?.()  // → undefined (kein Fehler)
+data.users?.[0]?.greet?.(); // → "Hallo!"
+data.users?.[0]?.missing?.(); // → undefined (kein Fehler)
 
 // Kombiniert mit ?? für Standardwerte
-const name = data.users?.[0]?.nickname ?? "Unbekannt";  // → "Unbekannt"
+const name = data.users?.[0]?.nickname ?? "Unbekannt"; // → "Unbekannt"
 ```
 
 > 📖 `?.` stoppt die Auswertung und gibt `undefined` zurück, sobald ein Glied `null` oder `undefined` ist.
@@ -423,8 +433,8 @@ function UserProfile({ user }) {
 // In useEffect mit API-Daten
 useEffect(() => {
   fetch("/api/user")
-    .then(res => res.json())
-    .then(data => {
+    .then((res) => res.json())
+    .then((data) => {
       // Sicherer Zugriff auf verschachtelte Daten
       const avatar = data?.profile?.images?.[0]?.url ?? "/default-avatar.png";
       setAvatar(avatar);
@@ -448,18 +458,19 @@ const response = {
         social: {
           github: "maxdev",
           // twitter fehlt absichtlich
-        }
+        },
       },
       posts: [
         { title: "Erster Post", tags: ["javascript", "react"] },
-        { title: "Zweiter Post" }  // tags fehlt absichtlich
-      ]
-    }
-  }
+        { title: "Zweiter Post" }, // tags fehlt absichtlich
+      ],
+    },
+  },
 };
 ```
 
 Schreibe Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
+
 1. Die Bio des Users (oder `"Keine Bio"`)
 2. Den Twitter-Handle (oder `"Nicht verknüpft"`)
 3. Den ersten Tag des zweiten Posts (oder `"Kein Tag"`)
@@ -469,13 +480,13 @@ Schreibe Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
 
 <!-- _header: "" -->
 
-# Array Destructuring
+# 5. Destructuring
 
 ---
 
-<!-- header: Array Destructuring -->
+<!-- header: 5. Destructuring -->
 
-## Array Destructuring
+## 5.1 Array Destructuring
 
 Destructuring erlaubt es, Werte aus Arrays in einzelne Variablen zu „entpacken":
 
@@ -488,32 +499,33 @@ const zweite = farben[1];
 
 // Mit Destructuring
 const [erste, zweite, dritte] = farben;
-console.log(erste);   // "rot"
-console.log(zweite);  // "grün"
-console.log(dritte);  // "blau"
+console.log(erste); // "rot"
+console.log(zweite); // "grün"
+console.log(dritte); // "blau"
 ```
 
 > 📖 Die Zuordnung erfolgt über die **Position** im Array.
 
 ---
 
-## Array Destructuring — Erweiterte Syntax
+### Array Destructuring — Erweiterte Syntax
 
 ```javascript
 const zahlen = [1, 2, 3, 4, 5];
 
 // Elemente überspringen
-const [erste, , dritte] = zahlen;     // erste=1, dritte=3
+const [erste, , dritte] = zahlen; // erste=1, dritte=3
 
 // Rest-Pattern (...rest)
-const [head, ...rest] = zahlen;        // head=1, rest=[2,3,4,5]
+const [head, ...rest] = zahlen; // head=1, rest=[2,3,4,5]
 
 // Standardwerte
-const [a, b, c = 99] = [10, 20];      // a=10, b=20, c=99
+const [a, b, c = 99] = [10, 20]; // a=10, b=20, c=99
 
 // Variablen tauschen (ohne Hilfsvariable!)
-let x = "A", y = "B";
-[x, y] = [y, x];                       // x="B", y="A"
+let x = "A",
+  y = "B";
+[x, y] = [y, x]; // x="B", y="A"
 ```
 
 ```javascript
@@ -522,7 +534,7 @@ function getMinMax(arr) {
   return [Math.min(...arr), Math.max(...arr)];
 }
 
-const [min, max] = getMinMax([3, 7, 1, 9]);  // min=1, max=9
+const [min, max] = getMinMax([3, 7, 1, 9]); // min=1, max=9
 ```
 
 ---
@@ -553,7 +565,7 @@ const [email, setEmail] = useState("");
 
 ---
 
-## 🧰 Aufgabe — Array Destructuring
+### 🧰 Aufgabe — Array Destructuring
 
 1. Schreibe eine Funktion `parseDate(dateString)`, die einen String wie `"06.02.2026"` erhält und per `split(".")` in Tag, Monat und Jahr destructuriert. Gib ein formatiertes Datum zurück: `"2026-02-06"`.
 
@@ -568,15 +580,7 @@ const [first, remaining] = head([10, 20, 30, 40]);
 
 ---
 
-<!-- _header: "" -->
-
-# Object Destructuring
-
----
-
-<!-- header: Object Destructuring -->
-
-## Object Destructuring
+## 5.2 Object Destructuring
 
 Ähnlich wie bei Arrays, aber die Zuordnung erfolgt über den **Eigenschaftsnamen**:
 
@@ -584,7 +588,7 @@ const [first, remaining] = head([10, 20, 30, 40]);
 const person = {
   name: "Anna",
   alter: 25,
-  stadt: "Stuttgart"
+  stadt: "Stuttgart",
 };
 
 // Klassisch
@@ -593,16 +597,16 @@ const alter = person.alter;
 
 // Mit Destructuring
 const { name, alter, stadt } = person;
-console.log(name);   // "Anna"
-console.log(alter);  // 25
-console.log(stadt);  // "Stuttgart"
+console.log(name); // "Anna"
+console.log(alter); // 25
+console.log(stadt); // "Stuttgart"
 ```
 
 > 📖 Die Reihenfolge spielt **keine** Rolle — nur der **Name** muss übereinstimmen.
 
 ---
 
-## Object Destructuring — Erweiterte Syntax
+### Object Destructuring — Erweiterte Syntax
 
 ```javascript
 const produkt = {
@@ -610,7 +614,7 @@ const produkt = {
   title: "Laptop",
   price: 999,
   category: "Elektronik",
-  stock: 42
+  stock: 42,
 };
 
 // Umbenennung (Alias)
@@ -627,13 +631,15 @@ const { id, ...details } = produkt;
 
 // Verschachtelt
 const user = { name: "Max", address: { city: "Berlin", zip: "10115" } };
-const { address: { city, zip } } = user;
+const {
+  address: { city, zip },
+} = user;
 // city = "Berlin", zip = "10115"
 ```
 
 ---
 
-## ⚛️ Verwendung in React
+### ⚛️ Verwendung in React
 
 Object Destructuring wird in React **überall** verwendet — besonders bei Props:
 
@@ -667,7 +673,7 @@ const { data, error, isLoading } = useFetch("/api/products");
 
 ---
 
-## 🧰 Aufgabe — Object Destructuring
+### 🧰 Aufgabe — Object Destructuring
 
 Gegeben ist ein API-Response:
 
@@ -682,14 +688,14 @@ const apiResponse = {
       preferences: {
         theme: "dark",
         language: "de",
-        notifications: true
-      }
+        notifications: true,
+      },
     },
     meta: {
       requestId: "abc-123",
-      timestamp: "2026-02-06T10:00:00Z"
-    }
-  }
+      timestamp: "2026-02-06T10:00:00Z",
+    },
+  },
 };
 ```
 
@@ -702,23 +708,28 @@ const apiResponse = {
 
 <!-- _header: "" -->
 
-# Spread Operator für Objekte
+# Spread Operator
 
 ---
 
-<!-- header: Spread Operator für Objekte -->
+<!-- header: Spread Operator -->
+
+## Spread Operator für Arrays
+
+
+Der Spread Operator für Arrays wurde bereits behandelt.
 
 ## Spread Operator für Objekte (`...`)
 
-Der Spread Operator erlaubt es, Objekteigenschaften zu entpacken und zu kopieren. (Der Spread Operator für Arrays wurde bereits behandelt.)
+Der Spread Operator erlaubt es, Objekteigenschaften zu entpacken und zu kopieren.
 
 ```javascript
 const original = { a: 1, b: 2, c: 3 };
 
 // Shallow Copy — neues Objekt, gleicher Inhalt
 const kopie = { ...original };
-console.log(kopie);     // { a: 1, b: 2, c: 3 }
-console.log(kopie === original);  // false (unterschiedliche Objekte)
+console.log(kopie); // { a: 1, b: 2, c: 3 }
+console.log(kopie === original); // false (unterschiedliche Objekte)
 
 // Eigenschaften zusammenführen
 const obj1 = { name: "Max", age: 25 };
@@ -735,7 +746,7 @@ const updated = { ...original, b: 99, d: 4 };
 
 ---
 
-## Spread Operator — Praktische Anwendungen
+### Spread Operator — Praktische Anwendungen
 
 ```javascript
 const user = { name: "Anna", email: "anna@example.com", admin: false };
@@ -750,14 +761,14 @@ const { admin, ...publicUser } = user;
 
 // Default-Eigenschaften + Benutzer-Overrides
 const defaults = { theme: "light", lang: "de", notifications: true };
-const settings = { theme: "dark" };  // Nutzer ändert nur theme
+const settings = { theme: "dark" }; // Nutzer ändert nur theme
 const merged = { ...defaults, ...settings };
 // merged = { theme: "dark", lang: "de", notifications: true }
 ```
 
 ---
 
-## ⚛️ Verwendung in React
+### ⚛️ Verwendung in React
 
 Der Spread Operator ist **das Standard-Pattern für immutable State Updates** in React:
 
@@ -781,7 +792,11 @@ function Button(props) {
 
 // Äquivalent zu:
 function Button({ className, onClick, children }) {
-  return <button className={className} onClick={onClick}>{children}</button>;
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 ```
 
@@ -799,7 +814,7 @@ function Card({ title, description, fullWidth = false, ...rest }) {
 
 ---
 
-## 🧰 Aufgabe — Spread Operator
+### 🧰 Aufgabe — Spread Operator
 
 Gegeben ist ein Benutzer-Objekt:
 
@@ -809,7 +824,7 @@ const user = {
   name: "Lisa",
   email: "lisa@example.com",
   role: "user",
-  createdAt: "2026-01-01"
+  createdAt: "2026-01-01",
 };
 ```
 
@@ -817,6 +832,40 @@ const user = {
 2. Erstelle ein neues Objekt `adminUser`, das auf `user` basiert, aber die `role` auf `"admin"` setzt.
 3. Merge zwei Einstellungs-Objekte: `{ theme: "light", notifications: true }` und `{ theme: "dark" }`. Welche `theme` wird benutzt?
 4. (optional) Erkläre, warum Shallow Copy ein Problem sein kann bei verschachtelten Objekten.
+
+---
+
+<!-- _header: "" -->
+
+# 💡 Rest Operator
+
+**Syntax:** `...`
+
+**✅ Purpose:** Collect multiple values into one structure.
+
+---
+
+<!-- _header: "Rest Operator" -->
+
+## 💡 Argumente sammeln (Collecting arguments)
+
+```js
+function sum(...numbers) {
+  return numbers.reduce((a, b) => a + b);
+}
+```
+
+## 💡 Rest with Array Destructuring
+
+```js
+const [first, ...rest] = [1, 2, 3];
+```
+
+## 💡 Rest with Object Destructuring
+
+```js
+const { name, ...others } = user;
+```
 
 ---
 
@@ -836,13 +885,13 @@ Diese Methoden transformieren Arrays funktional und werden ständig in React ver
 const zahlen = [1, 2, 3, 4, 5, 6];
 
 // filter() — gibt ein neues Array mit gefilterten Elementen zurück
-const gerade = zahlen.filter(n => n % 2 === 0);  // [2, 4, 6]
+const gerade = zahlen.filter((n) => n % 2 === 0); // [2, 4, 6]
 
 // find() — gibt das erste Element zurück, das die Bedingung erfüllt
-const erste = zahlen.find(n => n > 3);            // 4
+const erste = zahlen.find((n) => n > 3); // 4
 
 // reduce() — "reduziert" das Array zu einem einzelnen Wert
-const summe = zahlen.reduce((acc, n) => acc + n, 0);  // 21
+const summe = zahlen.reduce((acc, n) => acc + n, 0); // 21
 ```
 
 > 📖 `map()` wurde bereits in den Grundlagen behandelt.
@@ -855,20 +904,22 @@ const summe = zahlen.reduce((acc, n) => acc + n, 0);  // 21
 const produkte = [
   { id: 1, name: "Laptop", preis: 999, verfügbar: true },
   { id: 2, name: "Maus", preis: 25, verfügbar: false },
-  { id: 3, name: "Monitor", preis: 299, verfügbar: true }
+  { id: 3, name: "Monitor", preis: 299, verfügbar: true },
 ];
 
 // Nur verfügbare Produkte
-const verfügbar = produkte.filter(p => p.verfügbar);
+const verfügbar = produkte.filter((p) => p.verfügbar);
 // [{ id: 1, ... }, { id: 3, ... }]
 
 // Produkte über 100€
-const teuer = produkte.filter(p => p.preis > 100);
+const teuer = produkte.filter((p) => p.preis > 100);
 // [{ id: 1, ... }, { id: 3, ... }]
 
 // Nach Suchtext filtern
 function searchProducts(term) {
-  return produkte.filter(p => p.name.toLowerCase().includes(term.toLowerCase()));
+  return produkte.filter((p) =>
+    p.name.toLowerCase().includes(term.toLowerCase()),
+  );
 }
 ```
 
@@ -880,17 +931,17 @@ function searchProducts(term) {
 const users = [
   { id: 1, name: "Anna", role: "user" },
   { id: 2, name: "Bob", role: "admin" },
-  { id: 3, name: "Charlie", role: "user" }
+  { id: 3, name: "Charlie", role: "user" },
 ];
 
 // User mit bestimmter ID (sehr häufig!)
-const user = users.find(u => u.id === 2);       // Bob-Objekt
+const user = users.find((u) => u.id === 2); // Bob-Objekt
 
 // Erstes Element mit Bedingung
-const admin = users.find(u => u.role === "admin");  // Bob
+const admin = users.find((u) => u.role === "admin"); // Bob
 
 // Gibt undefined zurück, wenn nicht gefunden
-const notFound = users.find(u => u.id === 999);     // undefined
+const notFound = users.find((u) => u.id === 999); // undefined
 ```
 
 ---
@@ -907,7 +958,7 @@ const summe = zahlen.reduce((acc, n) => acc + n, 0);
 // Objekt aus Array erstellen (sehr mächtig!)
 const personen = [
   { id: 1, name: "Anna" },
-  { id: 2, name: "Bob" }
+  { id: 2, name: "Bob" },
 ];
 const indexById = personen.reduce((acc, p) => {
   acc[p.id] = p;
@@ -917,10 +968,13 @@ const indexById = personen.reduce((acc, p) => {
 
 // Verschachtelt: Map mit count
 const items = ["a", "b", "a", "c", "b", "a"];
-const count = items.reduce((acc, item) => ({
-  ...acc,
-  [item]: (acc[item] ?? 0) + 1
-}), {});
+const count = items.reduce(
+  (acc, item) => ({
+    ...acc,
+    [item]: (acc[item] ?? 0) + 1,
+  }),
+  {},
+);
 // { a: 3, b: 2, c: 1 }
 ```
 
@@ -934,14 +988,14 @@ Diese Methoden können **verkettet** werden:
 const produkte = [
   { name: "Laptop", kategorie: "Elektronik", preis: 999 },
   { name: "Buch", kategorie: "Medien", preis: 15 },
-  { name: "Monitor", kategorie: "Elektronik", preis: 299 }
+  { name: "Monitor", kategorie: "Elektronik", preis: 299 },
 ];
 
 // Elektronik-Produkte → Preise extrahieren → Summe bilden
 const summeElektronik = produkte
-  .filter(p => p.kategorie === "Elektronik")    // 2 Produkte
-  .map(p => p.preis)                             // [999, 299]
-  .reduce((sum, preis) => sum + preis, 0);       // 1298
+  .filter((p) => p.kategorie === "Elektronik") // 2 Produkte
+  .map((p) => p.preis) // [999, 299]
+  .reduce((sum, preis) => sum + preis, 0); // 1298
 ```
 
 ---
@@ -952,8 +1006,8 @@ Der häufigste Use-Case in React: **Listen filtern und rendern**
 
 ```jsx
 function ProductList({ products, searchTerm }) {
-  const filtered = products.filter(p =>
-    p.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filtered = products.filter((p) =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -962,7 +1016,7 @@ function ProductList({ products, searchTerm }) {
         <p>Keine Produkte gefunden</p>
       ) : (
         <ul>
-          {filtered.map(p => (
+          {filtered.map((p) => (
             <li key={p.id}>{p.name}</li>
           ))}
         </ul>
@@ -980,7 +1034,7 @@ function Cart({ items }) {
 }
 
 // Einen bestimmten Artikel finden
-const editItem = items.find(i => i.id === selectedId);
+const editItem = items.find((i) => i.id === selectedId);
 ```
 
 ---
@@ -992,10 +1046,30 @@ Gegeben ein Array von Filmen:
 ```javascript
 const movies = [
   { title: "Dune", year: 2021, rating: 8, genres: ["Sci-Fi", "Action"] },
-  { title: "The Matrix", year: 1999, rating: 8.7, genres: ["Sci-Fi", "Thriller"] },
-  { title: "Inception", year: 2010, rating: 8.8, genres: ["Sci-Fi", "Thriller"] },
-  { title: "Pulp Fiction", year: 1994, rating: 8.9, genres: ["Crime", "Drama"] },
-  { title: "Oppenheimer", year: 2023, rating: 8.5, genres: ["Drama", "History"] }
+  {
+    title: "The Matrix",
+    year: 1999,
+    rating: 8.7,
+    genres: ["Sci-Fi", "Thriller"],
+  },
+  {
+    title: "Inception",
+    year: 2010,
+    rating: 8.8,
+    genres: ["Sci-Fi", "Thriller"],
+  },
+  {
+    title: "Pulp Fiction",
+    year: 1994,
+    rating: 8.9,
+    genres: ["Crime", "Drama"],
+  },
+  {
+    title: "Oppenheimer",
+    year: 2023,
+    rating: 8.5,
+    genres: ["Drama", "History"],
+  },
 ];
 ```
 
@@ -1026,17 +1100,17 @@ Eine `Promise` stellt ein Versprechen dar, dass eine asynchrone Operation irgend
 const myPromise = new Promise((resolve, reject) => {
   // asynchrone Operation...
   if (success) {
-    resolve("Erfolg!");     // Promise erfüllt
+    resolve("Erfolg!"); // Promise erfüllt
   } else {
-    reject("Fehler!");      // Promise abgelehnt
+    reject("Fehler!"); // Promise abgelehnt
   }
 });
 
 // Promise verwenden
 myPromise
-  .then(result => console.log(result))      // Falls erfüllt
-  .catch(error => console.error(error))     // Falls abgelehnt
-  .finally(() => console.log("Fertig"));    // Immer
+  .then((result) => console.log(result)) // Falls erfüllt
+  .catch((error) => console.error(error)) // Falls abgelehnt
+  .finally(() => console.log("Fertig")); // Immer
 ```
 
 ---
@@ -1046,16 +1120,16 @@ myPromise
 ```javascript
 // Fetch liefert ein Promise
 fetch("https://api.example.com/data")
-  .then(response => response.json())        // Convert zu JSON
-  .then(data => {
-    console.log("Daten:", data);            // Daten verarbeiten
-    return data;                            // Für nächsten .then()
+  .then((response) => response.json()) // Convert zu JSON
+  .then((data) => {
+    console.log("Daten:", data); // Daten verarbeiten
+    return data; // Für nächsten .then()
   })
-  .catch(error => {
-    console.error("Fehler:", error);        // Fehlerbehandlung
+  .catch((error) => {
+    console.error("Fehler:", error); // Fehlerbehandlung
   })
   .finally(() => {
-    console.log("Request abgeschlossen");   // Cleanup
+    console.log("Request abgeschlossen"); // Cleanup
   });
 ```
 
@@ -1076,11 +1150,11 @@ Promise.all([p1, p2, p3])
   .then(([users, posts, comments]) => {
     console.log("Alle Daten geladen");
   })
-  .catch(err => console.error("Mindestens eine fehlgeschlagen"));
+  .catch((err) => console.error("Mindestens eine fehlgeschlagen"));
 
 // Promise.race() — warte auf ERSTE
 const firstResponse = Promise.race([p1, p2, p3]);
-firstResponse.then(first => console.log("Erste Antwort kam an"));
+firstResponse.then((first) => console.log("Erste Antwort kam an"));
 ```
 
 ---
@@ -1093,9 +1167,9 @@ firstResponse.then(first => console.log("Erste Antwort kam an"));
 // Mit .then()
 function loadData() {
   return fetch("/api/data")
-    .then(res => res.json())
-    .then(data => console.log(data))
-    .catch(err => console.error(err));
+    .then((res) => res.json())
+    .then((data) => console.log(data))
+    .catch((err) => console.error(err));
 }
 
 // Mit async/await
@@ -1121,16 +1195,16 @@ async function loadData() {
 ```jsx
 useEffect(() => {
   Promise.all([
-    fetch("/api/user").then(r => r.json()),
-    fetch("/api/settings").then(r => r.json()),
-    fetch("/api/posts").then(r => r.json())
+    fetch("/api/user").then((r) => r.json()),
+    fetch("/api/settings").then((r) => r.json()),
+    fetch("/api/posts").then((r) => r.json()),
   ])
     .then(([user, settings, posts]) => {
       setUser(user);
       setSettings(settings);
       setPosts(posts);
     })
-    .catch(err => setError(err));
+    .catch((err) => setError(err));
 }, []);
 ```
 
@@ -1139,8 +1213,8 @@ useEffect(() => {
 useEffect(() => {
   (async () => {
     try {
-      const user = await fetch("/api/user").then(r => r.json());
-      const posts = await fetch("/api/posts").then(r => r.json());
+      const user = await fetch("/api/user").then((r) => r.json());
+      const posts = await fetch("/api/posts").then((r) => r.json());
       setUser(user);
       setPosts(posts);
     } catch (err) {
@@ -1157,17 +1231,17 @@ useEffect(() => {
 1. Schreibe eine Funktion `delay(ms)`, die nach `ms` Millisekunden mit `"Fertig!"` erfüllt wird:
 
 ```javascript
-delay(1000).then(msg => console.log(msg));  // Nach 1s: "Fertig!"
+delay(1000).then((msg) => console.log(msg)); // Nach 1s: "Fertig!"
 ```
 
 2. Konvertiere diese `.then()`-Kette in `async/await`:
 
 ```javascript
 fetch("/api/user")
-  .then(res => res.json())
-  .then(user => fetch(`/api/posts/${user.id}`))
-  .then(res => res.json())
-  .then(posts => console.log(posts));
+  .then((res) => res.json())
+  .then((user) => fetch(`/api/posts/${user.id}`))
+  .then((res) => res.json())
+  .then((posts) => console.log(posts));
 ```
 
 3. Schreibe ein `Promise.race()` für einen **Timeout**: Falls ein Fetch länger als 5 Sekunden dauert, zeige "Timeout!".
@@ -1184,17 +1258,17 @@ fetch("/api/user")
 
 Die 9 Konzepte dieser Vorlesung sind die **Grundlagen für professionelle React-Entwicklung**:
 
-| Thema | Zweck | React-Anwendung |
-|-------|-------|-----------------|
-| **Ternary Operator** | Bedingte Werte | JSX conditional rendering |
-| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung | Stiles/Klassen, optionales Rendering |
-| **Nullish Coalescing `??`** | Sichere Defaultwerte | Props-Fallbacks, localStorage |
-| **Optional Chaining `?.`** | Sichere Zugriffe | Nested API-Daten |
-| **Array Destructuring** | Werte entpacken | `useState` Hook |
-| **Object Destructuring** | Werte entpacken | Props extrahieren |
-| **Spread `...`** | Shallow Copy, Merging | Immutable State Updates |
-| **Array-Methoden** | Array transformieren | Filtern, Mappen, Reduzieren von Listen |
-| **Promises** | Async Operationen | API-Fetching in `useEffect` |
+| Thema                          | Zweck                 | React-Anwendung                        |
+| ------------------------------ | --------------------- | -------------------------------------- |
+| **Ternary Operator**           | Bedingte Werte        | JSX conditional rendering              |
+| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung   | Stiles/Klassen, optionales Rendering   |
+| **Nullish Coalescing `??`**    | Sichere Defaultwerte  | Props-Fallbacks, localStorage          |
+| **Optional Chaining `?.`**     | Sichere Zugriffe      | Nested API-Daten                       |
+| **Array Destructuring**        | Werte entpacken       | `useState` Hook                        |
+| **Object Destructuring**       | Werte entpacken       | Props extrahieren                      |
+| **Spread `...`**               | Shallow Copy, Merging | Immutable State Updates                |
+| **Array-Methoden**             | Array transformieren  | Filtern, Mappen, Reduzieren von Listen |
+| **Promises**                   | Async Operationen     | API-Fetching in `useEffect`            |
 
 ---
 
