@@ -31,21 +31,6 @@ style: |
 
 ---
 
-## Legened
-
-🧰: Aufgabe
-
-- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werde
-- 🟡 Mittel: Erfordert etwas mehr Aufwand oder spezifisches Wissen
-- 🔴 Schwer: Erfordert umfangreiche Änderungen oder externe Unterstützung
-
-🛠️: Tool (Werkzeug); Ein stück Software das ein Problem löst
-💡: Konzept, wehes implementiert wird
-🚫 Problem beschreibung, welches das Konzeopt löst
-✅: Lösungsbeschriebung des Problems, welches das Konzept löst
-
----
-
 ## Einleitung
 
 - In der Frontend Vorlesung haben wir ein Build-Tool kennengelernt: Vite
