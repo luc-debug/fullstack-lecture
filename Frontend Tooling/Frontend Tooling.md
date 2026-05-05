@@ -60,6 +60,45 @@ style: |
 
 ---
 
+## Development Tooling
+
+### Dev Server
+
+Um möglichst nah am tatsächlichen Nutzererlebnis zu entwickeln sollten wir einen Dev.-Sever verwenden:
+
+- Ein Dev Server ermöglicht Features wie Hot reloading, HTTPS, Proxying und korrekte MIME-Types -> Ein einfaches Öffnen der HTML-Datei im Browser (`file://`) unterstützt diese Features nicht
+
+---
+
+### Hot reloading
+
+- historisch haben wir diese Evolution
+
+```
+Live Reload   →       HMR       →   Fast Refresh
+(full reload)   (module-level)   (component-level)
+```
+
+#### Live Reloading
+
+- Automatisches Neuladen der gesamten Seite bei Dateiänderungen
+- Von VS Code kennen wir das bereits durch den Live Server
+- Nachteil: Die Seite wird komplett neu geladen – der App-State geht dabei verloren
+
+---
+
+#### Hot Module Replacement (HMR)
+
+HMR geht einen Schritt weiter: Es aktualisiert nur die geänderten Module, ohne die Seite komplett neu zu laden
+
+#### Fast Refresh
+
+- Fast Refresh ist eine React-spezifische Erweiterung von HMR, die tief in den React-Renderer integriert ist
+- Normales HMR kann den State komplexer Komponenten nicht zuverlässig erhalten – Fast Refresh schon
+- Auch Hook-State (`useState`, `useRef`) bleibt nach einer Änderung erhalten, solange sich die Hook-Reihenfolge nicht ändert
+
+---
+
 ## Build Tooling
 
 ### Allgemeine Einführung
