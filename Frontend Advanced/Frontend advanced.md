@@ -12,32 +12,27 @@ style: |
 
 # Komponentenorientierte Frontend-Entwicklung
 
----
-
-## Was ist die Bare Bones Method?
-
 Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten.
 
-Ziel:
-
-- Fokus auf klare Architektur -> Wartbarkeit
-- Reduzierung von Komplexität -> Teile und herrsche (Divide and Conquer)
-- Schrittweise Entwicklung -> Fokus
-- Trennung von Verantwortlichkeiten -> Wiederverwendbarkeit
-
---
-
-# Warum diese Methode?
-
-Ohne Struktur entstehen oft:
-
-- Vermischte Concerns
-- Unklarer State
-- Chaotische Props
-- Schwer wartbarer Code
-- Zu frühes Styling
-
 ---
+
+## Motivation
+
+| Ohne Methode                                       | Mit Lean Component Method                            | Auswirkung                              | Design Pattern/ Code Principal |
+| -------------------------------------------------- | ---------------------------------------------------- | --------------------------------------- | ------------------------------ | --------------------------- | --- |
+| Styling vor Struktur                               | Struktur vor Styling -> verhindert zu frühes Styling |                                         |                                |
+| Unklarer State/ State-Chaos durch falsches Lifting | Klare State-Hierarchie                               |                                         |                                |
+| Refactoring nach Feature-Fertigstellung            | Saubere Architektur von Anfang an                    |                                         |                                |
+| Tests schwer zu schreiben                          | Testbare Komponenten by Design                       |                                         |                                |
+| Lange Debug-Sessions                               | Klare Datenflüsse                                    |                                         |                                |
+| Vermischte Verantwortlichkeiten                    | Trennung von Verantwortlichkeiten                    |                                         |                                | Wiederverwendbarkeit        |     |
+| alle anfangen aber nichts zu Ende bringen          | Schrittweise Entwicklung -> Fokus                    |                                         |                                |
+| Schwer wartbarer Code                              | Architektur per design -> Wartbarkeit                |                                         |                                |
+| Nicht wissen wo anfangen                           | Reduzierung von Komplexität                          | Teile und herrsche (Divide and Conquer) |                                | Schnellere Entwicklungszeit |     |
+| Chaotische Props                                   | Fest definierte Schnittstellen                       |                                         |                                |
+
+> **"Make it work, make it right, make it fast."**
+> Die Lean Component Method stellt sicher, dass du nicht beim Styling stecken bleibst, bevor es überhaupt funktioniert.
 
 ---
 
@@ -46,6 +41,40 @@ Ohne Struktur entstehen oft:
 - Man muss die UI in KOmponenten runterbrechen
 
 TODO: Bild wo die UI in KOmpoennten gegliedert ist
+
+---
+
+## State
+
+### App State: URL als Single Source of Truth
+
+Persistiere relevante State-Werte in der URL – das ermöglicht:
+
+- Seite teilen / bookmarken
+- Browser-Back funktioniert korrekt
+- Deep Links (z.B. in Email-Kampagnen)
+
+```tsx
+// State aus URL lesen
+const [searchParams, setSearchParams] = useSearchParams();
+const searchText = searchParams.get("search") || "Star Wars";
+const currentPage = Number(searchParams.get("page")) || 1;
+
+// URL aktualisieren nach Fetch
+setSearchParams({ search: searchText, page: String(currentPage) });
+```
+
+**Resultat:** `?search=Inception&page=3` ist ein vollständiger App-State.
+
+---
+
+### Parent Component State: Lift up state
+
+### Component state
+
+### Essential vs derived state
+
+## Kompnenten-Entwicklung
 
 ---
 
