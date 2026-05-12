@@ -18,6 +18,12 @@ Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten
 
 ## Motivation
 
+Die zwei wichtigsten Skills als Frontend Dev:
+- UI in Komponenten zerlegen
+- State richtig verorten und managen
+
+Sonst entstehen:
+
 | Ohne Methode                                        | Mit Lean Component Method                           | Auswirkung                                   | Design Pattern / Code Principle |
 | --------------------------------------------------- | --------------------------------------------------- | -------------------------------------------- | ------------------------------- |
 | Styling vor Struktur                                | Struktur vor Styling → verhindert zu frühes Styling | Klarere Priorisierung, weniger Rework        | Separation of Concerns          |
@@ -33,9 +39,9 @@ Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten
 
 ---
 
-## Untersuchen der Entwürfe nach Komponenten
+## Komponentenraster
 
-- Man muss die UI in KOmponenten runterbrechen
+- Untersuchen der Entwürfe nach Komponenten
 
 TODO: Bild wo die UI in KOmpoennten gegliedert ist
 
@@ -43,33 +49,112 @@ TODO: Bild wo die UI in KOmpoennten gegliedert ist
 
 ## State
 
-### App State: URL als Single Source of Truth
+🛑 Problem
+- willkürliche Änderungen am DOM
+- schwer vorauszusagen wie die UI auf Änderungen reagiert
+- unübersichtlicher Code
+- schwer zu debuggen
+- schwer zu testen
+- schwer zu warten
+- schwer zu erweitern
+- schwer zu verstehen
+- schwer zu optimieren
+- globale Namespace verschmutzung
 
-Persistiere relevante State-Werte in der URL – das ermöglicht:
+✅ Lösung: State-Management
+- State ist die einzige Quelle der Wahrheit
+- UI ist eine Funktion des State  
+- State-Änderungen führen zu vorhersehbaren UI-Updates
 
-- Seite teilen / bookmarken
-- Browser-Back funktioniert korrekt
-- Deep Links (z.B. in Email-Kampagnen)
-
-```tsx
-// State aus URL lesen
-const [searchParams, setSearchParams] = useSearchParams();
-const searchText = searchParams.get("search") || "Star Wars";
-const currentPage = Number(searchParams.get("page")) || 1;
-
-// URL aktualisieren nach Fetch
-setSearchParams({ search: searchText, page: String(currentPage) });
-```
-
-**Resultat:** `?search=Inception&page=3` ist ein vollständiger App-State.
+💡 State machine pattern
 
 ---
 
-### Parent Component State: Lift up state
+## Where Does State Live?
 
-### Component state
+### Local State
 
-### Essential vs derived state
+Local state means in the Context of a Component
+
+🚫 **Problem:** How do you implement state for something like user input?
+✅ **Solution:** Use the SPA framework’s local state utility (e.g. React → `useState`)
+
+⚠️ **Anti-Pattern:** Essential vs. derived state
+Prefer derived state whenever possible instead of duplicating state.
+
+⚠️ **Best Practice:** Keep state as close as possible to where it originates.
+In most cases, that means inside the component itself.
+
+---
+
+### Lifted State (Shared Parent State)
+
+🚫 **Problem:** Two or more components need access to the same state.
+✅ **Solution:** Lift the state up to the closest common ancestor and pass it down via props.
+
+⚠️ **Anti-Pattern:** Prop drilling / lifting state too high
+Avoid pushing state unnecessarily far up the tree — see Global State for alternatives.
+
+---
+
+### Global State
+
+🚫 **Problem:** How do you avoid prop drilling across many component layers?
+
+✅ **Solution:** Use a global state mechanism such as React Context API (or similar solutions in other SPAs).
+
+⚠️ **Problem:** Context can trigger broad top-down re-renders.
+✅ **Optimization:** Use tools like Redux, Zustand, or selector-based state managers to re-render only the components that actually depend on changed state.
+
+---
+
+## Where Is State Stored?
+
+### In-Memory (Runtime State)
+
+* Component state (`useState`, `useReducer`)
+* Global stores (Redux, Zustand, Context)
+* Exists only while the app is running
+
+---
+
+### Local Storage / Session Storage
+
+* Persists in the browser
+* Useful for user preferences, auth tokens, drafts
+* `localStorage`: persists across sessions
+* `sessionStorage`: cleared when the tab closes
+
+---
+
+### Server
+
+* Persistent, centralized state
+* Databases, user profiles, application data
+* Shared across devices and sessions
+* Often accessed through APIs
+
+---
+
+### URL
+
+* State encoded in query params, path params, or hash
+* Useful for filters, pagination, search state, deep linking
+* Shareable and bookmarkable
+
+
+
+
+
+
+
+---
+
+
+
+
+
+
 
 ---
 
