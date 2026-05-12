@@ -18,21 +18,18 @@ Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten
 
 ## Motivation
 
-| Ohne Methode                                       | Mit Lean Component Method                            | Auswirkung                              | Design Pattern/ Code Principal |
-| -------------------------------------------------- | ---------------------------------------------------- | --------------------------------------- | ------------------------------ | --------------------------- | --- |
-| Styling vor Struktur                               | Struktur vor Styling -> verhindert zu frühes Styling |                                         |                                |
-| Unklarer State/ State-Chaos durch falsches Lifting | Klare State-Hierarchie                               |                                         |                                |
-| Refactoring nach Feature-Fertigstellung            | Saubere Architektur von Anfang an                    |                                         |                                |
-| Tests schwer zu schreiben                          | Testbare Komponenten by Design                       |                                         |                                |
-| Lange Debug-Sessions                               | Klare Datenflüsse                                    |                                         |                                |
-| Vermischte Verantwortlichkeiten                    | Trennung von Verantwortlichkeiten                    |                                         |                                | Wiederverwendbarkeit        |     |
-| alle anfangen aber nichts zu Ende bringen          | Schrittweise Entwicklung -> Fokus                    |                                         |                                |
-| Schwer wartbarer Code                              | Architektur per design -> Wartbarkeit                |                                         |                                |
-| Nicht wissen wo anfangen                           | Reduzierung von Komplexität                          | Teile und herrsche (Divide and Conquer) |                                | Schnellere Entwicklungszeit |     |
-| Chaotische Props                                   | Fest definierte Schnittstellen                       |                                         |                                |
-
-> **"Make it work, make it right, make it fast."**
-> Die Lean Component Method stellt sicher, dass du nicht beim Styling stecken bleibst, bevor es überhaupt funktioniert.
+| Ohne Methode                                        | Mit Lean Component Method                           | Auswirkung                                   | Design Pattern / Code Principle |
+| --------------------------------------------------- | --------------------------------------------------- | -------------------------------------------- | ------------------------------- |
+| Styling vor Struktur                                | Struktur vor Styling → verhindert zu frühes Styling | Klarere Priorisierung, weniger Rework        | Separation of Concerns          |
+| Unklarer State / State-Chaos durch falsches Lifting | Klare State-Hierarchie                              | Vorhersehbare Datenflüsse, weniger Bugs      | Single Source of Truth          |
+| Refactoring erst nach Feature-Fertigstellung        | Saubere Architektur von Anfang an                   | Weniger technische Schulden                  | Clean Architecture              |
+| Tests schwer zu schreiben                           | Testbare Komponenten by Design                      | Höhere Testbarkeit, schnellere QA            | Testability by Design           |
+| Lange Debug-Sessions                                | Klare Datenflüsse                                   | Schnellere Fehleranalyse                     | Unidirectional Data Flow        |
+| Vermischte Verantwortlichkeiten                     | Trennung von Verantwortlichkeiten                   | Wiederverwendbarkeit, bessere Skalierbarkeit | Separation of Concerns          |
+| Alle fangen an, aber nichts wird zu Ende gebracht   | Schrittweise Entwicklung mit Fokus                  | Höhere Abschlussrate, bessere Iteration      | Iterative Development           |
+| Schwer wartbarer Code                               | Architektur by Design → Wartbarkeit                 | Langfristig stabilere Codebasis              | Maintainability                 |
+| Nicht wissen, wo anfangen                           | Komplexität reduzieren durch Zerlegung              | Schnellere Entwicklungszeit                  | Divide and Conquer              |
+| Chaotische Props                                    | Fest definierte Schnittstellen                      | Klarere Kommunikation zwischen Komponenten   | Interface Segregation Principle |
 
 ---
 
@@ -74,11 +71,11 @@ setSearchParams({ search: searchText, page: String(currentPage) });
 
 ### Essential vs derived state
 
-## Kompnenten-Entwicklung
-
 ---
 
-# Die 4 Schritte
+## Komponenten-Entwicklung
+
+### Die 4 Schritte
 
 ```text
 1. Component Structure
@@ -91,7 +88,7 @@ Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
 ---
 
-# Grundprinzip
+### Grundprinzip
 
 ```text
 Skeleton
