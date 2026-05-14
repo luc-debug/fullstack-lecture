@@ -43,12 +43,13 @@ style: |
 <div class ="columns">
   <div>
 
-  ![alt text](iceberg.png)
+![alt text](iceberg.png)
+
   </div>
   <div>
 
-  - Die meisten entwickler arbeiten mit Fancy JavaScript Frameworks
-  - Ohne jedoch wirklich zu wissen was darunter ist
+- Die meisten entwickler arbeiten mit Fancy JavaScript Frameworks
+- Ohne jedoch wirklich zu wissen was darunter ist
   </div>
 </div>
 
@@ -234,7 +235,7 @@ Mittel 🟡
 
 - Linting ist ein Aspekt der statische Codeanalyse; weitere aspekte werden nicht in der Vorlesung besprochen um den Umfang nicht zu sprengen
 - Linter analysieren den Quellcode, ohne ihn auszuführen, und finden potenzielle Fehler, Code-Smells und Verstöße gegen Coding-Conventions.
-  - Tools: ESLint, Biome
+  - Tools: ESLint, Biome, Oxlint
 
 TBD Beispiele für Code Smells
 
@@ -243,7 +244,7 @@ TBD Beispiele für Code Smells
 ### 🛠️ Formatter
 
 - Formatter sorgen für ein einheitliches Code-Format (Einrückung, Zeilenlänge, etc.).
-  - Tools: Prettier, Biome
+  - Tools: Prettier, Biome, ESlint Stylisitc, Oxfmt
 
 - Vortiele
   - besser lesbar beim Coden
