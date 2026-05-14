@@ -107,8 +107,6 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
----
-
 ## 🛠️ Guideline zur Erstellung von Komponenten
 
 ![alt text](image-5.png)
@@ -165,7 +163,11 @@ Richtlinien für die Komponentenerstellung
 
 ---
 
-## 💡 State machine pattern
+##
+
+💡 State machine patter
+
+TODO
 
 ---
 
@@ -177,6 +179,8 @@ Local state means in the Context of a Component
 
 🚫 **Problem:** How do you implement state for something like user input?
 ✅ **Solution:** Use the SPA framework’s local state utility (e.g. React → `useState`)
+⚠️ Anti-Pattern: Essential vs. derived state
+⚠️ Best Practice: State immer möglichst nah am bgebracuhten Ort bereitstelle
 
 ---
 
@@ -458,7 +462,6 @@ Warum schlecht?
 
 ---
 
-
 ### Global State
 
 🚫 **Problem:** How do you avoid prop drilling across many component layers?
@@ -469,7 +472,6 @@ Warum schlecht?
 ✅ **Optimization:** Use tools like Redux, Zustand, or selector-based state managers to re-render only the components that actually depend on changed state.
 
 ---
-
 
 ## State Hierarchie
 
@@ -495,8 +497,6 @@ Viele entfernte Bereiche → Context / Zustand / Redux
 - Global stores (Redux, Zustand, Context)
 - Exists only while the app is running
 
----
-
 ### Local Storage / Session Storage
 
 - Persists in the browser
@@ -513,8 +513,6 @@ Viele entfernte Bereiche → Context / Zustand / Redux
 - Shared across devices and sessions
 - Often accessed through APIs
 
----
-
 ### URL
 
 - State encoded in query params, path params, or hash
@@ -523,9 +521,21 @@ Viele entfernte Bereiche → Context / Zustand / Redux
 
 ---
 
-## State anti-patterns
+## Zusammenfassung State
 
----
+### State MAnagement Patterns in React
+
+TODO
+
+https://link.excalidraw.com/readonly/t7BvLGu2IqLIWyzCgJIG
+
+### State Architecture Example
+
+TODO
+
+### State anti-patterns
+
+## TODO
 
 ## Komponenten-Entwicklung
 
