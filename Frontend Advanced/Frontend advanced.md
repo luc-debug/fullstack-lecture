@@ -489,41 +489,104 @@ Viele entfernte Bereiche → Context / Zustand / Redux
 
 ---
 
-## Where Is State Stored?
+## Wo wird State gespeichert?
 
-### In-Memory (Runtime State)
+### Im Arbeitsspeicher (Runtime State)
 
-- Component state (`useState`, `useReducer`)
-- Global stores (Redux, Zustand, Context)
-- Exists only while the app is running
+- Komponenten-State (`useState`, `useReducer`)
+- Globale Stores (Redux, Zustand, Context)
+- Existiert nur, solange die App läuft
+
+```jsx
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return <button onClick={() => setCount(count + 1)}>Klicks: {count}</button>;
+}
+```
+
+---
 
 ### Local Storage / Session Storage
 
-- Persists in the browser
-- Useful for user preferences, auth tokens, drafts
-- `localStorage`: persists across sessions
-- `sessionStorage`: cleared when the tab closes
+- Bleibt im Browser gespeichert
+- Nützlich für Benutzereinstellungen, Auth-Tokens, Entwürfe
+- `localStorage` bleibt über Sitzungen hinweg erhalten; `sessionStorage` wird gelöscht, wenn der Tab geschlossen wird
+
+```jsx
+import { useEffect, useState } from "react";
+
+export default function ThemeToggle() {
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  return (
+    <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+      Theme: {theme}
+    </button>
+  );
+}
+```
 
 ---
 
 ### Server
 
-- Persistent, centralized state
-- Databases, user profiles, application data
-- Shared across devices and sessions
-- Often accessed through APIs
+- Datenbanken, Benutzerprofile, Anwendungsdaten
+- Über Geräte und Sitzungen hinweg verfügbar
+- Wird oft über APIs abgerufen
+
+```jsx
+import { useEffect, useState } from "react";
+
+export default function UserProfile() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/api/user")
+      .then((res) => res.json())
+      .then(setUser);
+  }, []);
+
+  if (!user) return <p>Lade...</p>;
+
+  return <p>Hallo, {user.name}</p>;
+}
+```
+
+---
 
 ### URL
 
-- State encoded in query params, path params, or hash
-- Useful for filters, pagination, search state, deep linking
-- Shareable and bookmarkable
+- State wird in Query-Parametern, Pfad-Parametern oder Hash gespeichert
+- Nützlich für Filter, Paginierung, Suchstatus, Deep Linking
+- Teilbar und als Lesezeichen speicherbar
+
+```jsx
+import { useSearchParams } from "react-router-dom";
+
+export default function ProductFilter() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const category = searchParams.get("category") || "all";
+
+  return (
+    <button onClick={() => setSearchParams({ category: "books" })}>
+      Kategorie: {category}
+    </button>
+  );
+}
+```
 
 ---
 
 ## Zusammenfassung State
 
-### State MAnagement Patterns in React
+### State Management Patterns in React
 
 TODO
 
@@ -535,7 +598,9 @@ TODO
 
 ### State anti-patterns
 
-## TODO
+TODO
+
+---
 
 ## Komponenten-Entwicklung
 
@@ -816,20 +881,6 @@ defineEmits(["delete", "toggle"]);
   :checked="todo.done"
   @change="$emit('toggle', todo.id)"
 />
-```
-
----
-
-# Vue Beispiel
-
-## Styling
-
-```vue
-<style scoped>
-.todo-item {
-  display: flex;
-}
-</style>
 ```
 
 ---
