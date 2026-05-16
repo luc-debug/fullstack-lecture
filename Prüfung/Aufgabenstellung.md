@@ -37,7 +37,7 @@ https://github.com/public-apis/public-apis
 - IMplementierung eines Linters
 - IMplementierung eines Formatters
 - Eingeschaltene Regeln
-- Einhaltung der Regeln bzw. Formaiterung
+- Einhaltung der Regeln sowie Formaiterung
 
 #### Web Performance (5 BE)
 
@@ -48,7 +48,11 @@ https://github.com/public-apis/public-apis
 
 - Überlegen Sie sich wie Sie die Daten der API im Frontendsinnvoll visualiseren
 - IMplementieren Sie dies nach der in der Vorlesung besprocehnene Bare Bone Method
-- Dokumentieren Sie diesen Prozess sepeart in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
+  - globale Statemanagement
+  - Lift Up State
+  - lokale State
+  - Dokumentieren Sie diesen Prozess sepeart in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
+- 
 
 #### Funktionalität Frontend (10 BE)
 
@@ -61,4 +65,4 @@ https://github.com/public-apis/public-apis
 
 #### Auth (10 BE)
 
-IMplementieren eines Auth Prozess
+Implementieren eines Auth Prozess
