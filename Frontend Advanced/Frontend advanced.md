@@ -140,6 +140,14 @@ Richtlinien für die Komponentenerstellung
 
 ---
 
+## 🧰 Aufgabe
+
+- Gehen Sie auf eine Webseite IHrer Wahl
+- Screenshoten
+- Komponenten einzeichnen
+
+---
+
 ## State
 
 🛑 Problem
@@ -602,9 +610,16 @@ TODO
 
 ---
 
-## Komponenten-Entwicklung
+## Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
-### Die 4 Schritte
+- framework unabhängig -> egal obReact, Vue, Svelte etc.
+- Technologie unabhängig -> egal ob Web oder Desktop
+- systemisches Denken (Mental model) das auch im Backend z.B. hilft
+- Sie sind natürlich noch kein Senior, das kommt durch Berufserfahrung, aber Sie können bereits denken wie ein Senior
+
+---
+
+### Die 5 Schritte
 
 ```text
 1. Component Structure
@@ -617,197 +632,80 @@ Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
 ---
 
-### Grundprinzip
+### Schritt 1 Komponentenstruktur und Hierarchie festlegen
 
-```text
-Skeleton
-   ↓
-Component API
-   ↓
-Behavior
-   ↓
-Appearance
-```
 
-Die Komponente wächst schrittweise.
 
----
 
-# Beispiel-Komponente
-
-## TodoItem
-
-Wir entwickeln eine einzelne Komponente:
-
-- Checkbox
-- Todo-Text
-- Delete-Button
-
----
-
-# Schritt 1
-
-# Component Structure
-
-Zuerst nur die Grundstruktur.
-
-Noch keine:
-
-- Props
-- Events
-- Logik
-- Styles
-
----
-
-# React – Structure
-
-```jsx
-function TodoItem() {
-  return (
-    <div>
-      <input type="checkbox" />
-      <span>Todo Text</span>
-      <button>Delete</button>
-    </div>
-  );
-}
-```
-
----
-
-# Ziel von Structure
-
-Fragen:
-
-- Welche HTML-Elemente existieren?
 - Welche Komponenten werden benötigt?
 - Wie ist die Hierarchie?
 - Welche Slots/Bereiche gibt es?
 
-Die Komponente wird wie ein Wireframe aufgebaut.
+ Dazu können folgende Techniken angewendet werden
+ - Komponentenraster
+   - Screenshot von Mockup
+   - oder wenn nicht vorhanden: Wireframw
+  
+ - Komponentendiagramm
+
+
+Tools: tldraw, Excalidraw, Figma, Balsamiq, Visio
+Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-# Schritt 2
+![alt-text](breaking-up-ui-in-components.png)
 
-# Data Flow
-
-Jetzt definieren wir:
-
-- Welche Daten kommen rein?
-- Welche Events gehen raus?
-- Wo liegt der State?
 
 ---
 
-# React – Data Flow
-
-```jsx
-function TodoItem({ todo, onDelete, onToggle }) {
-  return (
-    <div>
-      <input type="checkbox" checked={todo.done} />
-
-      <span>{todo.text}</span>
-
-      <button>Delete</button>
-    </div>
-  );
-}
-```
+![component-tree-view](component-tree-view.png)
 
 ---
 
-# Warum Data Flow wichtig ist
+### Schritt 2: HTML Struktur
 
-Viele Probleme entstehen durch:
+- Welche HTML-Elemente existieren? -> Semantisches HTML
+- Die Komponente wird wie ein Wireframe aufgebaut.
 
-- unklaren State
-- doppelte Daten
-- unklare Verantwortlichkeiten
+![alt-text](html-elements.png)
 
-Die Bare Bones Method löst zuerst die Architektur.
 
 ---
 
-# Component API
 
-Die Props definieren die API der Komponente.
+## Schritt 3: Data Flow
 
-```jsx
-<TodoItem todo={todo} onDelete={handleDelete} onToggle={handleToggle} />
-```
 
-Dadurch wird die Komponente:
+- essentiellere vs abgeleitete State
+- Data flow
+  - props
+  - parent
+  - global
+- Identifizieren von UI States
+  - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
 
-- wiederverwendbar
-- testbar
-- vorhersehbar
+## Schritt 4: Functionality
 
+- Identifizieren von Effects, wenn ein essentieller State sich ändert
+  - Beispiel: local storage updaten
+- Identifizieren von Events, z.B. onClick, onKeyPress
+
+
+siehe auch README Action Item
 ---
 
-# Schritt 3
+### Schritt 5: Styling
 
-# Functionality
 
-Erst jetzt wird Verhalten implementiert.
-
-Zum Beispiel:
-
-- Click Events
-- API Calls
-- Form Handling
-- Validation
-- State Updates
-
----
-
-# React – Functionality
-
-```jsx
-function TodoItem({ todo, onDelete, onToggle }) {
-  return (
-    <div>
-      <input
-        type="checkbox"
-        checked={todo.done}
-        onChange={() => onToggle(todo.id)}
-      />
-
-      <span>{todo.text}</span>
-
-      <button onClick={() => onDelete(todo.id)}>Delete</button>
-    </div>
-  );
-}
-```
-
----
-
-# Vorteil dieser Reihenfolge
-
-Die Funktionalität basiert jetzt auf:
-
-- klarer Struktur
-- sauberem Data Flow
-- definierter Component API
-
-Dadurch entstehen weniger Refactorings.
-
----
-
-# Schritt 4
-
-# Styling
 
 Ganz am Ende:
 
 - Layout
 - Farben
-- Animationen
 - Responsiveness
-- Design-Systeme
+- Animationen
+
 
 ---
 
@@ -836,52 +734,6 @@ Zu frühes Styling führt oft zu:
 - Fokusverlust
 
 Die Methode priorisiert Funktion vor Design.
-
----
-
-# Vue Beispiel
-
-## Structure
-
-```vue
-<template>
-  <div>
-    <input type="checkbox" />
-    <span></span>
-    <button>Delete</button>
-  </div>
-</template>
-```
-
----
-
-# Vue Beispiel
-
-## Data Flow
-
-```vue
-<script setup>
-defineProps({
-  todo: Object,
-});
-
-defineEmits(["delete", "toggle"]);
-</script>
-```
-
----
-
-# Vue Beispiel
-
-## Functionality
-
-```vue
-<input
-  type="checkbox"
-  :checked="todo.done"
-  @change="$emit('toggle', todo.id)"
-/>
-```
 
 ---
 
