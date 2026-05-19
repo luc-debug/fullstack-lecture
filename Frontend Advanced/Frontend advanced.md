@@ -179,21 +179,21 @@ TODO
 
 ---
 
-## Where Does State Live?
+## Wo lebt der State?
 
-### Local State
+### Lokaler State
 
-Local state means in the Context of a Component
+Lokaler State bedeutet: State innerhalb einer Komponente
 
-🚫 **Problem:** How do you implement state for something like user input?
-✅ **Solution:** Use the SPA framework’s local state utility (e.g. React → `useState`)
-⚠️ Anti-Pattern: Essential vs. derived state
+🚫 **Problem:** Wie implementiert man State für Benutzereingaben?
+✅ **Lösung:** Die lokale State-Funktion des SPA-Frameworks verwenden (z. B. React → `useState`)
+⚠️ Anti-Pattern: Essenzieller vs. abgeleiteter State
 ⚠️ Best Practice: State immer möglichst nah am gebrauchten Ort bereitstellen
 
 ---
 
-⚠️ **Anti-Pattern:** Essential vs. derived state
-Prefer derived state whenever possible instead of duplicating state.
+⚠️ **Anti-Pattern:** Essenzieller vs. abgeleiteter State
+Abgeleiteten State bevorzugen, anstatt State zu duplizieren.
 
 ```
 Hochschul-Semesterplaner
@@ -472,12 +472,12 @@ Warum schlecht?
 
 ### Global State
 
-🚫 **Problem:** How do you avoid prop drilling across many component layers?
+🚫 **Problem:** Wie vermeidet man Prop Drilling über viele Komponentenebenen?
 
-✅ **Solution:** Use a global state mechanism such as React Context API (or similar solutions in other SPAs).
+✅ **Lösung:** Einen globalen State-Mechanismus wie die React Context API verwenden (oder vergleichbare Lösungen in anderen SPAs).
 
-⚠️ **Problem:** Context can trigger broad top-down re-renders.
-✅ **Optimization:** Use tools like Redux, Zustand, or selector-based state managers to re-render only the components that actually depend on changed state.
+⚠️ **Problem:** Context kann weitreichende Top-down-Re-Renders auslösen.
+✅ **Optimierung:** Tools wie Redux, Zustand oder selektor-basierte State-Manager verwenden, um nur die Komponenten neu zu rendern, die tatsächlich vom geänderten State abhängen.
 
 ---
 
@@ -600,11 +600,11 @@ TODO
 
 https://link.excalidraw.com/readonly/t7BvLGu2IqLIWyzCgJIG
 
-### State Architecture Example
+### State-Architektur-Beispiel
 
 TODO
 
-### State anti-patterns
+### State-Anti-Patterns
 
 TODO
 
@@ -622,9 +622,9 @@ TODO
 ### Die 5 Schritte
 
 ```text
-1. Component Structure
-2. Data Flow
-3. Functionality
+1. Komponentenstruktur
+2. Datenfluss
+3. Funktionalität
 4. Styling
 ```
 
@@ -668,13 +668,13 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-## Schritt 3: Data Flow
+## Schritt 3: Datenfluss
 
 - essenzieller vs. abgeleiteter State
-- Data flow
-  - props
-  - parent
-  - global
+- Datenfluss
+  - Props
+  - Parent
+  - Global
 - Identifizieren von UI States
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
 
