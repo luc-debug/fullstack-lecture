@@ -16,9 +16,11 @@ Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten
 
 ---
 
-## Motivation
+# Motivation
 
 Wie war es vor Komponenten Frameworks?
+
+TODO
 
 ---
 
@@ -52,7 +54,7 @@ Sonst entstehen:
 | Nicht wissen, wo anfangen                         | Komplexität reduzieren durch Zerlegung | Schnellere Entwicklungszeit                  | Divide and Conquer              |
 | Chaotische Props                                  | Fest definierte Schnittstellen         | Klarere Kommunikation zwischen Komponenten   | Interface Segregation Principle |
 
----
+# Komponenten
 
 ## Komponentenraster
 
@@ -148,7 +150,7 @@ Richtlinien für die Komponentenerstellung
 
 ---
 
-## State
+# State
 
 🛑 Problem
 
@@ -171,9 +173,7 @@ Richtlinien für die Komponentenerstellung
 
 ---
 
-##
-
-💡 State machine pattern
+## State machine pattern
 
 TODO
 
@@ -610,7 +610,7 @@ TODO
 
 ---
 
-## Der Senior Workflow für moderne Frontend-Komponentenentwicklung
+# Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
 - framework unabhängig -> egal ob React, Vue, Svelte etc.
 - Technologie unabhängig -> egal ob Web oder Desktop
