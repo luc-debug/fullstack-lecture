@@ -64,7 +64,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 ## Wie brechen wir eine UI in Komponenten herunter?
 
 - wir betrachten die Komponentengröße
-- zu groß oder zu klein ist schlecht, wir braucehen den Sweet Spo
+- zu groß oder zu klein ist schlecht, wir brauchen den Sweet Spot
 
 ![alt text](image.png)
 
@@ -76,7 +76,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-- Seperation of concerns: Wenn eine Komponente zu viele Aufgaben übernimmt, kann sie unübersichtlich und schwer handhabbar werden. Genau wie bei JavaScript-Funktionen gilt: Wenn eine Komponente zu viel leistet, sollte sie in kleinere Komponenten aufgeteilt werden.
+- Separation of concerns: Wenn eine Komponente zu viele Aufgaben übernimmt, kann sie unübersichtlich und schwer handhabbar werden. Genau wie bei JavaScript-Funktionen gilt: Wenn eine Komponente zu viel leistet, sollte sie in kleinere Komponenten aufgeteilt werden.
 
 - Wiederverwendbarkeit: Große Komponenten lassen sich oft nur schwer wiederverwenden, was den Nutzen modularer Komponenten untergräbt. Zudem können sie komplexen und verschachtelten Code enthalten, was ihre Wartung erschwert.
 
@@ -142,9 +142,9 @@ Richtlinien für die Komponentenerstellung
 
 ## 🧰 Aufgabe
 
-- Gehen Sie auf eine Webseite IHrer Wahl
-- Screenshoten
-- Komponenten einzeichnen
+- Gehen Sie auf eine Webseite Ihrer Wahl
+- Machen Sie einen Screenshot
+- Zeichnen Sie die Komponenten ein
 
 ---
 
@@ -161,7 +161,7 @@ Richtlinien für die Komponentenerstellung
 - schwer zu erweitern
 - schwer zu verstehen
 - schwer zu optimieren
-- globale Namespace verschmutzung
+- globale Namespace-Verschmutzung
 
 ✅ Lösung: State-Management
 
@@ -173,7 +173,7 @@ Richtlinien für die Komponentenerstellung
 
 ##
 
-💡 State machine patter
+💡 State machine pattern
 
 TODO
 
@@ -188,7 +188,7 @@ Local state means in the Context of a Component
 🚫 **Problem:** How do you implement state for something like user input?
 ✅ **Solution:** Use the SPA framework’s local state utility (e.g. React → `useState`)
 ⚠️ Anti-Pattern: Essential vs. derived state
-⚠️ Best Practice: State immer möglichst nah am bgebracuhten Ort bereitstelle
+⚠️ Best Practice: State immer möglichst nah am gebrauchten Ort bereitstellen
 
 ---
 
@@ -612,7 +612,7 @@ TODO
 
 ## Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
-- framework unabhängig -> egal obReact, Vue, Svelte etc.
+- framework unabhängig -> egal ob React, Vue, Svelte etc.
 - Technologie unabhängig -> egal ob Web oder Desktop
 - systemisches Denken (Mental model) das auch im Backend z.B. hilft
 - Sie sind natürlich noch kein Senior, das kommt durch Berufserfahrung, aber Sie können bereits denken wie ein Senior
@@ -644,7 +644,7 @@ Jede Komponente wird in genau dieser Reihenfolge entwickelt.
  Dazu können folgende Techniken angewendet werden
  - Komponentenraster
    - Screenshot von Mockup
-   - oder wenn nicht vorhanden: Wireframw
+   - oder wenn nicht vorhanden: Wireframe
   
  - Komponentendiagramm
 
@@ -677,7 +677,7 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 ## Schritt 3: Data Flow
 
 
-- essentiellere vs abgeleitete State
+- essenzieller vs. abgeleiteter State
 - Data flow
   - props
   - parent
