@@ -634,20 +634,17 @@ Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
 ### Schritt 1 Komponentenstruktur und Hierarchie festlegen
 
-
-
-
 - Welche Komponenten werden benötigt?
 - Wie ist die Hierarchie?
 - Welche Slots/Bereiche gibt es?
 
- Dazu können folgende Techniken angewendet werden
- - Komponentenraster
-   - Screenshot von Mockup
-   - oder wenn nicht vorhanden: Wireframe
-  
- - Komponentendiagramm
+Dazu können folgende Techniken angewendet werden
 
+- Komponentenraster
+  - Screenshot von Mockup
+  - oder wenn nicht vorhanden: Wireframe
+
+- Komponentendiagramm
 
 Tools: tldraw, Excalidraw, Figma, Balsamiq, Visio
 Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
@@ -655,7 +652,6 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 ---
 
 ![alt-text](breaking-up-ui-in-components.png)
-
 
 ---
 
@@ -670,12 +666,9 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ![alt-text](html-elements.png)
 
-
 ---
 
-
 ## Schritt 3: Data Flow
-
 
 - essenzieller vs. abgeleiteter State
 - Data flow
@@ -691,13 +684,11 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
   - Beispiel: local storage updaten
 - Identifizieren von Events, z.B. onClick, onKeyPress
 
-
 siehe auch README Action Item
+
 ---
 
 ### Schritt 5: Styling
-
-
 
 Ganz am Ende:
 
@@ -705,7 +696,6 @@ Ganz am Ende:
 - Farben
 - Responsiveness
 - Animationen
-
 
 ---
 
