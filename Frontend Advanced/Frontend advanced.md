@@ -12,15 +12,13 @@ style: |
 
 # Komponentenorientierte Frontend-Entwicklung
 
-Eine strukturierte Vorgehensweise zur Entwicklung einzelner Frontend-Komponenten.
+Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
 
 ---
 
 # Motivation
 
-Wie war es vor Komponenten Frameworks?
-
-TODO
+Suehe andere Präsnetation
 
 ---
 
@@ -613,7 +611,7 @@ TODO
 # Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
 - framework unabhängig -> egal ob React, Vue, Svelte etc.
-- Technologie unabhängig -> egal ob Web oder Desktop
+- Technologie unabhängig -> egal ob Web oder Desktop oder Mobile
 - systemisches Denken (Mental model) das auch im Backend z.B. hilft
 - Sie sind natürlich noch kein Senior, das kommt durch Berufserfahrung, aber Sie können bereits denken wie ein Senior
 
