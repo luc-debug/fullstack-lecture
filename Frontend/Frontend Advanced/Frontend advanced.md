@@ -16,7 +16,45 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
 
 ---
 
-# Motivation
+# Inhaltsverzeichnis
+
+1. Motivation
+2. Komponenten
+   - 2.1 Komponentenraster
+   - 2.2 Wie brechen wir eine UI in Komponenten herunter?
+   - 2.3 Probleme mit zu große Komponenten
+   - 2.4 Probleme mit zu kleinen Komponenten
+   - 2.5 Die richtige Balance finden
+   - 2.6 🛠️ Guideline zur Erstellung von Komponenten
+   - 2.7 Richtlinien für die Komponentenerstellung
+   - 2.8 🧰 Aufgabe
+3. State
+   - 3.1 State machine pattern
+   - 3.2 Wo lebt der State?
+     - 3.2.1 Lokaler State
+     - 3.2.2 🔼 Lifted State (Shared Parent State)
+     - 3.2.3 Global State
+     - 3.2.4 Zusammenfassung State Hierarchie
+   - 3.3 Wo wird State gespeichert?
+     - 3.3.1 Im Arbeitsspeicher (Runtime State)
+     - 3.3.2 Local Storage / Session Storage
+     - 3.3.3 Server
+     - 3.3.4 URL
+   - 3.4 Zusammenfassung State
+     - 3.4.1 State Management Patterns in React
+     - 3.4.2 State-Architektur-Beispiel
+     - 3.4.3 State-Anti-Patterns
+4. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
+   - 4.1 Die 5 Schritte
+   - 4.2 Schritt 1: Komponentenstruktur und Hierarchie festlegen
+   - 4.3 Schritt 2: HTML Struktur
+   - 4.4 Schritt 3: Datenfluss
+   - 4.5 Schritt 4: Functionality
+   - 4.6 Schritt 5: Styling
+
+---
+
+# 1. Motivation
 
 ➡️ siehe Vorlesung Entwicklung der Web-Architektur
 
@@ -54,16 +92,16 @@ Sonst entstehen:
 
 ---
 
-# Komponenten
+# 2. Komponenten
 
-## Komponentenraster
+## 2.1 Komponentenraster
 
 als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Komponenten erkennen
 ![Komponentenraster](component-raster.png)
 
 ---
 
-## Wie brechen wir eine UI in Komponenten herunter?
+## 2.2 Wie brechen wir eine UI in Komponenten herunter?
 
 - wir betrachten die Komponentengröße
 - zu groß oder zu klein ist schlecht, wir brauchen den Sweet Spot
@@ -72,7 +110,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## Probleme mit zu große Komponenten
+## 2.3 Probleme mit zu große Komponenten
 
 ![alt text](image-1.png)
 
@@ -86,7 +124,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## Probleme mit zu kleinen Komponenten
+## 2.4 Probleme mit zu kleinen Komponenten
 
 ![alt text](image-3.png)
 
@@ -98,7 +136,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## Die richtige Balance finden
+## 2.5 Die richtige Balance finden
 
 ![alt text](image-4.png)
 
@@ -109,7 +147,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## 🛠️ Guideline zur Erstellung von Komponenten
+## 2.6 🛠️ Guideline zur Erstellung von Komponenten
 
 ![alt text](image-5.png)
 
@@ -129,7 +167,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## Richtlinien für die Komponentenerstellung
+## 2.7 Richtlinien für die Komponentenerstellung
 
 - Abstraktionskosten verstehen: Jede neue Komponente führt eine Abstraktion ein, die zusätzlichen kognitiven Mehraufwand verursacht. Vermeiden Sie es, neue Komponenten zu früh zu erstellen.
 - Namenskonventionen: Benennen Sie Komponenten basierend auf ihrer Funktion oder ihrem Darstellungszweck. Lange, beschreibende Namen sind häufig erforderlich.
@@ -142,7 +180,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## 🧰 Aufgabe
+## 2.8 🧰 Aufgabe
 
 - Gehen Sie auf eine Webseite Ihrer Wahl
 - Machen Sie einen Screenshot
@@ -150,7 +188,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-# State
+# 3. State
 
 🛑 Problem
 
@@ -173,15 +211,15 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## State machine pattern
+## 3.1 State machine pattern
 
 TODO
 
 ---
 
-## Wo lebt der State?
+## 3.2 Wo lebt der State?
 
-### Lokaler State
+### 3.2.1 Lokaler State
 
 Lokaler State bedeutet: State innerhalb einer Komponente
 
@@ -344,7 +382,7 @@ State darf höher liegen, wenn:
 
 ---
 
-## 🔼 Lifted State (Shared Parent State)
+## 3.2.2 🔼 Lifted State (Shared Parent State)
 
 🚫 **Problem:** Zwei oder mehr Komponenten brauchen denselben State.
 ✅ **Lösung:** State zum **nächstgelegenen gemeinsamen Parent** verschieben.
@@ -446,7 +484,7 @@ function ProductPage({ query, setQuery }) {
 </div>
 <div>
 
-Warum schlecht?
+**Warum schlecht?**
 
 - `App`, `Layout`, `MainContent` brauchen den State eigentlich nicht
 - Props werden nur „durchgereicht“
@@ -458,7 +496,7 @@ Warum schlecht?
 
 ---
 
-## 📌 Entscheidungsregel:
+**📌 Entscheidungsregel:**
 
 ### Frage:
 
@@ -470,7 +508,7 @@ Warum schlecht?
 
 ---
 
-### Global State
+### 3.2.3 Global State
 
 🚫 **Problem:** Wie vermeidet man Prop Drilling über viele Komponentenebenen?
 
@@ -481,7 +519,7 @@ Warum schlecht?
 
 ---
 
-## State Hierarchie
+## 3.2.4 Zusammenfassung State Hierarchie
 
 ### Lokal:
 
@@ -497,9 +535,9 @@ Viele entfernte Bereiche → Context / Zustand / Redux
 
 ---
 
-## Wo wird State gespeichert?
+## 3.3 Wo wird State gespeichert?
 
-### Im Arbeitsspeicher (Runtime State)
+### 3.3.1 Im Arbeitsspeicher (Runtime State)
 
 - Komponenten-State (`useState`, `useReducer`)
 - Globale Stores (Redux, Zustand, Context)
@@ -517,7 +555,7 @@ export default function Counter() {
 
 ---
 
-### Local Storage / Session Storage
+### 3.3.2 Local Storage / Session Storage
 
 - Bleibt im Browser gespeichert
 - Nützlich für Benutzereinstellungen, Auth-Tokens, Entwürfe
@@ -543,7 +581,7 @@ export default function ThemeToggle() {
 
 ---
 
-### Server
+### 3.3.3 Server
 
 - Datenbanken, Benutzerprofile, Anwendungsdaten
 - Über Geräte und Sitzungen hinweg verfügbar
@@ -569,7 +607,7 @@ export default function UserProfile() {
 
 ---
 
-### URL
+### 3.3.4 URL
 
 - State wird in Query-Parametern, Pfad-Parametern oder Hash gespeichert
 - Nützlich für Filter, Paginierung, Suchstatus, Deep Linking
@@ -592,25 +630,25 @@ export default function ProductFilter() {
 
 ---
 
-## Zusammenfassung State
+## 3.4 Zusammenfassung State
 
-### State Management Patterns in React
+### 3.4.1 State Management Patterns in React
 
 TODO
 
 https://link.excalidraw.com/readonly/t7BvLGu2IqLIWyzCgJIG
 
-### State-Architektur-Beispiel
+### 3.4.2 State-Architektur-Beispiel
 
 TODO
 
-### State-Anti-Patterns
+### 3.4.3 State-Anti-Patterns
 
 TODO
 
 ---
 
-# Der Senior Workflow für moderne Frontend-Komponentenentwicklung
+# 4. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
 - framework unabhängig -> egal ob React, Vue, Svelte etc.
 - Technologie unabhängig -> egal ob Web oder Desktop oder Mobile
@@ -619,7 +657,7 @@ TODO
 
 ---
 
-## Die 5 Schritte
+## 4.1 Die 5 Schritte
 
 ```text
 1. Komponentenstruktur
@@ -633,7 +671,7 @@ Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
 ---
 
-## Schritt 1: Komponentenstruktur und Hierarchie festlegen
+## 4.2 Schritt 1: Komponentenstruktur und Hierarchie festlegen
 
 - Welche Komponenten werden benötigt?
 - Wie ist die Hierarchie?
@@ -660,7 +698,7 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-## Schritt 2: HTML Struktur
+## 4.3 Schritt 2: HTML Struktur
 
 - Welche HTML-Elemente existieren? -> Semantisches HTML
 - Die Komponente wird wie ein Wireframe aufgebaut.
@@ -669,7 +707,7 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-## Schritt 3: Datenfluss
+## 4.4 Schritt 3: Datenfluss
 
 - essenzieller vs. abgeleiteter State
 - Datenfluss
@@ -681,7 +719,7 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-## Schritt 4: Functionality
+## 4.5 Schritt 4: Functionality
 
 - Identifizieren von Effects, wenn ein essentieller State sich ändert
   - Beispiel: local storage updaten
@@ -691,7 +729,7 @@ siehe auch README Action Item
 
 ---
 
-## Schritt 5: Styling
+## 4.6 Schritt 5: Styling
 
 Ganz am Ende:
 
