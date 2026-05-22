@@ -1,3 +1,23 @@
+---
+marp: true
+theme: default
+paginate: true
+style: |
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+---
+
+## Motivaion
+
+- JavaScript kann im Frontend und im ABckend verwednet werden
+- JavaScript ist einer der beliebtesten Sprachen und damit auch af dem Job MAarkt gesucht
+
+TODO
+
+---
 
 <!-- _header: "" -->
 
