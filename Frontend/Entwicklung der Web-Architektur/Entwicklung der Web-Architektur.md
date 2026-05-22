@@ -116,11 +116,13 @@ ABER:
 - Schlechte Developer Experience
 - Fast keine automatisierten Tests möglich
 
+---
+
 ✅ Lösung: SPAs (Single Page Applications) mit modernen Frameworks
 
-- **OOP** – Komponenten als zentrale Abstraktion (Kapselung, Wiederverwendbarkeit)
-- **Deklarative Programmierung** – UI als Funktion des States beschreiben (in React: JSX)
-- **State-Machine-Pattern** – deterministische Modellierung und Verwaltung von Anwendungsdaten
+- **OOP** – Komponenten als zentrale Abstraktion (Kapselung, Wiederverwendbarkeit) ➡️ [3.2 Architekturvorbild aus dem Backend: OOP im Frontend](#32-architekturvorbild-aus-dem-backend-oop-im-frontend)
+- **Deklarative Programmierung** – UI als Funktion des States beschreiben (in React: JSX) ➡️ [3.3 Von imperativ zu deklarativ](#33-von-imperativ-zu-deklarativ)
+- **State-Machine-Pattern** – deterministische Modellierung und Verwaltung von Anwendungsdaten ➡️ Vorlesung Frontend Advanced
 
 ---
 
