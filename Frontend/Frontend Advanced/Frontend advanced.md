@@ -18,7 +18,7 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
 
 # Motivation
 
-Suehe andere Präsnetation
+➡️ siehe Vorlesung Entwicklung der Web-Architektur
 
 ---
 
@@ -51,6 +51,8 @@ Sonst entstehen:
 | Schwer wartbarer Code                             | Architektur by Design → Wartbarkeit    | Langfristig stabilere Codebasis              | Maintainability                 |
 | Nicht wissen, wo anfangen                         | Komplexität reduzieren durch Zerlegung | Schnellere Entwicklungszeit                  | Divide and Conquer              |
 | Chaotische Props                                  | Fest definierte Schnittstellen         | Klarere Kommunikation zwischen Komponenten   | Interface Segregation Principle |
+
+---
 
 # Komponenten
 
@@ -127,7 +129,7 @@ als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-Richtlinien für die Komponentenerstellung
+## Richtlinien für die Komponentenerstellung
 
 - Abstraktionskosten verstehen: Jede neue Komponente führt eine Abstraktion ein, die zusätzlichen kognitiven Mehraufwand verursacht. Vermeiden Sie es, neue Komponenten zu früh zu erstellen.
 - Namenskonventionen: Benennen Sie Komponenten basierend auf ihrer Funktion oder ihrem Darstellungszweck. Lange, beschreibende Namen sind häufig erforderlich.
@@ -324,11 +326,11 @@ Warum schlecht?
 - Höheres Risiko für unnötige Re-Renders
 
 </div>
-<div>
+</div>
 
 ---
 
-## 📌 Ausnahme
+#### 📌 Ausnahme
 
 State darf höher liegen, wenn:
 
@@ -336,7 +338,7 @@ State darf höher liegen, wenn:
 - Globales UI (Theme, Auth, Cart)
 - Server State / Context sinnvoll ist
 
-## Faustregel
+#### Faustregel
 
 **Lokaler State zuerst → Lift State Up nur bei echtem Bedarf**
 
@@ -405,7 +407,7 @@ Warum gut?
 - Klarer Datenfluss
 
 </div>
-<div>
+</div>
 
 ---
 
@@ -452,7 +454,7 @@ Warum schlecht?
 - Schlechter wartbar
 - Klassisches **Prop Drilling**
 </div>
-<div>
+</div>
 
 ---
 
@@ -617,20 +619,21 @@ TODO
 
 ---
 
-### Die 5 Schritte
+## Die 5 Schritte
 
 ```text
 1. Komponentenstruktur
-2. Datenfluss
-3. Funktionalität
-4. Styling
+2. HTML Struktur
+3. Datenfluss
+4. Funktionalität
+5. Styling
 ```
 
 Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
 ---
 
-### Schritt 1 Komponentenstruktur und Hierarchie festlegen
+## Schritt 1: Komponentenstruktur und Hierarchie festlegen
 
 - Welche Komponenten werden benötigt?
 - Wie ist die Hierarchie?
@@ -657,7 +660,7 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-### Schritt 2: HTML Struktur
+## Schritt 2: HTML Struktur
 
 - Welche HTML-Elemente existieren? -> Semantisches HTML
 - Die Komponente wird wie ein Wireframe aufgebaut.
@@ -676,6 +679,8 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 - Identifizieren von UI States
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
 
+---
+
 ## Schritt 4: Functionality
 
 - Identifizieren von Effects, wenn ein essentieller State sich ändert
@@ -686,7 +691,7 @@ siehe auch README Action Item
 
 ---
 
-### Schritt 5: Styling
+## Schritt 5: Styling
 
 Ganz am Ende:
 
