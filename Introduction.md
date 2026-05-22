@@ -12,7 +12,7 @@ style: |
 
 # Fullstack Vorlesung
 
-## Legend
+## Legende
 
 🧰: Aufgabe
 
@@ -24,6 +24,25 @@ style: |
 💡: Konzept, wehes implementiert wird
 🚫 Problem beschreibung, welches das Konzeopt löst
 ✅: Lösungsbeschriebung des Problems, welches das Konzept löst
+
+---
+
+## Motivation: Was ist Fullstack?
+
+TODO
+
+- Jobmarkt fordert End-to-end delivery
+  - Anforderungsanalyse
+  - Projektmanagment (Scrum!)
+  - Frontend
+  - Backend 
+  - DevOps
+
+TODO Videoinhaltergänzen Einleitung
+
+---
+
+TODO :Vorstellung der Roadmap als Mindmap
 
 ---
 
