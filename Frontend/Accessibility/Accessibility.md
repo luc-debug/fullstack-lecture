@@ -20,3 +20,6 @@ size: 4:3
 
 TBD
 Action Item mit A11y aufsetzen; Anschlie0end an Frontend Tooling
+
+
+Cumulocity Accessibily Page
