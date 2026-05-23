@@ -8,6 +8,11 @@ style: |
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
   }
+  .columnstwothird {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+  }
 ---
 
 # Komponentenorientierte Frontend-Entwicklung
@@ -28,6 +33,9 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
    - 2.6 🛠️ Guideline zur Erstellung von Komponenten
    - 2.7 Richtlinien für die Komponentenerstellung
    - 2.8 🧰 Aufgabe
+
+---
+
 3. State
    - 3.1 State machine pattern
    - 3.2 Wo lebt der State?
@@ -40,11 +48,15 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
      - 3.3.2 Local Storage / Session Storage
      - 3.3.3 Server
      - 3.3.4 URL
-   - 3.4 Zusammenfassung State
-     - 3.4.1 State Management Patterns in React
-     - 3.4.2 State-Architektur-Beispiel
-     - 3.4.3 State-Anti-Patterns
-4. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
+
+---
+
+- 3.4 Zusammenfassung State
+  - 3.4.1 State Management Patterns in React
+  - 3.4.2 State-Architektur-Beispiel
+  - 3.4.3 State-Anti-Patterns
+
+1. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
    - 4.1 Die 5 Schritte
    - 4.2 Schritt 1: Komponentenstruktur und Hierarchie festlegen
    - 4.3 Schritt 2: HTML Struktur
@@ -92,12 +104,23 @@ Sonst entstehen:
 
 ---
 
-# 2. Komponenten
+# 2. Komponentenraster
 
-## 2.1 Komponentenraster
+---
 
-als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Komponenten erkennen
-![Komponentenraster](component-raster.png)
+## 2.1 Motivation
+
+<div class=" columnstwothird ">
+<div>
+
+![Komponentenraster w:600px](component-raster.png)
+</div>
+<div>
+Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Komponenten erkennen
+
+
+</div>
+</div>
 
 ---
 
@@ -690,11 +713,15 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 
 ---
 
-![alt-text](breaking-up-ui-in-components.png)
+![alt-text w:550px](breaking-up-ui-in-components.png)
+
+_Abb. 1: UI in Komponenten zerlegen_
 
 ---
 
-![component-tree-view](component-tree-view.png)
+![component-tree-view h:550px](component-tree-view.png)
+
+_Abb. 2: Komponentenbaum_
 
 ---
 
@@ -703,72 +730,56 @@ Persönliche Empfehlung: [tldraw](https://www.tldraw.com/)
 - Welche HTML-Elemente existieren? -> Semantisches HTML
 - Die Komponente wird wie ein Wireframe aufgebaut.
 
-![alt-text](html-elements.png)
+![alt-text w:700px](html-elements.png)
 
 ---
 
 ## 4.4 Schritt 3: Datenfluss
 
-- essenzieller vs. abgeleiteter State
-- Datenfluss
-  - Props
-  - Parent
-  - Global
 - Identifizieren von UI States
+  - State = "etwas , dass sich ändert
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
+  - essenzieller vs. abgeleiteter State
+
+- Datenfluss skizzieren
+  - Local State
+  - Lifted State -> Props
+  - Global -> injected
 
 ---
 
 ## 4.5 Schritt 4: Functionality
 
-- Identifizieren von Effects, wenn ein essentieller State sich ändert
+- Identifizieren von Effects, wenn ein State sich ändert
   - Beispiel: local storage updaten
-- Identifizieren von Events, z.B. onClick, onKeyPress
 
-siehe auch README Action Item
+- Identifizieren von State-Transitions als Reaktion auf User Events
+  - z.B. Klicks auf Buttons, Eingaben in Formularen, etc.
+  - Datenlebenszyklus: Daten von Server holen, Loading und Error State managen
 
 ---
 
 ## 4.6 Schritt 5: Styling
 
-Ganz am Ende:
+1. Layout
+2. Farben
+3. Responsiveness
+4. Animationen
 
-- Layout
-- Farben
-- Responsiveness
-- Animationen
-
----
-
-# React – Styling
-
-```jsx
-<div className="todo-item">
-```
-
-```css
-.todo-item {
-  display: flex;
-  gap: 8px;
-}
-```
-
----
-
-# Warum Styling zuletzt?
-
-Zu frühes Styling führt oft zu:
+**Warum Styling zuletzt? Zu frühes Styling führt oft zu:**
 
 - Ablenkung
 - unnötigem Refactoring
 - versteckten Architekturproblemen
 - Fokusverlust
 
-Die Methode priorisiert Funktion vor Design.
+Dier Senior Workflow priorisiert Funktion vor Design.
 
 ---
 
-# Typische Fehler ohne Bare Bones Method
+## 4.7 Fazit
+
+### 4.7.1 Typische Fehler ohne den Senior Workflow
 
 - Sofort Styling beginnen
 - Zu früh abstrahieren
@@ -778,16 +789,16 @@ Die Methode priorisiert Funktion vor Design.
 
 ---
 
-# Vorteile der Methode
+#### 4.7.2 Vorteile der Methode
 
-## Technisch
+**Technisch**
 
 - bessere Wartbarkeit
 - sauberer Data Flow
 - bessere Testbarkeit
 - klarere Komponenten
 
-## Im Team
+**Im Team**
 
 - besseres Code Review
 - einheitliche Struktur
@@ -795,20 +806,9 @@ Die Methode priorisiert Funktion vor Design.
 
 ---
 
-# Besonders geeignet für
+### 4.7.3 Fazit
 
-- React
-- Vue
-- Svelte
-- Component Libraries
-- Design-Systeme
-- moderne SPA-Entwicklung
-
----
-
-# Fazit
-
-Die Bare Bones Method ist:
+Der Senior Workflow ist:
 
 - komponentenorientiert
 - iterativ
@@ -822,14 +822,3 @@ Sie hilft dabei, Frontend-Komponenten:
 - skalierbar
 
 zu entwickeln.
-
----
-
-# Merksatz
-
-```text
-Structure first.
-Data second.
-Behavior third.
-Design last.
-```
