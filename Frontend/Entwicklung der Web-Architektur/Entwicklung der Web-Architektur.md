@@ -152,16 +152,18 @@ ABER:
 
 Das Backend kannte Klassen, Kapselung und Wiederverwendbarkeit schon lange – diese Ideen werden nun auf das Frontend übertragen:
 
-| OOP-Konzept        | Frontend-Entsprechung                              |
-| ------------------ | -------------------------------------------------- |
-| Klasse             | Komponente (z. B. `<Button />`, `<MovieCard />`)   |
-| Kapselung          | Komponente verwaltet eigenen State und eigenes CSS |
-| Wiederverwendung   | Komponente wird an mehreren Stellen eingesetzt     |
-| Komposition        | Komponenten werden ineinander verschachtelt        |
+| OOP-Konzept      | Frontend-Entsprechung                              |
+| ---------------- | -------------------------------------------------- |
+| Klasse           | Komponente (z. B. `<Button />`, `<MovieCard />`)   |
+| Kapselung        | Komponente verwaltet eigenen State und eigenes CSS |
+| Wiederverwendung | Komponente wird an mehreren Stellen eingesetzt     |
+| Komposition      | Komponenten werden ineinander verschachtelt        |
 
 > Eine Komponente ist eine in sich geschlossene Einheit aus **Struktur (JSX)**, **Logik (JS)** und optional **Stil (CSS)**.
 
 ---
+
+## TODO: SOLID Prinzipien
 
 ## 3.3 Von imperativ zu deklarativ
 
