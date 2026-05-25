@@ -194,3 +194,87 @@ HTTP verwendet Statuscodes, um den Erfolg oder Fehler einer Anfrage anzuzeigen
 - HTTP/1.1 ist die am weitesten verbreitete Version von HTTP, die seit den 1990er Jahren verwendet wird und grundlegende Funktionen wie persistent connections, chunked transfer encoding und pipelining bietet, um die Leistung von Webanwendungen zu verbessern.
 - HTTP/2 ist eine neuere Version von HTTP, die Verbesserungen in der Leistung und Effizienz bietet, z.B. durch die Verwendung von Multiplexing, Header-Komprimierung und Server-Push-Techniken, um die Ladezeiten von Websites zu reduzieren und die Benutzererfahrung zu verbessern.
 - HTTP/3 ist die neueste Version von HTTP, die auf dem QUIC-Protokoll basiert und weitere Verbesserungen in der Leistung und Sicherheit bietet, z.B. durch die Verwendung von UDP anstelle von TCP, um die Latenz zu reduzieren und die Verbindungssicherheit zu erhöhen.
+
+---
+
+# HTTP Advanced
+
+## Content Negotiation
+
+Das Zusammenspiel dieser drei Konzepte ist im Grunde ein ständiger Dialog zwischen dem Client (z. B. einem Browser oder einer React-App) und dem Server. Das Ziel: Daten so effizient, passgenau und schnell wie möglich zu übertragen.
+
+Man kann es sich wie eine Bestellung im Restaurant vorstellen: Du sagst dem Kellner, was du gerne hättest und ob du Allergien hast (**Content Negotiation**). Der Koch bereitet das Essen zu, verpackt es platzsparend für den Transport (**Content Compression**) und klebt ein Etikett auf die Box, damit du weißt, was drin ist (**Content Type**).
+
+Im Folgenden ist die genaue Aufschlüsselung, wie diese drei Komponenten ineinandergreifen:
+
+---
+
+### 1. Content Negotiation (Die Verhandlung)
+
+Bevor der Server überhaupt Daten schickt, teilt der Client ihm mit, was er _versteht_ und was er _bevorzugt_. Das passiert direkt im HTTP-Request über verschiedene `Accept`-Header. Der Client eröffnet also die Verhandlung.
+
+- **`Accept`:** "Ich hätte gerne HTML, nehme aber auch reines JSON." (z. B. `Accept: text/html, application/json`)
+- **`Accept-Encoding`:** "Ich beherrsche folgende Komprimierungsverfahren: Brotli und Gzip." (z. B. `Accept-Encoding: gzip, deflate, br`)
+- **`Accept-Language`:** "Am liebsten auf Deutsch, Englisch geht zur Not auch." (z. B. `Accept-Language: de-DE, en-US;q=0.8`)
+
+---
+
+### 2. Content Type (Das tatsächliche Format)
+
+Nachdem der Server den "Wunschzettel" (Content Negotiation) gelesen hat, entscheidet er, was er zurückschickt. Der Server packt die Daten zusammen und muss dem Client nun exakt sagen, um welches Datenformat es sich handelt, damit der Browser (oder dein JavaScript-Code) weiß, wie er die Bytes interpretieren muss.
+
+- Im Response-Header: **`Content-Type: application/json; charset=utf-8`**
+- **Der Zusammenhang:** Der `Content-Type` in der Response ist die direkte Antwort auf den `Accept`-Header im Request.
+- [Media types (MIME types)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types) `Content-Type: type/subtype;parameter=value`
+  - type: Hauptkategorie (z. B. `text`, `application`, `image`)
+  - subtype: Spezifisches Format (z. B. `html`, `json`, `png`)
+  - parameter: Zusätzliche Informationen (z. B. `charset=utf-8`)
+
+---
+
+### 3. Content Compression / Encoding (Die Transport-Optimierung)
+
+Da Netzwerkanfragen teuer sind (Ladezeit, Bandbreite), entscheidet der Server oft, die Daten vor dem Senden zu komprimieren (z. B. eine große JSON-Datei aus einer API). Er darf das aber _nur_ tun, wenn der Client in der Negotiation (Schritt 1) gesagt hat, dass er diese Komprimierung auch entpacken kann.
+
+- Der Server komprimiert die Daten und setzt den Response-Header: **`Content-Encoding: br`** (für Brotli).
+- **Der Zusammenhang:** Das `Content-Encoding` in der Response ist die direkte Antwort auf den `Accept-Encoding`-Header im Request. Der `Content-Type` bleibt dabei unverändert (es ist immer noch JSON, nur eben komprimiertes JSON).
+
+---
+
+### Der gesamte Zyklus im Code
+
+Wenn du Daten aus einem Backend abrufst, sieht das Zusammenspiel in den HTTP-Headern genau so aus:
+
+**Der Request (Client ➡️ Server)**
+
+```http
+GET /api/users HTTP/1.1
+Host: api.beispiel.de
+Accept: application/json
+Accept-Encoding: gzip, br
+
+```
+
+_(Der Client sagt: "Gib mir die User als JSON. Du darfst das Paket gerne mit Gzip oder Brotli komprimieren.")_
+
+---
+
+**Die Response (Server ➡️ Client)**
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json; charset=utf-8
+Content-Encoding: br
+Content-Length: 4096
+
+[... hier folgen die komprimierten Bytes des JSON-Arrays ...]
+
+```
+
+_(Der Server sagt: "Hier ist dein JSON (`Content-Type`). Ich habe es mit Brotli gepackt (`Content-Encoding`), weil du mir vorhin erlaubt hast, das zu tun.")_
+
+---
+
+### Warum das für die Entwicklung wichtig ist
+
+In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn du eine Next.js-Anwendung baust und deployest, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
