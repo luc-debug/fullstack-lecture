@@ -35,7 +35,7 @@ TODO
   - Anforderungsanalyse
   - Projektmanagment (Scrum!)
   - Frontend
-  - Backend 
+  - Backend
   - DevOps
 
 TODO Videoinhaltergänzen Einleitung
