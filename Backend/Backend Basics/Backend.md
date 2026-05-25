@@ -116,7 +116,7 @@ style: |
 
 ## MVC
 
-![alt text](img/MVC.png)
+![alt text h:500px](img/MVC.png)
 
 ---
 
