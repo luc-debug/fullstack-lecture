@@ -104,12 +104,12 @@ style: |
     tr:nth-child(even) td {
         background-color: #1e293b; /* Deutlich abgesetzte Zeilen für bessere Scanbarkeit */
     }
-
 ---
 
 # Backend Basics
 
 ---
+
 # Einleitung
 
 ---
@@ -123,23 +123,51 @@ style: |
 - Model: Repräsentation der Daten
 - View: Darstellung der Daten für den Benutzer
 - Controller: Vermittler zwischen Model und View, verarbeitet Benutzereingaben; Geschäftslogik
-- Früher war View ein HTML-Template, heute ist es oft eine Single Page Application (SPA) im Frontend
+- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als User Frontend.
   - zum Beispiel ASP .NET MVC, Spring MVC, Ruby on Rails
 
 ---
+
 # REST API
 
+---
 
 # Business Logic
 
+---
 
+## Einleitung
+
+- Simpel heruntergebrochen, werden die HTTP abgefangen, ruft man in den Handlern die Database auf und gibt Daten an den User zurück
+- am Anfang kann man es relativ simpel halten und verschiedene Anfragne mit if else auswerten
+- BEi höhere komplexität bracuht man Struktur - genau das implementieren Frameworks wie JavaScr Springt Bootmit OOP oder express.js mit funktionsorientiertem Programmierung
+
+---
+
+## Middleware and Request Handler Pattern/Request Handler Delegate
+
+- Middleware: Funktion, die HTTP-Anfragen abfängt, bevor sie den eigentlichen Request Handler erreichen. Sie kann Anfragen modifizieren, authentifizieren oder protokollieren.
+- Request Handler: Funktion, die die eigentliche Logik zur Verarbeitung einer HTTP-Anfrage enthält und eine Antwort zurückgibt.
+- Request Handler Delegate: Ein Konzept, bei dem Middleware und Request Handler in einer Kette organisiert sind. Jede Middleware kann entscheiden, ob sie die Anfrage weiterleitet oder eine Antwort zurückgibt.
+
+---
+
+## ![alt text ](img/Middleware.png)
+
+---
+
+## Aufgabe
+
+- einfache aufgabe mit express wo einmal die Middleware und die Request Handler getestet werden
+
+---
 
 # Databases
+
 ## Grundlagen
 
 ### Relationale Datenbanken
 
 ### Nicht-relationale Datenbanken
-
 
 ## ORM
