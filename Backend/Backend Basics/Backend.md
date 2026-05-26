@@ -136,31 +136,119 @@ style: |
 
 ---
 
-## Einleitung
+# Business **Logic**
 
-- Simpel heruntergebrochen, werden die HTTP abgefangen, ruft man in den Handlern die Database auf und gibt Daten an den User zurück
-- am Anfang kann man es relativ simpel halten und verschiedene Anfragne mit if else auswerten
-- BEi höhere komplexität bracuht man Struktur - genau das implementieren Frameworks wie JavaScr Springt Bootmit OOP oder express.js mit funktionsorientiertem Programmierung
+Vom HTTP-Request zur Datenbank und zurück
 
 ---
 
-## Middleware and Request Handler Pattern/Request Handler Delegate
+---
 
-- Middleware: Funktion, die HTTP-Anfragen abfängt, bevor sie den eigentlichen Request Handler erreichen. Sie kann Anfragen modifizieren, authentifizieren oder protokollieren.
-- Request Handler: Funktion, die die eigentliche Logik zur Verarbeitung einer HTTP-Anfrage enthält und eine Antwort zurückgibt.
-- Request Handler Delegate: Ein Konzept, bei dem Middleware und Request Handler in einer Kette organisiert sind. Jede Middleware kann entscheiden, ob sie die Anfrage weiterleitet oder eine Antwort zurückgibt.
+## Die Evolution der Business Logic
+
+Im Grunde genommen macht jedes Backend das Gleiche: Es nimmt einen **HTTP-Request** entgegen, jagt ihn durch die Geschäftslogik und spuckt eine **HTTP-Response** aus. Spannend wird es bei der Frage, wie wir diesen Code strukturieren, wenn die App wächst.
+
+<div class="grid-2">
+<div class="tile" style="border-color: rgba(248, 113, 113, 0.3);">
+<h3 style="color: #f87171;">Phase 1: Der Prototyp (if / else)</h3>
+<p>Man startet mit einer einzigen Datei. Die Routen und die Logik werden direkt untereinander in simplen Verzweigungen abgehandelt. Wenn die URL <code>/users</code> ist, hol den User; wenn sie <code>/products</code> ist, hol das Produkt.</p>
+<p><strong>Das Problem:</strong> Sobald Validierung, Error-Handling und Datenbanken dazukommen, bricht dieses File auseinander. Der Code wird unlesbar und lässt sich nicht mehr testen.</p>
+</div>
 
 ---
 
-## ![alt text ](img/Middleware.png)
+<div class="tile" style="border-color: rgba(16, 185, 129, 0.3);">
+<h3 style="color: #34d399;">Phase 2: Strukturierte Architektur</h3>
+<p>Ab hier bricht man die Riesen-Logik in saubere, wiederverwendbare Bausteine auf. Je nach Team-Präferenz nutzt man dafür einen von zwei Wegen:</p>
+<ul>
+  <li><strong>Funktionsorientiert:</strong> Reine, entkoppelte Funktionen (z. B. typisch für Express-Controller oder Next.js Route Handler).</li>
+  <li><strong>Klassenorientiert (OOP):</strong> Strukturierung über Controller- und Service-Klassen mit Dependency Injection (z. B. der Standard in NestJS).</li>
+</ul>
+</div>
+</div>
 
 ---
 
-## Aufgabe
+## Das Middleware & Handler Pattern
 
-- einfache aufgabe mit express wo einmal die Middleware und die Request Handler getestet werden
+Um diese Struktur zu erreichen, etablieren moderne Frameworks eine saubere Kette von Verantwortlichkeiten:
+
+- **Middleware:** Eine Funktion, die HTTP-Anfragen abfängt, _bevor_ sie die eigentliche Geschäftslogik erreichen. Sie ist perfekt geeignet, um Requests zu modifizieren, Tokens zu authentifizieren oder Logs zu schreiben.
+- **Request Handler:** Die finale Funktion am Ende der Kette. Sie enthält die eigentliche Geschäftslogik (z. B. den Datenbankaufruf) und sendet die fertige HTTP-Antwort (`Response`) an den Client zurück.
+- **Request Handler Delegate:** Das Prinzip, diese Bausteine als Pipeline zu organisieren. Jede Middleware entscheidet aktiv, ob sie die Anfrage an den nächsten Block _delegiert_ (`next()`) oder abricht.
 
 ---
+
+# Systemarchitektur: **Die Pipeline**
+
+So durchläuft der Request das Backend
+
+<br>
+
+![width:900px](img/Middleware.png)
+
+---
+
+## 💻 Aufgabe: Der VIP-Eingang
+
+Erstelle einen simplen Express-Server mit einer geschützten Route. Ziel ist es, die Verantwortlichkeiten strikt zwischen Middleware und Handler zu trennen.
+
+<div class="grid-2">
+<div class="tile" style="border-top: 4px solid #f87171;">
+<h3>1. Die Middleware (Der Türsteher)</h3>
+<p>Schreibe eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
+<ul>
+  <li>Wenn ja: Reiche die Anfrage weiter.</li>
+  <li>Wenn nein: Blockiere die Anfrage mit Status <code>403 Forbidden</code> und einer Fehlermeldung.</li>
+</ul>
+</div>
+
+---
+
+<div class="tile" style="border-top: 4px solid #34d399;">
+<h3>2. Der Request Handler (Die Party)</h3>
+<p>Schreibe eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
+<ul>
+  <li>Sende den Status <code>200 OK</code>.</li>
+  <li>Schicke ein JSON-Objekt zurück: <code>{ message: "Willkommen in der VIP-Lounge!" }</code></li>
+</ul>
+</div>
+</div>
+
+**Route:** Verknüpfe beide Funktionen auf der Route `GET /api/vip`.
+
+---
+
+## ✅ Musterlösung
+
+So sieht die saubere Trennung im Code aus:
+
+```javascript
+const express = require("express");
+const app = express();
+
+// 1. Middleware: Kontrolliert den Zugang
+const checkAuth = (req, res, next) => {
+  const role = req.headers["x-role"];
+
+  if (role === "vip") {
+    next(); // Erfolgreich: Delegiere an den nächsten Handler
+  } else {
+    // Abbruch: Der Request endet hier, der Handler wird nie erreicht
+    res.status(403).json({ error: "Zugriff verweigert. Nur für VIPs!" });
+  }
+};
+
+// 2. Request Handler: Kümmert sich nur um die Business Logik
+const getVipData = (req, res) => {
+  res.status(200).json({ message: "Willkommen in der VIP-Lounge!" });
+};
+
+// Verknüpfung der Pipeline
+app.get("/api/vip", checkAuth, getVipData);
+
+app.listen(3000, () => console.log("Server läuft auf Port 3000"));
+```
 
 # Databases
 
