@@ -330,12 +330,91 @@ Beide Patterns (Middleware & Sequenz-Modellierung) funktionieren unabhängig vom
 
 ---
 
-# Databases
+# Databases **Fundamentals**
 
-## Grundlagen
+Die Grundlage für persistente Daten und stabile Geschäftsdomänen
 
-### Relationale Datenbanken
+---
 
-### Nicht-relationale Datenbanken
+## SQL vs. NoSQL: Die zwei Welten
+
+Datenbanken werden grundlegend in **relationale (SQL)** und **nicht-tabellarische (NoSQL)** Systeme unterteilt. Im echten Entwickleralltag überwiegt meist der relationale Ansatz, da sich Business-Logiken hervorragend über feste Beziehungen abbilden lassen.
+
+<div class="grid-2">
+<div class="tile" style="border-left: 4px solid #3b82f6;">
+<h3 style="color: #60a5fa;">SQL (Relational)</h3>
+<ul>
+  <li>Basiert auf strikten <strong>Beziehungen</strong></li>
+  <li>Festes, vordefiniertes <strong>Schema</strong></li>
+  <li>Geringere Roh-Performance</li>
+  <li>Schwieriger horizontal zu skalieren</li>
+  <li><em>Tech-Stack:</em> PostgreSQL, MySQL</li>
+</ul>
+</div>
+
+---
+
+<div class="tile" style="border-left: 4px solid #a855f7;">
+<h3 style="color: #c084fc;">NoSQL (Non-Tabular)</h3>
+<ul>
+  <li>Keine starre Form (<strong>Schemalos</strong>)</li>
+  <li>Eingeschränkte Beziehungslogik</li>
+  <li>Sehr hohe Performance</li>
+  <li>Hervorragend horizontal skalierbar</li>
+  <li><em>Tech-Stack:</em> MongoDB, Neo4j</li>
+</ul>
+</div>
+</div>
+
+---
+
+## Wann nutzt man was?
+
+Die Wahl des Datenbanksystems hängt von den Anforderungen der Anwendung ab:
+
+| Kriterium     | SQL-Datenbanken                   | NoSQL-Datenbanken                     |
+| :------------ | :-------------------------------- | :------------------------------------ |
+| **Fokus**     | Komplexe Beziehungen wichtig      | Maximale Performance & Durchsatz      |
+| **Schema**    | Benötigt ein verlässliches Schema | Flexibel für unstrukturierte Daten    |
+| **Beispiele** | E-Commerce-Systeme, Banking       | Content-Management (CMS), Log-Storage |
+
+
+## Query (Afrage Basics)
+
+---
+
+## 💻 Aufgabe:
+
+Um in technischen Screenings und Live-Coding-Interviews zu bestehen, müssen beide Konzepte praktisch beherrscht werden:
+
+- **SQL Practice:**
+  - Du musst SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
+  - **Fokus im Interview:** Beherrsche `INNER JOIN` und `LEFT JOIN` im Effeff auf einfachem bis mittlerem Schwierigkeitsgrad.
+- **NoSQL (MongoDB) Practice:**
+  - Mache dich mit dokumentenorientierten Abfragen vertraut.
+  - Nutze Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und dich auf typische Screening-Fragen vorzubereiten.
+
+---
+
+## Das SQL-Datenbankschema
+
+In der relationalen Welt ist das **Schema** das Fundament der Datenintegrität. Es beschreibt exakt die Struktur und die Datentypen aller Entitäten.
+
+> "Ein Schema macht Datenbankabfragen verlässlich, typsicher und vorhersagbar."
+
+- **Sicherer Vertrag:** Änderungen am Datenmodell erfordern explizite Migrationen (Hinzufügen von Tabellen, Spalten oder neuen Fremdschlüssel-Beziehungen).
+- **Visuelle Modellierung:** Beziehungen zwischen Entitäten (z. B. wie ein `actor` mit `movies` verknüpft ist oder wo `movie_reviews` andocken) werden in Entity-Relationship-Diagrammen (ERD) strukturiert.
+
+---
+
+# Daten halten. **Struktur bewahren.**
+
+Die Wahl der Datenbank bestimmt das Schicksal der Skalierung.
+
+<div style="margin-top: 60px; font-size: 1.1rem; color: #64748b;">
+PostgreSQL | MongoDB | ERD | Schema Design
+</div>
+
+---
 
 ## ORM
