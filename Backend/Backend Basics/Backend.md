@@ -169,7 +169,7 @@ Im Grunde genommen macht jedes Backend das Gleiche: Es nimmt einen **HTTP-Reques
 
 ---
 
-## Das Middleware & Handler Pattern
+## Das Middleware & Request Handler Pattern
 
 Um diese Struktur zu erreichen, etablieren moderne Frameworks eine saubere Kette von Verantwortlichkeiten:
 
@@ -249,6 +249,86 @@ app.get("/api/vip", checkAuth, getVipData);
 
 app.listen(3000, () => console.log("Server läuft auf Port 3000"));
 ```
+
+Note to myself, eigentlich denke ich müsste man die zwei Sachen vertauschen. OOP oder Sfunktioniert orient dier sdann mit wimlane müsste man
+
+---
+
+# API Architektur & **Modellierung**
+
+Struktur, Verhalten und Implementierungs-Stile
+
+---
+
+## Das "Duo" der Backend-Architektur
+
+Um eine professionelle REST-API zu bauen, trennen wir zwischen der **technischen Struktur** und dem **logischen Ablauf**:
+
+<div class="grid-2">
+<div class="tile">
+<h3>1. Die Struktur</h3>
+<p>Das <strong>Middleware & Request Handler Pattern</strong> bildet das Skelett der API. Es definiert, wie ein Request die technische Pipeline (Auth, Validierung, Logging) durchläuft, bevor er die Logik erreicht.</p>
+</div>
+
+<div class="tile">
+<h3>2. Das Verhalten</h3>
+<p><strong>Sequenzdiagramme</strong> modellieren die eigentliche Business Logic. Sie zeigen visuell, wie Daten zwischen Middleware, Handlern, Services und Datenbanken fließen.</p>
+</div>
+</div>
+
+---
+
+## Modellierung mit Sequenzdiagrammen
+
+Warum sind Sequenzdiagramme das perfekte Werkzeug für das Middleware-Pattern? Weil HTTP-Anfragen von Natur aus **sequentiell** ablaufen.
+
+> Das Diagramm zeigt nicht "Wie wird sortiert?", sondern "**Wer spricht wann mit wem?**"
+
+- **Visualisierung der Kette:** Man sieht sofort, wo eine Middleware den Request abbricht (z. B. 401 Unauthorized).
+- **Zuständigkeiten:** Es wird klar, welche Komponente für die Datenvalidierung zuständig ist und welche für den Datenbank-Query.
+- **Schnittstellen:** Die Pfeile im Diagramm definieren die Methoden-Aufrufe oder Funktions-Parameter.
+
+---
+
+## Architekturstile: FP vs. OOP
+
+Beide Patterns (Middleware & Sequenz-Modellierung) funktionieren unabhängig vom gewählten Programmierstil. Der Unterschied liegt nur in der **Art der Bausteine**.
+
+<div class="grid-2">
+<div class="tile" style="border-top: 4px solid #10b981;">
+<h3>Funktionsorientiert (FP)</h3>
+<p>Typisch für <strong>Express.js</strong>.</p>
+<ul>
+  <li>Bausteine im Diagramm sind <strong>reine Funktionen</strong>.</li>
+  <li>Der Request-Status wird als Datenobjekt durch eine Kette (Pipe) gereicht.</li>
+  <li><code>req -> func1 -> func2 -> res</code></li>
+</ul>
+</div>
+
+---
+
+<div class="tile" style="border-top: 4px solid #10b981;">
+<h3>Objektorientiert (OOP)</h3>
+<p>Standard in <strong>NestJS / Spring Boot</strong>.</p>
+<ul>
+  <li>Bausteine im Diagramm sind <strong>Instanzen von Klassen</strong> (Objekte).</li>
+  <li>Der Request triggert Methoden auf Objekten (Controller, Services, Guards).</li>
+  <li><code>ObjectA.method() -> ObjectB.call()</code></li>
+</ul>
+</div>
+</div>
+
+---
+
+## Zusammenfassung
+
+1. Das **Middleware-Pattern** ist das infrastrukturelle Gerüst (Die Pipeline).
+2. Das **Sequenzdiagramm** ist der Bauplan für den Datenfluss (Die Logik).
+3. **FP oder OOP** sind lediglich die Werkzeuge, mit denen wir diese Architektur im Code umsetzen.
+
+**Egal welcher Stil:** Das Ziel ist die Entkopplung von technischer Infrastruktur und fachlicher Business Logic.
+
+---
 
 # Databases
 
