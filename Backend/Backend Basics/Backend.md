@@ -379,13 +379,110 @@ Die Wahl des Datenbanksystems hängt von den Anforderungen der Anwendung ab:
 | **Beispiele** | E-Commerce-Systeme, Banking       | Content-Management (CMS), Log-Storage |
 
 
-## Query (Afrage Basics)
 
 ---
 
 ## 💻 Aufgabe:
 
 Um in technischen Screenings und Live-Coding-Interviews zu bestehen, müssen beide Konzepte praktisch beherrscht werden:
+
+- **SQL Practice:**
+  - Du musst SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
+  - **Fokus im Interview:** Beherrsche `INNER JOIN` und `LEFT JOIN` im Effeff auf einfachem bis mittlerem Schwierigkeitsgrad.
+- **NoSQL (MongoDB) Practice:**
+  - Mache dich mit dokumentenorientierten Abfragen vertraut.
+  - Nutze Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und dich auf typische Screening-Fragen vorzubereiten.
+
+# Query (Abfrage) **Basics**
+
+Wie wir mit Datenbanken kommunizieren: SQL vs. NoSQL
+
+---
+
+## Die zwei Sprachen der Datenbeschaffung
+
+Egal welche Architektur: Im Kern geht es immer um **CRUD** (Create, Read, Update, Delete). Aber _wie_ wir diese Anfragen (Queries) formulieren, unterscheidet sich fundamental:
+
+<div class="grid-2">
+<div class="tile" style="border-left: 4px solid #3b82f6;">
+<h3 style="color: #60a5fa;">Der SQL-Ansatz</h3>
+<p><strong>Deklarativ:</strong> Du beschreibst exakt, <em>was</em> du haben willst, aber nicht, wie die Datenbank es intern beschafft. Die Syntax ist eine eigene, englisch-ähnliche Sprache (Structured Query Language).</p>
+</div>
+
+<div class="tile" style="border-left: 4px solid #a855f7;">
+<h3 style="color: #c084fc;">Der NoSQL-Ansatz</h3>
+<p><strong>Prozedural / Objektbasiert:</strong> (Am Beispiel MongoDB). Du rufst Methoden auf Collections auf und übergibst Filterbedingungen als JSON-Objekte. Fühlt sich für JavaScript-Entwickler extrem vertraut an.</p>
+</div>
+</div>
+
+---
+
+## 🔍 SQL Query Basics
+
+Die Anatomie einer Standard-SQL-Abfrage besteht fast immer aus denselben Klauseln:
+
+- `SELECT`: Bestimmt, **welche Spalten** zurückgegeben werden.
+- `FROM`: Bestimmt, aus **welcher Tabelle** gelesen wird.
+- `WHERE`: Die **Filterbedingung** (z.B. ID, Status, Datum).
+- `JOIN`: Verknüpft Datensätze aus **zwei Tabellen** anhand einer gemeinsamen ID.
+
+```sql
+-- Hole Namen und Email aller aktiven User über 18
+SELECT first_name, email
+FROM users
+WHERE age > 18 AND status = 'active';
+
+```
+
+---
+
+## 📄 NoSQL Query Basics (MongoDB)
+
+In MongoDB arbeiten wir nicht mit Tabellen und Zeilen, sondern mit **Collections** und **Dokumenten** (im Grunde JSON-Objekte).
+
+- `db.collection.find()`: Die Standardmethode zum Lesen.
+- **Filter-Objekt:** Das erste Argument ist ein Objekt mit den Filter-Bedingungen.
+- **Operatoren:** Statt `>`, `<` oder `=` nutzen wir spezielle Keys wie `$gt` (greater than) oder `$eq` (equal).
+
+```javascript
+// Exakt gleiche Logik wie die SQL-Query zuvor
+db.users.find(
+  { age: { $gt: 18 }, status: "active" }, // Filter (WHERE)
+  { first_name: 1, email: 1, _id: 0 }, // Projection (SELECT)
+);
+```
+
+---
+
+## ⚔️ CRUD: Der direkte Syntax-Vergleich
+
+| Operation  | SQL (Relational)                           | MongoDB (NoSQL)                                         |
+| ---------- | ------------------------------------------ | ------------------------------------------------------- |
+| **CREATE** | `INSERT INTO users (name) VALUES ('Tom');` | `db.users.insertOne({ name: 'Tom' })`                   |
+| **READ**   | `SELECT * FROM users;`                     | `db.users.find({})`                                     |
+| **UPDATE** | `UPDATE users SET age = 20 WHERE id = 1;`  | `db.users.updateOne({ _id: 1 }, { $set: { age: 20 } })` |
+| **DELETE** | `DELETE FROM users WHERE id = 1;`          | `db.users.deleteOne({ _id: 1 })`                        |
+
+> Fällt etwas auf? SQL ist textbasiert und starr. MongoDB-Queries sind reine Datenstrukturen (JSON/BSON), die sich im Backend (z.B. in Express.js) direkt dynamisch zusammenbauen lassen.
+
+---
+
+## Das "Join" Problem
+
+Der größte funktionale Unterschied beim Schreiben von Queries:
+
+- **SQL ist fürs Verknüpfen gebaut:** Ein `INNER JOIN` in SQL ist hochoptimiert und der absolute Standardweg, um z. B. einen User mit seinen Bestellungen zu verknüpfen.
+- **NoSQL speichert Daten zusammen:** In MongoDB gibt es zwar `$lookup` (eine Art Join), aber eigentlich speichert man Daten, die oft zusammen abgerufen werden, direkt **in einem einzigen verschachtelten Dokument**. Man modelliert die Datenbank nach den Queries, nicht nach Beziehungen.
+
+---
+
+# Daten abfragen ist **Logik.**
+
+## Das Tool entscheidet nur über die Syntax.
+
+---
+
+## 💻 Aufgabe:
 
 - **SQL Practice:**
   - Du musst SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
