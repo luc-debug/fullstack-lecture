@@ -12,6 +12,12 @@ style: |
     padding: 60px;
   }
 
+  .columns, .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
   /* Farbdefinitionen für Hervorhebungen */
   h1, h2, h3 {
     color: #f8fafc;
@@ -107,7 +113,20 @@ style: |
 ---
 
 # Web Basics Advanced
+
 ---
+
+## Inhaltsverzeichnis
+
+- Wiederholung Web Basics
+- HTTP Advanced
+- RESTful Principles
+- Idempotenz
+- API Dokumentation
+- API Versionierung
+
+---
+
 # Wiederholung Web Basics
 
 ## Internet Protocol
@@ -125,7 +144,7 @@ style: |
 
 - IP-Adressen können auch in Kombination mit Subnetzen verwendet werden, um Netzwerke zu segmentieren und die Verwaltung zu erleichtern.
 - IP operiert auf der Netzwerkschicht des OSI-Modells und ermöglicht die Kommunikation zwischen Geräten in verschiedenen Netzwerken.
-- Ein IP Paket besteht aus einem Header (metadata oder Daten über Daten), der Informationen über die Quelle und das Ziel enthält, sowie einem Payload, der die eigentlichen Daten enthält.
+- Ein IP-Paket besteht aus einem Header (Metadaten oder Daten über Daten), der Informationen über die Quelle und das Ziel enthält, sowie einem Payload, der die eigentlichen Daten enthält.
   ![IP Paket](./img/IP.png)
 
 ---
@@ -133,7 +152,7 @@ style: |
 ## TCP Protocol
 
 - Transmission Control Protocol (TCP) ist ein verbindungsorientiertes Protokoll, das eine zuverlässige Datenübertragung zwischen zwei Endpunkten ermöglicht.
-- TCP verwendet eine Handshake-Mechanismus, um eine Verbindung zwischen Sender und Empfänger herzustellen, bevor Daten übertragen werden.
+- TCP verwendet einen Handshake-Mechanismus, um eine Verbindung zwischen Sender und Empfänger herzustellen, bevor Daten übertragen werden.
 - TCP garantiert die Reihenfolge der Datenpakete und stellt sicher, dass alle Pakete korrekt empfangen werden, indem es Bestätigungen (ACKs) verwendet.
 - TCP verwendet auch Flusskontrolle und Staukontrolle, um die Übertragungsgeschwindigkeit zu regulieren und Netzwerküberlastungen zu vermeiden.
 - TCP ist eines der Hauptprotokolle, die im Internet verwendet werden, insbesondere für Anwendungen wie Webbrowser, E-Mail und Dateiübertragungen.
@@ -188,16 +207,16 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ## HTTP Requests/ Responses
 
-- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP oder UDP Pakages in ein Request und Reponse Objekt. Somit wird die Entwicjklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um unterliegende Netzwerkschichten kümmern müssen.
+- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP- oder UDP-Pakete zu einem Request- und Response-Objekt. Somit wird die Entwicklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um unterliegende Netzwerkschichten kümmern müssen.
   ![alt text](img/Request_Response.png)
 
-- Sowohl HTTP-Anfragen als auch HTTP-Antworten bestehen aus einem HTTP-BODY (optional), der Daten enthält einem und HTTP-HEADER, der die Anfrage/Antwort selbst beschreiben (Ursprung, Codierung, Sicherheit, Caching, Inhaltstyp).
+- Sowohl HTTP-Anfragen als auch HTTP-Antworten bestehen aus einem HTTP-BODY (optional), der Daten enthält, und einem HTTP-HEADER, der die Anfrage bzw. Antwort selbst beschreibt (Ursprung, Codierung, Sicherheit, Caching, Inhaltstyp).
 
 ---
 
 ### Der HTTP-Request (Die Anfrage)
 
-Das schickt dein Browser (oder deine React-App via `fetch`), wenn ein Nutzer eine Webseite aufruft. Im Prinzip ist es en simples Textdokument, welches dann interpretiert wird.
+Das schickt Ihr Browser (oder Ihre React-App via `fetch`), wenn ein Nutzer eine Webseite aufruft. Im Prinzip ist es ein simples Textdokument, das dann interpretiert wird.
 
 ```http
 GET /artikel/http-basics HTTP/1.1
@@ -301,7 +320,7 @@ HTTP verwendet Statuscodes, um den Erfolg oder Fehler einer Anfrage anzuzeigen
 
 Das Zusammenspiel dieser drei Konzepte ist im Grunde ein ständiger Dialog zwischen dem Client (z. B. einem Browser oder einer React-App) und dem Server. Das Ziel: Daten so effizient, passgenau und schnell wie möglich zu übertragen.
 
-Man kann es sich wie eine Bestellung im Restaurant vorstellen: Du sagst dem Kellner, was du gerne hättest und ob du Allergien hast (**Content Negotiation**). Der Koch bereitet das Essen zu, verpackt es platzsparend für den Transport (**Content Compression**) und klebt ein Etikett auf die Box, damit du weißt, was drin ist (**Content Type**).
+Man kann es sich wie eine Bestellung im Restaurant vorstellen: Sie sagen dem Kellner, was Sie gerne hätten und ob Sie Allergien haben (**Content Negotiation**). Der Koch bereitet das Essen zu, verpackt es platzsparend für den Transport (**Content Compression**) und klebt ein Etikett auf die Box, damit Sie wissen, was drin ist (**Content Type**).
 
 Im Folgenden ist die genaue Aufschlüsselung, wie diese drei Komponenten ineinandergreifen:
 
@@ -319,7 +338,7 @@ Bevor der Server überhaupt Daten schickt, teilt der Client ihm mit, was er _ver
 
 ### 2. Content Type (Das tatsächliche Format)
 
-Nachdem der Server den "Wunschzettel" (Content Negotiation) gelesen hat, entscheidet er, was er zurückschickt. Der Server packt die Daten zusammen und muss dem Client nun exakt sagen, um welches Datenformat es sich handelt, damit der Browser (oder dein JavaScript-Code) weiß, wie er die Bytes interpretieren muss.
+Nachdem der Server den "Wunschzettel" (Content Negotiation) gelesen hat, entscheidet er, was er zurückschickt. Der Server packt die Daten zusammen und muss dem Client nun exakt sagen, um welches Datenformat es sich handelt, damit der Browser (oder Ihr JavaScript-Code) weiß, wie er die Bytes interpretieren muss.
 
 - Im Response-Header: **`Content-Type: application/json; charset=utf-8`**
 - **Der Zusammenhang:** Der `Content-Type` in der Response ist die direkte Antwort auf den `Accept`-Header im Request.
@@ -341,7 +360,7 @@ Da Netzwerkanfragen teuer sind (Ladezeit, Bandbreite), entscheidet der Server of
 
 ### Der gesamte Zyklus im Code
 
-Wenn du Daten aus einem Backend abrufst, sieht das Zusammenspiel in den HTTP-Headern genau so aus:
+Wenn Sie Daten aus einem Backend abrufen, sieht das Zusammenspiel in den HTTP-Headern genau so aus:
 
 **Der Request (Client ➡️ Server)**
 
@@ -353,7 +372,7 @@ Accept-Encoding: gzip, br
 
 ```
 
-_(Der Client sagt: "Gib mir die User als JSON. Du darfst das Paket gerne mit Gzip oder Brotli komprimieren.")_
+_(Der Client sagt: "Gib mir die User als JSON. Sie dürfen das Paket gerne mit Gzip oder Brotli komprimieren.")_
 
 ---
 
@@ -369,13 +388,13 @@ Content-Length: 4096
 
 ```
 
-_(Der Server sagt: "Hier ist dein JSON (`Content-Type`). Ich habe es mit Brotli gepackt (`Content-Encoding`), weil du mir vorhin erlaubt hast, das zu tun.")_
+_(Der Server sagt: "Hier ist Ihr JSON (`Content-Type`). Ich habe es mit Brotli gepackt (`Content-Encoding`), weil Sie mir vorhin erlaubt haben, das zu tun.")_
 
 ---
 
 ### Warum das für die Entwicklung wichtig ist
 
-In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn du eine Next.js-Anwendung baust und deployest, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
+In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn Sie eine Next.js-Anwendung bauen und deployen, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
 
 ---
 
@@ -423,7 +442,7 @@ Wir beginnen mit einem Überblick über die grundlegenden Prinzipien, die RESTfu
 ### 1. Uniform Interface
 
 - **Vorteil:** Das System wird vorhersehbar, einheitlich und extrem einfach erweiterbar.
-- **Wie wird es erreicht?** Durch strikte Einhaltung standardisierter Rege
+- **Wie wird es erreicht?** Durch strikte Einhaltung standardisierter Regeln
 - **RESTful Design:** Jede URI benennt **Substantive** (Ressourcen), auf die über standardisierte **HTTP-Verben** (wie `GET`, `POST`, `PUT`, `DELETE`) zugegriffen wird.
 
 ---
@@ -482,7 +501,7 @@ Dies zeigt, wie die verschiedenen Teile einer URI zusammenarbeiten, um Ressource
   Jede einzelne HTTP-Anfrage muss alle Informationen enthalten, die für das Verstehen und Verarbeiten notwendig sind (z.B. Authentifizierungs-Token im Header).
 
 - **Ergebnis:** Starke Skalierung möglich:
-- Ein State (z.B. Login Zustand  ) würde massiven overhead erzeugen: DIes müsste im RAM oder in der Datenbank gespeichert werden. Wenn es gar keinen State (Zustand) gibt kann einfach sklaiert (=mehr Traffic auf Webse) werden
+- Ein State (z. B. ein Login-Zustand) würde massiven Overhead erzeugen: Dies müsste im RAM oder in der Datenbank gespeichert werden. Wenn es gar keinen State (Zustand) gibt, kann einfach skaliert werden.
 
   - Massives **Load Balancing** wird möglich. Jeder Server im Cluster kann jeden Request sofort verarbeiten.
 
@@ -496,7 +515,7 @@ Server-Antworten müssen implizit oder explizit als cachebar deklariert werden. 
 ### 5. Layered System
 
 **Mehrschichtiges System (Layered System):**
-Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (= Stellvetreter z.B. Load Balancer, verteilt Traffic um auf verschiedene Server um Last zu verteiln) kommuniziert. Schichten verbessern die Sicherheit und die Skalierbarkeit.
+Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (= Stellvertreter, z. B. ein Load Balancer, der Traffic auf verschiedene Server verteilt) kommuniziert. Schichten verbessern die Sicherheit und die Skalierbarkeit.
 
 ---
 
@@ -550,12 +569,12 @@ Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (=
 <div style="display: flex; gap: 40px;">
 <div style="flex: 1; background: #0f172a; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
 <h3>🛗 Der Fahrstuhl-Knopf</h3>
-<p><strong>Idempotent:</strong> Egal wie oft du den Knopf für das 5. Stockwerk drückst: Der Fahrstuhl fährt in das 5. Stockwerk. Das Ergebnis bleibt beim 2. oder 100. Klick absolut identisch.</p>
+<p><strong>Idempotent:</strong> Egal wie oft Sie den Knopf für das 5. Stockwerk drücken: Der Fahrstuhl fährt in das 5. Stockwerk. Das Ergebnis bleibt beim 2. oder 100. Klick absolut identisch.</p>
 </div>
 
 <div style="flex: 1; background: #0f172a; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
 <h3>🍫 Der Snack-Automat</h3>
-<p><strong>Nicht Idempotent:</strong> Jedes Mal, wenn du den Knopf drückst (und bezahlst), fällt ein neuer Snack heraus. Dein Kontostand sinkt weiter und der Vorrat im Automaten verringert sich.</p>
+<p><strong>Nicht idempotent:</strong> Jedes Mal, wenn Sie den Knopf drücken (und bezahlen), fällt ein neuer Snack heraus. Ihr Kontostand sinkt weiter und der Vorrat im Automaten verringert sich.</p>
 </div>
 </div>
 
@@ -568,7 +587,7 @@ In instabilen Netzwerken sind **Retries** (Wiederholungsanfragen) unvermeidlich.
 
 * **Das Problem:** Ein Client sendet einen Request, der Server verarbeitet ihn erfolgreich, aber die Server-Antwort geht auf dem Rückweg im Netzwerk verloren.
 * **Die Lösung:** Ist die HTTP-Methode *idempotent*, darf der Client (oder die Axios/Fetch-Logik im Frontend) den Request bei einem Timeout einfach gefahrlos noch einmal senden.
-* **Kritischer Anwendungsfall:** "Bestellung abschicken" (meist `POST`) vs. "Zahlungsstatus auf bezahlt setzen" (meist `PUT`). Du willst niemals versehentlich Doppelabbuchungen erzeugen.
+* **Kritischer Anwendungsfall:** "Bestellung abschicken" (meist `POST`) vs. "Zahlungsstatus auf bezahlt setzen" (meist `PUT`). Sie wollen niemals versehentlich Doppelabbuchungen erzeugen.
 
 ---
 
@@ -580,13 +599,13 @@ In instabilen Netzwerken sind **Retries** (Wiederholungsanfragen) unvermeidlich.
 <div style="flex: 1;">
 <h3><code>PUT</code> (Idempotent)</h3>
 <p style="color: #34d399;"><code>PUT /users/45</code></p>
-<p>Wenn du diesen Request 10-mal hintereinander abschickst, wird der Datensatz mit der ID 45 jedes Mal mit exakt denselben Werten überschrieben. Der Endzustand der Datenbank nach dem ersten und dem zehnten Request ist absolut identisch.</p>
+<p>Wenn Sie diesen Request 10-mal hintereinander abschicken, wird der Datensatz mit der ID 45 jedes Mal mit exakt denselben Werten überschrieben. Der Endzustand der Datenbank nach dem ersten und dem zehnten Request ist absolut identisch.</p>
 </div>
 
 <div style="flex: 1;">
 <h3><code>POST</code> (Nicht Idempotent)</h3>
 <p style="color: #f87171;"><code>POST /users</code></p>
-<p>Wenn du diesen Request 10-mal abschickst, erzeugst du im schlimmsten Fall 10 identische Nutzer mit 10 verschiedenen IDs in deiner Datenbank. Jede Wiederholung verändert den Zustand des Systems.</p>
+<p>Wenn Sie diesen Request 10-mal abschicken, erzeugen Sie im schlimmsten Fall 10 identische Nutzer mit 10 verschiedenen IDs in Ihrer Datenbank. Jede Wiederholung verändert den Zustand des Systems.</p>
 </div>
 </div>
 
@@ -626,7 +645,7 @@ Jeder dokumentierte Endpoint sollte mindestens folgende 4 Informationen liefern:
 
 1. **Basis-Metadaten:** Die HTTP-Methode und der exakte Pfad (z.B. `POST /api/v1/users`).
 2. **Request-Parameter:** Welche Daten müssen in den `Query-Params`, den `Headers` oder im `Body` (Payload) mitgeschickt werden?
-3. **Response-Beispiele:** Wie sieht das JSON-Objekt im Erfolgsfall (`200 OK` / `210 Created`) exakt aus?
+3. **Response-Beispiele:** Wie sieht das JSON-Objekt im Erfolgsfall (`200 OK` / `201 Created`) exakt aus?
 4. **Fehler-Szenarien:** Welche Statuscodes (`400`, `401`, `404`, `500`) gibt es und wie sieht die Fehlermeldung aus?
 
 ---
@@ -718,7 +737,8 @@ Nicht jede Änderung erfordert eine neue API-Version (z.B. `v2`). Wir unterschei
 Die Versionsnummer wird direkt als Präfix in den URL-Pfad geschrieben.
 
 * **Beispiel:** `GET https://api.example.com/v1/users`
-* **Vorteile:** * Extrem einfach zu implementieren und im Browser zu testen.
+* **Vorteile:**
+  * Extrem einfach zu implementieren und im Browser zu testen.
   * Für Frontend-Entwickler sofort ersichtlich, welche API genutzt wird.
 * **Nachteile:**
   * Bricht streng genommen die REST-Prinzipien (Eine Version ist eigentlich keine "Ressource").
@@ -763,12 +783,12 @@ Die Versionsnummer wird direkt als Präfix in den URL-Pfad geschrieben.
 
 1. **Halte es simpel:** Nutze nur Major-Versionen (z.B. `v1`, `v2`). Ein Schema wie `v1.4.2` in der API ist Overkill und führt zu Chaos im Backend-Routing.
 2. **Standard-Version definieren:** Wenn ein Client keinen Header oder Pfad angibt, route ihn entweder zur ältesten stabilen Version oder gib einen sauberen Error (`400 Bad Request`) zurück.
-3. **Graceful Sunset:** Wenn du `v1` abschaltest, kündige es rechtzeitig an (Deprecation Notices). Nutze in HTTP-Responses den standardisierten `Sunset`-Header mit einem Datum.
+3. **Graceful Sunset:** Wenn Sie `v1` abschalten, kündigen Sie es rechtzeitig an (Deprecation Notices). Nutzen Sie in HTTP-Responses den standardisierten `Sunset`-Header mit einem Datum.
 
 ---
 
 # Stabile Verträge. **Gute APIs.**
-Versionierung ist das Sicherheitsnetz deiner Architektur.
+Versionierung ist das Sicherheitsnetz Ihrer Architektur.
 
 <div style="margin-top: 60px; font-size: 1.1rem; color: #64748b;">
 URI Path | Query Params | Custom Headers

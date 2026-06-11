@@ -1,7 +1,7 @@
 ---
 marp: true
+theme: default
 paginate: true
-size: 4:3
 style: |
   .columns {
     display: grid;
@@ -127,7 +127,7 @@ function Greeting({ isLoggedIn }) {
 
 ## 🧰 Aufgabe — Ternary Operator
 
-Schreibe eine Funktion `bewertung(punkte)`, die folgende Werte zurückgibt:
+Schreiben Sie eine Funktion `bewertung(punkte)`, die folgende Werte zurückgibt:
 
 | Punkte       | Rückgabewert      |
 | ------------ | ----------------- |
@@ -135,9 +135,9 @@ Schreibe eine Funktion `bewertung(punkte)`, die folgende Werte zurückgibt:
 | 50–89        | `"Bestanden"`     |
 | unter 50     | `"Durchgefallen"` |
 
-1. Implementiere die Funktion zuerst mit `if/else`.
-2. Schreibe sie dann mit dem Ternary Operator um.
-3. Überlege: An welchem Punkt wird der verschachtelte Ternary Operator unlesbar?
+1. Implementieren Sie die Funktion zuerst mit `if/else`.
+2. Schreiben Sie sie dann mit dem Ternary Operator um.
+3. Überlegen Sie: An welchem Punkt wird der verschachtelte Ternary Operator unlesbar?
 
 ---
 
@@ -206,7 +206,7 @@ function Dashboard({ user, notifications }) {
 
       {/* Nur anzeigen wenn Benachrichtigungen vorhanden */}
       {notifications.length > 0 && (
-        <p>Du hast {notifications.length} neue Nachrichten.</p>
+        <p>Sie haben {notifications.length} neue Nachrichten.</p>
       )}
 
       {/* Nur anzeigen wenn Admin */}
@@ -216,7 +216,7 @@ function Dashboard({ user, notifications }) {
 }
 ```
 
-> **Wichtig:** Vermeide `{count && <Text />}` wenn `count` den Wert `0` haben kann — React rendert dann `0` auf dem Bildschirm! Besser: `{count > 0 && <Text />}`
+> **Wichtig:** Vermeiden Sie `{count && <Text />}`, wenn `count` den Wert `0` haben kann — React rendert dann `0` auf dem Bildschirm! Besser: `{count > 0 && <Text />}`
 
 ---
 
@@ -238,8 +238,8 @@ function getUserDisplay(user) {
 }
 ```
 
-1. Schreibe die Funktion mit `||` und `&&` so um, dass sie in **einer Zeile** passt.
-2. Teste mit: `{ nickname: "CoolMax" }`, `{ firstName: "Max" }`, `null`, `{ nickname: "" }`
+1. Schreiben Sie die Funktion mit `||` und `&&` so um, dass sie in **eine Zeile** passt.
+2. Testen Sie mit: `{ nickname: "CoolMax" }`, `{ firstName: "Max" }`, `null`, `{ nickname: "" }`
 3. Welches Ergebnis liefert der Fall `{ nickname: "" }` — und warum könnte das problematisch sein?
 
 ---
@@ -284,7 +284,7 @@ null ?? "Wert"; // → "Wert" ✅
 
 | Operator | Fallback wenn...                               | Anwendungsfall                                     |
 | -------- | ---------------------------------------------- | -------------------------------------------------- |
-| `\|\|`   | `null`, `undefined`, `0`, `""`, `false`, `NaN` | Allgemeiner Fallback, „irgendwas Truthy"           |
+| `\|\|`   | `null`, `undefined`, `0`, `""`, `false`, `NaN` | Allgemeiner Fallback, „irgendein truthy Wert“      |
 | `??`     | nur `null` oder `undefined`                    | Sichere Standardwerte, wo `0` und `""` gültig sind |
 
 ```javascript
@@ -346,9 +346,9 @@ function mergeSettings(userSettings) {
 }
 ```
 
-1. Teste die Funktion mit `{ theme: "", fontSize: 0, notifications: false, language: null }`.
+1. Testen Sie die Funktion mit `{ theme: "", fontSize: 0, notifications: false, language: null }`.
 2. Welche Werte sind falsch? Warum?
-3. Ersetze `||` durch `??` wo nötig — aber **nicht überall**! Überlege bei jedem Feld, ob `||` oder `??` sinnvoller ist.
+3. Ersetzen Sie `||` durch `??`, wo nötig — aber **nicht überall**! Überlegen Sie bei jedem Feld, ob `||` oder `??` sinnvoller ist.
 
 ---
 
@@ -472,7 +472,7 @@ const response = {
 };
 ```
 
-Schreibe Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
+Schreiben Sie Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
 
 1. Die Bio des Users (oder `"Keine Bio"`)
 2. Den Twitter-Handle (oder `"Nicht verknüpft"`)
@@ -491,7 +491,7 @@ Schreibe Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
 
 ## 5.1 Array Destructuring
 
-Destructuring erlaubt es, Werte aus Arrays in einzelne Variablen zu „entpacken":
+Destructuring erlaubt es, Werte aus Arrays in einzelne Variablen zu „entpacken“:
 
 ```javascript
 const farben = ["rot", "grün", "blau"];
@@ -570,16 +570,16 @@ const [email, setEmail] = useState("");
 
 ### 🧰 Aufgabe — Array Destructuring
 
-1. Schreibe eine Funktion `parseDate(dateString)`, die einen String wie `"06.02.2026"` erhält und per `split(".")` in Tag, Monat und Jahr destructuriert. Gib ein formatiertes Datum zurück: `"2026-02-06"`.
+1. Schreiben Sie eine Funktion `parseDate(dateString)`, die einen String wie `"06.02.2026"` erhält und per `split(".")` in Tag, Monat und Jahr destructuriert. Geben Sie ein formatiertes Datum zurück: `"2026-02-06"`.
 
-2. Schreibe eine Funktion `head(arr)`, die das **erste Element** und den **Rest** des Arrays zurückgibt:
+2. Schreiben Sie eine Funktion `head(arr)`, die das **erste Element** und den **Rest** des Arrays zurückgibt:
 
 ```javascript
 const [first, remaining] = head([10, 20, 30, 40]);
 // first = 10, remaining = [20, 30, 40]
 ```
 
-3. Gegeben ist ein Array mit RGB-Werten: `[255, 128, 0]`. Destructuriere es und erstelle daraus einen CSS-String: `"rgb(255, 128, 0)"`.
+3. Gegeben ist ein Array mit RGB-Werten: `[255, 128, 0]`. Destrukturieren Sie es und erstellen Sie daraus einen CSS-String: `"rgb(255, 128, 0)"`.
 
 ---
 
@@ -702,10 +702,10 @@ const apiResponse = {
 };
 ```
 
-1. Extrahiere `username` und `email` per Destructuring.
-2. Extrahiere `theme` und `language` per verschachteltem Destructuring.
-3. Extrahiere `status` und den gesamten Rest als `payload` per Rest-Pattern.
-4. Benenne `username` in `name` um während des Destructurings.
+1. Extrahieren Sie `username` und `email` per Destructuring.
+2. Extrahieren Sie `theme` und `language` per verschachteltem Destructuring.
+3. Extrahieren Sie `status` und den gesamten Rest als `payload` per Rest-Pattern.
+4. Benennen Sie `username` während des Destructurings in `name` um.
 
 ---
 
@@ -735,7 +735,7 @@ Der Spread Operator für Arrays wurde bereits behandelt.
 
 ---
 
-## 6.2 Spread Operator für Objekte (`...`)
+## 6.3 Spread Operator für Objekte (`...`)
 
 Der Spread Operator erlaubt es, Objekteigenschaften zu entpacken und zu kopieren.
 
@@ -758,7 +758,7 @@ const updated = { ...original, b: 99, d: 4 };
 // updated = { a: 1, b: 99, c: 3, d: 4 }
 ```
 
-> 📖 Der Spread Operator erzeugt eine **Shallow Copy** — verschachtelte Objekte werden nicht tiefenweit kopiert.
+> 📖 Der Spread Operator erzeugt eine **Shallow Copy** — verschachtelte Objekte werden nicht tief kopiert.
 
 ---
 
@@ -830,7 +830,7 @@ function Card({ title, description, fullWidth = false, ...rest }) {
 
 ---
 
-## 6.4 Spread in Iterable in new / Konstruktoren
+## 6.4 Spread bei Iterables und Konstruktoren
 
 ```javascript
 const parts = [2024, 11, 25];
@@ -853,10 +853,10 @@ const user = {
 };
 ```
 
-1. Erstelle ein neues Objekt `publicUser`, das alle Eigenschaften außer `id` und `createdAt` enthält.
-2. Erstelle ein neues Objekt `adminUser`, das auf `user` basiert, aber die `role` auf `"admin"` setzt.
-3. Merge zwei Einstellungs-Objekte: `{ theme: "light", notifications: true }` und `{ theme: "dark" }`. Welche `theme` wird benutzt?
-4. (optional) Erkläre, warum Shallow Copy ein Problem sein kann bei verschachtelten Objekten.
+1. Erstellen Sie ein neues Objekt `publicUser`, das alle Eigenschaften außer `id` und `createdAt` enthält.
+2. Erstellen Sie ein neues Objekt `adminUser`, das auf `user` basiert, aber die `role` auf `"admin"` setzt.
+3. Führen Sie zwei Einstellungsobjekte zusammen: `{ theme: "light", notifications: true }` und `{ theme: "dark" }`. Welche `theme` wird verwendet?
+4. (optional) Erklären Sie, warum Shallow Copy bei verschachtelten Objekten ein Problem sein kann.
 
 ---
 
@@ -866,7 +866,7 @@ const user = {
 
 **Syntax:** `...`
 
-**✅ Purpose:** Collect multiple values into one structure.
+**✅ Zweck:** Mehrere Werte in einer Struktur sammeln.
 
 ---
 
@@ -907,14 +907,14 @@ Die 9 Konzepte dieser Vorlesung sind die **Grundlagen für professionelle React-
 | Thema                          | Zweck                 | React-Anwendung                        |
 | ------------------------------ | --------------------- | -------------------------------------- |
 | **Ternary Operator**           | Bedingte Werte        | JSX conditional rendering              |
-| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung   | Stiles/Klassen, optionales Rendering   |
+| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung   | Styles/Klassen, optionales Rendering   |
 | **Nullish Coalescing `??`**    | Sichere Defaultwerte  | Props-Fallbacks, localStorage          |
 | **Optional Chaining `?.`**     | Sichere Zugriffe      | Nested API-Daten                       |
 | **Array Destructuring**        | Werte entpacken       | `useState` Hook                        |
 | **Object Destructuring**       | Werte entpacken       | Props extrahieren                      |
 | **Spread `...`**               | Shallow Copy, Merging | Immutable State Updates                |
 | **Array-Methoden**             | Array transformieren  | Filtern, Mappen, Reduzieren von Listen |
-| **Promises**                   | Async Operationen     | API-Fetching in `useEffect`            |
+| **Promises**                   | Asynchrone Operationen | API-Fetching in `useEffect`           |
 
 ---
 

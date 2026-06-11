@@ -10,12 +10,22 @@ style: |
   }
 ---
 
-## Motivaion
+# Wiederholung JavaScript
 
-- JavaScript kann im Frontend und im ABckend verwednet werden
-- JavaScript ist einer der beliebtesten Sprachen und damit auch af dem Job MAarkt gesucht
+---
 
-TODO
+## Inhaltsverzeichnis
+
+1. [Motivation](#motivation)
+2. [Array-Methoden](#array-methoden)
+3. [Promises](#promises)
+
+---
+
+## Motivation
+
+- JavaScript kann im Frontend und im Backend verwendet werden
+- JavaScript ist eine der beliebtesten Sprachen und damit auch auf dem Jobmarkt gefragt
 
 ---
 
@@ -223,11 +233,11 @@ const movies = [
 ];
 ```
 
-1. Filtere alle Filme **ab dem Jahr 2000** heraus.
-2. Finde den Film mit der **besten Bewertung**.
-3. Erstelle ein Array nur der **Titel** aller Filme.
-4. Berechne die **durchschnittliche Bewertung** aller Filme per `reduce`.
-5. Verkette `filter` → `map` um nur die Titel der Sci-Fi-Filme zu bekommen.
+1. Filtern Sie alle Filme **ab dem Jahr 2000** heraus.
+2. Finden Sie den Film mit der **besten Bewertung**.
+3. Erstellen Sie ein Array nur mit den **Titeln** aller Filme.
+4. Berechnen Sie die **durchschnittliche Bewertung** aller Filme mit `reduce`.
+5. Verketten Sie `filter` → `map`, um nur die Titel der Sci-Fi-Filme zu erhalten.
 
 ---
 
@@ -378,13 +388,13 @@ useEffect(() => {
 
 ## 🧰 Aufgabe — Promises
 
-1. Schreibe eine Funktion `delay(ms)`, die nach `ms` Millisekunden mit `"Fertig!"` erfüllt wird:
+1. Schreiben Sie eine Funktion `delay(ms)`, die nach `ms` Millisekunden mit `"Fertig!"` erfüllt wird:
 
 ```javascript
 delay(1000).then((msg) => console.log(msg)); // Nach 1s: "Fertig!"
 ```
 
-2. Konvertiere diese `.then()`-Kette in `async/await`:
+2. Konvertieren Sie diese `.then()`-Kette in `async/await`:
 
 ```javascript
 fetch("/api/user")
@@ -394,4 +404,4 @@ fetch("/api/user")
   .then((posts) => console.log(posts));
 ```
 
-3. Schreibe ein `Promise.race()` für einen **Timeout**: Falls ein Fetch länger als 5 Sekunden dauert, zeige "Timeout!".
+3. Schreiben Sie ein `Promise.race()` für ein **Timeout**: Falls ein Fetch länger als 5 Sekunden dauert, zeigen Sie `"Timeout!"` an.

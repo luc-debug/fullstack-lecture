@@ -12,13 +12,28 @@ style: |
 
 # Performance Optimizing
 
-_Vorabbemerkung: Die meisten folgenden Konzepte sind allgemein. Sie lassen sich somit auf alle CMSs (zum Beispiel Wordpress, TYPO3), SPA (zum Beispiel React) oder MPAs (zum Beispiel ASP .NET CORE) anwenden. Denn am Ende ist es egal womit DU deine Webseite baust: Am Ende wird immer ausschließlich HTML, CSS und JavaScript im Browser ausgeführt._
+_Vorbemerkung: Die meisten der folgenden Konzepte sind allgemein. Sie lassen sich somit auf alle CMSs (zum Beispiel WordPress, TYPO3), SPAs (zum Beispiel React) oder MPAs (zum Beispiel ASP.NET Core) anwenden. Denn am Ende ist es egal, womit Sie Ihre Webseite bauen: Am Ende werden im Browser immer ausschließlich HTML, CSS und JavaScript ausgeführt._
 
 ---
 
-## 1 The Core web Vitals
+## Inhaltsverzeichnis
 
-Verschiedene Metriken, welche die Performance einer Webseite messen
+1. The Core Web Vitals
+2. The Critical Rendering Path
+3. Fünf Schritte für die Performance-Optimierung
+   - Performance Diagnosis
+   - Optimierung des Servers
+   - Optimierung der Assets
+   - Optimierung des JavaScript-Bundles
+     - Minification
+     - Bundle Cleanup
+     - Code Splitting
+
+---
+
+## 1. The Core Web Vitals
+
+Verschiedene Metriken, die die Performance einer Webseite messen.
 
 ### 1.1 FCP (First Contentful Paint)
 
@@ -34,7 +49,7 @@ Verschiedene Metriken, welche die Performance einer Webseite messen
 
 ## 2. The Critical Rendering Path
 
-## 3. Fünf Schritte für die Performance Optimierung
+## 3. Fünf Schritte für die Performance-Optimierung
 
 ### 3.1 Performance Diagnosis
 
@@ -44,20 +59,20 @@ Verschiedene Metriken, welche die Performance einer Webseite messen
 
 ---
 
-### 3.4 Optimierung des JavaScript Bundles
+### 3.4 Optimierung des JavaScript-Bundles
 
 #### 3.4.1 Minification
 
 🚫 Problem: 
 - Für die bessere Lesbarkeit verwenden wir Leerzeichen, Zeilenumbrüche, lange Variablennamen
-- Dies vergrößert die Bundlesize in der Production unnötig, wir haben davon nur ein Vorteil während des Developments
+- Dies vergrößert die Bundle-Größe in der Produktion unnötig; wir haben davon nur einen Vorteil während der Entwicklung.
 
 ✅ Lösung:
 
-Tools, wie Terser, oxc-minify, die
+Tools wie Terser oder oxc-minify:
 - Leerzeichen und Zeilenumbrüche entfernen
-- Variablennamen ersetzen mit kürzeren Namen
-- ... und vieles mehr, dass zur Minification beiträgt
+- Variablennamen durch kürzere Namen ersetzen
+- ... und vieles mehr, das zur Minification beiträgt
 
 ---
 
@@ -69,12 +84,12 @@ Tools, wie Terser, oxc-minify, die
 
 ✅ Lösung 1: Manuell die package.json durchsehen und nicht benötigte Pakete deinstallieren
 
-✅ Lösung 2: Pakete, die zwar verwendet werden, aber von denen nur ein kleiner Teil tatsächlich verwendet werden, können durch nativen Code ersetzt werden
-Beispiel: UI Bibliothek, von welcher nur eine Komponente verwendet wird. Ist es möglich die Komponente selbst zu implementieren? Mittlerweile bietet HTML eine ganze Palette an nativen UI Controls - es gibt zum Beispiel ein Accordion welches sogar ohne JavaScript funktioniert.
+✅ Lösung 2: Pakete, die zwar verwendet werden, von denen aber nur ein kleiner Teil tatsächlich genutzt wird, können durch nativen Code ersetzt werden.
+Beispiel: eine UI-Bibliothek, von der nur eine Komponente verwendet wird. Ist es möglich, die Komponente selbst zu implementieren? Mittlerweile bietet HTML eine ganze Palette an nativen UI-Controls – es gibt zum Beispiel ein Accordion, das sogar ohne JavaScript funktioniert.
 
 ---
 
-##### 3.4.2.2 Automatisches Clean Up - Tree Shaking
+##### 3.4.2.2 Automatisches Cleanup – Tree Shaking
 
 🚫 Problem: Nicht jeder importierte Code wird tatsächlich verwendet – unnötiger Code vergrößert das Bundle.
 
@@ -89,6 +104,6 @@ Beispiel: UI Bibliothek, von welcher nur eine Komponente verwendet wird. Ist es 
 ✅ Lösung: Bundler können den Code in kleinere Teile aufteilen, die nur bei Bedarf geladen werden:
 
 - Route Based Splitting: Code wird basierend auf den Routen der Anwendung aufgeteilt.
-- Dynamic Imports: Code wird erst geladen, wenn er tatsächlich benötigt wird, z.B. durch `import()`-Syntax.
+- Dynamic Imports: Code wird erst geladen, wenn er tatsächlich benötigt wird, z. B. durch die `import()`-Syntax.
 
 ---

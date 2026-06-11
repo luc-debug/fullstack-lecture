@@ -1,17 +1,12 @@
 ---
 marp: true
+theme: default
 paginate: true
-size: 4:3
 style: |
   .columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1rem;
-  }
-  img {
-    max-width: 80%;
-    max-height: 100%;
-    object-fit: contain;
   }
 ---
 
@@ -21,11 +16,26 @@ style: |
 
 ---
 
+## Inhaltsverzeichnis
+
+- Einleitung - Was bedeutet Auth?
+- Token Authentication
+  - Basic Auth
+  - Opaque Tokens
+  - JWT (JSON Web Tokens)
+- Session Authentication
+- Authentication
+  - Authentifizierung aus User-Sicht
+  - Authentifizierung aus Entwickler-Sicht
+- Authorization
+
+---
+
 # Einleitung - Was bedeutet Auth?
 
-Authentifizierung bedeutet, zu beweisen, wer du bist.
+Authentifizierung bedeutet, zu beweisen, wer Sie sind.
 
-Autorisierung bedeutet, was du tun darfst.
+Autorisierung bedeutet, was Sie tun dürfen.
 
 ## Token Authentication
 
@@ -43,50 +53,46 @@ https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Authentication
 
 ---
 
-### JWT (Json Web Tokens)
+### JWT (JSON Web Tokens)
 
 ## Session Authentication
 
 # Authentication
 
-## Authenticatuion aus User-Sicht
+## Authentifizierung aus User-Sicht
 
 ### Registrierung (Register, Sign-up)
 
-- Wenn noch kein Nutzer vorhanden
-- Formular mit E-Mail Passwort
+- Wenn noch kein Nutzer vorhanden ist
+- Formular mit E-Mail und Passwort
 - Registrierung über
 
 ### Login (Login, Sign-in)
 
 - Account-Erstellung bereits erfolgt
-- Formualr mit E-Mail und Passwort
+- Formular mit E-Mail und Passwort
 
 ---
 
-## Authentication aus Entwickler-Sicht
+## Authentifizierung aus Entwickler-Sicht
 
 ### Sign-up
 
 ## ![alt text](image.png){height=100px}
 
-
 ---
 
 ## 🧰 Aufgabe
 
-
 ## Session Authentication
 
 - zustandsbehaftet
-- server
+- Server
 
 ## Token Authentication
 
 - zustandslos
-- client
-
-###
+- Client
 
 ---
 

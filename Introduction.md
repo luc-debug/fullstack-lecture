@@ -12,18 +12,28 @@ style: |
 
 # Fullstack Vorlesung
 
+---
+
+## Inhaltsverzeichnis
+
+- Legende
+- Motivation: Was ist Fullstack?
+- Roadmap
+
+---
+
 ## Legende
 
 🧰: Aufgabe
 
-- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werde
+- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werden
 - 🟡 Mittel: Erfordert etwas mehr Aufwand oder spezifisches Wissen
 - 🔴 Schwer: Erfordert umfangreiche Änderungen oder externe Unterstützung
 
-🛠️: Tool (Werkzeug); Ein stück Software das ein Problem löst
-💡: Konzept, wehes implementiert wird
-🚫 Problem beschreibung, welches das Konzeopt löst
-✅: Lösungsbeschriebung des Problems, welches das Konzept löst
+🛠️: Tool (Werkzeug); ein Stück Software, das ein Problem löst
+💡: Konzept, welches implementiert wird
+🚫: Problembeschreibung des Problems, welches durch das Konzept gelöst wird
+✅: Lösungsbeschreibung des Problems, welches durch das Konzept gelöst wird
 
 ---
 
@@ -31,33 +41,33 @@ style: |
 
 TODO
 
-- Jobmarkt fordert End-to-end delivery
+- Der Jobmarkt fordert End-to-end Delivery
   - Anforderungsanalyse
-  - Projektmanagment (Scrum!)
+  - Projektmanagement (Scrum!)
   - Frontend
   - Backend
   - DevOps
 
-TODO Videoinhaltergänzen Einleitung
+TODO: Videoinhalte ergänzen: Einleitung
 
 ---
 
-TODO :Vorstellung der Roadmap als Mindmap
+TODO: Vorstellung der Roadmap als Mindmap
 
 ---
 
 ## Roadmap
 
-Vorstellung Prüfungsleistung: Projektarbeit (1 UE)
+Vorstellung der Prüfungsleistung: Projektarbeit (1 UE)
 
 Frontend Roadmap (15 UE)
 
-- Wiederholung Frontend (1UE)
-- Wiederholung und Erweierung JavaScript (1UE)
-- Frontend Tooling (3UE)
-- Accessibility (1UE)
-- Performance Optimizing (3UE)
-- Frontend Training in Depth (6UE)
+- Wiederholung Frontend (1 UE)
+- Wiederholung und Erweiterung JavaScript (1 UE)
+- Frontend Tooling (3 UE)
+- Accessibility (1 UE)
+- Performance Optimizing (3 UE)
+- Frontend Training in Depth (6 UE)
 
 ---
 
@@ -69,4 +79,4 @@ Backend Roadmap (12 UE)
 
 DevOps Roadmap (4 UE)
 
-- CI/CD (4UE)
+- CI/CD (4 UE)

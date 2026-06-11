@@ -12,6 +12,12 @@ style: |
     padding: 60px;
   }
 
+  .columns, .grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
   /* Farbdefinitionen für Hervorhebungen */
   h1, h2, h3 {
     color: #f8fafc;
@@ -110,6 +116,20 @@ style: |
 
 ---
 
+## Inhaltsverzeichnis
+
+- Einleitung
+- MVC
+- REST API
+- Business Logic
+- Middleware & Handler Pattern
+- Systemarchitektur: Die Pipeline
+- Aufgabe: Der VIP-Eingang
+- Musterlösung
+- Databases
+
+---
+
 # Einleitung
 
 ---
@@ -175,7 +195,7 @@ Um diese Struktur zu erreichen, etablieren moderne Frameworks eine saubere Kette
 
 - **Middleware:** Eine Funktion, die HTTP-Anfragen abfängt, _bevor_ sie die eigentliche Geschäftslogik erreichen. Sie ist perfekt geeignet, um Requests zu modifizieren, Tokens zu authentifizieren oder Logs zu schreiben.
 - **Request Handler:** Die finale Funktion am Ende der Kette. Sie enthält die eigentliche Geschäftslogik (z. B. den Datenbankaufruf) und sendet die fertige HTTP-Antwort (`Response`) an den Client zurück.
-- **Request Handler Delegate:** Das Prinzip, diese Bausteine als Pipeline zu organisieren. Jede Middleware entscheidet aktiv, ob sie die Anfrage an den nächsten Block _delegiert_ (`next()`) oder abricht.
+- **Request Handler Delegate:** Das Prinzip, diese Bausteine als Pipeline zu organisieren. Jede Middleware entscheidet aktiv, ob sie die Anfrage an den nächsten Block _delegiert_ (`next()`) oder abbricht.
 
 ---
 
@@ -196,7 +216,7 @@ Erstelle einen simplen Express-Server mit einer geschützten Route. Ziel ist es,
 <div class="grid-2">
 <div class="tile" style="border-top: 4px solid #f87171;">
 <h3>1. Die Middleware (Der Türsteher)</h3>
-<p>Schreibe eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
+<p>Schreiben Sie eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
 <ul>
   <li>Wenn ja: Reiche die Anfrage weiter.</li>
   <li>Wenn nein: Blockiere die Anfrage mit Status <code>403 Forbidden</code> und einer Fehlermeldung.</li>
@@ -207,7 +227,7 @@ Erstelle einen simplen Express-Server mit einer geschützten Route. Ziel ist es,
 
 <div class="tile" style="border-top: 4px solid #34d399;">
 <h3>2. Der Request Handler (Die Party)</h3>
-<p>Schreibe eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
+<p>Schreiben Sie eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
 <ul>
   <li>Sende den Status <code>200 OK</code>.</li>
   <li>Schicke ein JSON-Objekt zurück: <code>{ message: "Willkommen in der VIP-Lounge!" }</code></li>

@@ -1,6 +1,13 @@
 ---
 marp: true
+theme: default
 paginate: true
+style: |
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
 ---
 
 # Entwicklung der Web-Architektur
@@ -50,8 +57,8 @@ ABER:
 
 🛑 Problem
 
-- keine aktuellen Daten: z.B. bei einer Nachrichtenseite, einem Online-Shop oder einem sozialen Netzwerk sind aktuelle (tagesaktuell bis sekunden aktuell) Inhalte essentiell
-- keine Datenkomplexität abbildbar: große Datenmengen nicht wartbar
+- keine aktuellen Daten: z. B. bei einer Nachrichtenseite, einem Online-Shop oder einem sozialen Netzwerk sind aktuelle (tagesaktuelle bis sekundenaktuelle) Inhalte essenziell
+- keine Datenkomplexität abbildbar: große Datenmengen sind nicht wartbar
 
 ✅ Lösung: MPAs (Multi Page Applications)
 
@@ -87,9 +94,9 @@ ABER:
 
 🛑 Problem:
 
-- keine gute Nutzererfahrung, da immer gesamte Seite neulädt
+- keine gute Nutzererfahrung, da immer die gesamte Seite neu geladen wird
   - langsam
-  - Nutzer sind andere UX (User Experience = Nutzererfahrung) aus mobilen Apps gewöhnt (wenn ich ein Bild auf Instagram like lädt nicht die ganze Seite neu, sondern nur das Bild bekommt ein rotes Herz)
+  - Nutzer sind eine andere UX (User Experience = Nutzererfahrung) aus mobilen Apps gewöhnt (wenn ich ein Bild auf Instagram like, wird nicht die ganze Seite neu geladen, sondern nur das Bild bekommt ein rotes Herz)
 
 ✅ Lösung: AJAX (Asynchronous JavaScript and XML)
 
@@ -101,7 +108,7 @@ ABER:
 - Konkret: Daten von einem Webserver lesen oder an ihn senden – **ohne die Seite neu zu laden**
 - AJAX ist eine irreführende Bezeichnung, da es nicht auf XML beschränkt ist, sondern auch JSON oder andere Formate verwenden kann
 - AJAX ist eher ein Konzept (Design Pattern) als eine konkrete Technologie; es umfasst verschiedene APIs wie `XMLHttpRequest` oder die modernere `fetch` API
-- verschiedene Browser-Inkonsistenzen wurden damals durch **jQuery** vereinfacht
+- Verschiedene Browser-Inkonsistenzen wurden damals durch **jQuery** vereinfacht
 
 ---
 
@@ -144,7 +151,7 @@ ABER:
   - Svelte
 
 - Ausnahme:
-  - Blazor (C#) (Nutzt u.a. **WebAssembly**)
+  - Blazor (C#) (nutzt u.a. **WebAssembly**)
 
 ---
 
@@ -219,7 +226,7 @@ jQuery machte vieles kürzer und verlässlicher.
 
 ### 3.3.3 React
 
-React verändert die Denkweise komplett. Statt DOM-Elemente manuell ein- oder auszublenden, aktualisierst du den **State** und React aktualisiert die UI.
+React verändert die Denkweise komplett. Statt DOM-Elemente manuell ein- oder auszublenden, aktualisieren Sie den **State** und React aktualisiert die UI.
 
 ```jsx
 import { useState } from "react";
@@ -275,7 +282,7 @@ export default function App() {
 
 **Plain JS / jQuery**
 
-Du sagst dem Browser:
+Sie sagen dem Browser:
 
 > "Finde dieses Element und ändere es."
 
@@ -285,9 +292,9 @@ hiddenBox.show();
 
 **React**
 
-Du sagst React:
+Sie sagen React:
 
-> "Wenn der State sichtbar sagt, rendere das Element."
+> "Wenn der State sichtbar ist, rendere das Element."
 
 ```jsx
 {
@@ -309,11 +316,11 @@ Dieses deklarative Modell ist der zentrale Entwicklungsschritt von jQuery zu Rea
 
 ## 4.1 Fazit
 
-- jede Architektur hat ihre Stärken und Schwächen
-- die Wahl hängt von den Anforderungen des Projekts ab (z.B. Performance, Interaktivität, SEO)
-- MPAs sind immer noch weit verbreitet, insbesondere für Content-lastige Websites, während SPAs für komplexe, interaktive Anwendungen bevorzugt werden
-- die Entwicklung von Web-Architekturen ist ein kontinuierlicher Prozess, der sich mit den Bedürfnissen der Nutzer und den technologischen Fortschritten weiterentwickelt
-- die Zukunft liegt in hybriden Ansätzen, die die Vorteile von Statig Pages, MPAs und SPAs kombinieren (z.B. durch serverseitiges Rendering oder statische Generierung mit dynamischen Komponenten) (siehe Advanced Concepts SPA Vorlesung)
+- Jede Architektur hat ihre Stärken und Schwächen.
+- Die Wahl hängt von den Anforderungen des Projekts ab (z. B. Performance, Interaktivität, SEO).
+- MPAs sind immer noch weit verbreitet, insbesondere für content-lastige Websites, während SPAs für komplexe, interaktive Anwendungen bevorzugt werden.
+- Die Entwicklung von Web-Architekturen ist ein kontinuierlicher Prozess, der sich mit den Bedürfnissen der Nutzer und den technologischen Fortschritten weiterentwickelt.
+- Die Zukunft liegt in hybriden Ansätzen, die die Vorteile von Static Pages, MPAs und SPAs kombinieren (z. B. durch serverseitiges Rendering oder statische Generierung mit dynamischen Komponenten) (siehe Advanced Concepts SPA Vorlesung).
 
 ---
 
@@ -330,14 +337,14 @@ Dieses deklarative Modell ist der zentrale Entwicklungsschritt von jQuery zu Rea
 | Kriterium             | Statisch                                        | MPA                                                                             | SPA                                                        |
 | --------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | **Interaktivität**    | Minimal (kaum bis keine dynamischen Funktionen) | Gut (kann interaktive Elemente enthalten)                                       | Sehr hoch (hohe Interaktivität und dynamisches UI möglich) |
-| **Daten-integration** | Kaum oder keine (statisch eingebettete Inhalte) | Umfangreich (direkte Backend-Integration möglich)                               | Umfangreich (APIs werden für dynamische Daten verwendet)   |
+| **Datenintegration** | Kaum oder keine (statisch eingebettete Inhalte) | Umfangreich (direkte Backend-Integration möglich)                               | Umfangreich (APIs werden für dynamische Daten verwendet)   |
 | **Technologien**      | HTML, CSS, ggf. JavaScript                      | HTML, CSS, JavaScript, Backend-Sprachen (z.B. PHP, Ruby on Rails, ASP.NET Core) | JavaScript-Frameworks (z.B. React, Angular, Vue)           |
 
 ---
 
 | Kriterium               | Statisch                                     | MPA                                             | SPA                                                       |
 | ----------------------- | -------------------------------------------- | ----------------------------------------------- | --------------------------------------------------------- |
-| **Nutzer-erfahrung**    | Gering (wenig dynamische Interaktion)        | Gut (klassisches Website-Erlebnis)              | Sehr gut (App-ähnliche Erfahrung)                         |
+| **Nutzererfahrung**     | Gering (wenig dynamische Interaktion)         | Gut (klassisches Website-Erlebnis)             | Sehr gut (App-ähnliche Erfahrung)                          |
 | **Caching**             | Einfach (CDN-Caching funktioniert perfekt)   | Möglich (pro Seite separat)                     | Schwieriger (State-Management und dynamische Daten)       |
-| **SEO-Freundlich-keit** | Sehr gut (vollständig durchsuchbare Inhalte) | Gut (jedes HTML-Dokument ist separat indiziert) | Mäßig (serverseitiges Rendering oder Prerendering nötig ) |
+| **SEO-Freundlichkeit**  | Sehr gut (vollständig durchsuchbare Inhalte) | Gut (jedes HTML-Dokument ist separat indiziert) | Mäßig (serverseitiges Rendering oder Prerendering nötig)  |
 | **Beispiele**           | Portfolio-Websites, Blogs, Dokumentationen   | Online-Shops, Foren, Nachrichtenseiten          | Gmail, Trello, Google Maps                                |

@@ -79,13 +79,13 @@ Die zwei wichtigsten Skills als Frontend Dev:
 
 Sonst entstehen:
 
-| Ohne Methode         | Mit Method                                          | Auswirkung                            | Design Pattern         |
+| Ohne Methode         | Mit Methode                                          | Auswirkung                            | Design Pattern         |
 | -------------------- | --------------------------------------------------- | ------------------------------------- | ---------------------- |
 | Styling vor Struktur | Struktur vor Styling → verhindert zu frühes Styling | Klarere Priorisierung, weniger Rework | Separation of Concerns |
 
 ---
 
-| Ohne Methode                                        | Mit Methode                       | Auswirkung                              | Design Pattern           |
+| Ohne Methode                                        | Mit Methode                        | Auswirkung                              | Design Pattern           |
 | --------------------------------------------------- | --------------------------------- | --------------------------------------- | ------------------------ |
 | Unklarer State / State-Chaos durch falsches Lifting | Klare State-Hierarchie            | Vorhersehbare Datenflüsse, weniger Bugs | Single Source of Truth   |
 | Refactoring erst nach Feature-Fertigstellung        | Saubere Architektur von Anfang an | Weniger technische Schulden             | Clean Architecture       |
@@ -94,12 +94,12 @@ Sonst entstehen:
 
 ---
 
-| Ohne Methode                                      | Mit Method                             | Auswirkung                                   | Design Pattern                  |
+| Ohne Methode                                      | Mit Methode                             | Auswirkung                                   | Design Pattern                  |
 | ------------------------------------------------- | -------------------------------------- | -------------------------------------------- | ------------------------------- |
 | Vermischte Verantwortlichkeiten                   | Trennung von Verantwortlichkeiten      | Wiederverwendbarkeit, bessere Skalierbarkeit | Separation of Concerns          |
 | Alle fangen an, aber nichts wird zu Ende gebracht | Schrittweise Entwicklung mit Fokus     | Höhere Abschlussrate, bessere Iteration      | Iterative Development           |
 | Schwer wartbarer Code                             | Architektur by Design → Wartbarkeit    | Langfristig stabilere Codebasis              | Maintainability                 |
-| Nicht wissen, wo anfangen                         | Komplexität reduzieren durch Zerlegung | Schnellere Entwicklungszeit                  | Divide and Conquer              |
+| Nicht wissen, wo man anfangen soll                         | Komplexität reduzieren durch Zerlegung | Schnellere Entwicklungszeit                  | Divide and Conquer              |
 | Chaotische Props                                  | Fest definierte Schnittstellen         | Klarere Kommunikation zwischen Komponenten   | Interface Segregation Principle |
 
 ---
@@ -133,7 +133,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## 2.3 Probleme mit zu große Komponenten
+## 2.3 Probleme mit zu großen Komponenten
 
 ![alt text](image-1.png)
 
@@ -143,7 +143,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 - Wiederverwendbarkeit: Große Komponenten lassen sich oft nur schwer wiederverwenden, was den Nutzen modularer Komponenten untergräbt. Zudem können sie komplexen und verschachtelten Code enthalten, was ihre Wartung erschwert.
 
-➡️ Möglicher Hinweis auf zu große Größe: Zu viele Props: Wenn eine Komponente eine große Anzahl von Props benötigt (z. B. 10 oder mehr), ist dies häufig ein Indiz dafür, dass die Komponente zu umfangreich ist und aufgeteilt werden muss.
+➡️ Möglicher Hinweis auf zu große Komponenten: Zu viele Props: Wenn eine Komponente eine große Anzahl von Props benötigt (z. B. 10 oder mehr), ist dies häufig ein Indiz dafür, dass die Komponente zu umfangreich ist und aufgeteilt werden muss.
 
 ---
 
@@ -673,9 +673,9 @@ TODO
 
 # 4. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
 
-- framework unabhängig -> egal ob React, Vue, Svelte etc.
-- Technologie unabhängig -> egal ob Web oder Desktop oder Mobile
-- systemisches Denken (Mental model) das auch im Backend z.B. hilft
+- Framework-unabhängig -> egal ob React, Vue, Svelte etc.
+- Technologie-unabhängig -> egal ob Web oder Desktop oder Mobile
+- Systemisches Denken (Mental Model), das auch im Backend z. B. hilft
 - Sie sind natürlich noch kein Senior, das kommt durch Berufserfahrung, aber Sie können bereits denken wie ein Senior
 
 ---
@@ -736,8 +736,8 @@ _Abb. 2: Komponentenbaum_
 
 ## 4.4 Schritt 3: Datenfluss
 
-- Identifizieren von UI States
-  - State = "etwas , dass sich ändert
+- Identifizieren von UI-States
+  - State = "etwas, das sich ändert"
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
   - essenzieller vs. abgeleiteter State
 
@@ -751,7 +751,7 @@ _Abb. 2: Komponentenbaum_
 ## 4.5 Schritt 4: Functionality
 
 - Identifizieren von Effects, wenn ein State sich ändert
-  - Beispiel: local storage updaten
+  - Beispiel: Local Storage aktualisieren
 
 - Identifizieren von State-Transitions als Reaktion auf User Events
   - z.B. Klicks auf Buttons, Eingaben in Formularen, etc.
@@ -773,7 +773,7 @@ _Abb. 2: Komponentenbaum_
 - versteckten Architekturproblemen
 - Fokusverlust
 
-Dier Senior Workflow priorisiert Funktion vor Design.
+Der Senior Workflow priorisiert Funktion vor Design.
 
 ---
 
@@ -814,7 +814,7 @@ Der Senior Workflow ist:
 - iterativ
 - architekturfokussiert
 
-Sie hilft dabei, Frontend-Komponenten:
+Er hilft dabei, Frontend-Komponenten:
 
 - strukturiert
 - verständlich
