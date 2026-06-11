@@ -109,4 +109,4 @@ https://github.com/public-apis/public-apis
 
 #### Auth (10 BE)
 
-Implementierung eines Auth-Prozesses
+Implementieren Sie einen Auth-Prozess
