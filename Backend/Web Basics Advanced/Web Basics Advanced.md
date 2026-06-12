@@ -110,7 +110,7 @@ style: |
 
 ---
 
-## TOC
+## Inhaltsverzeichnis
 
 1. Wiederholung Web Basics (IP, TCP, DNS, HTTP)
 2. HTTP Advanced (Content Negotiation, Content Type, Content Compression)

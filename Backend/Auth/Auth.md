@@ -21,7 +21,7 @@ style: |
 
 ---
 
-# TOC
+# Inhaltsverzeichnis
 
 1. Einleitung - Was bedeutet Auth?
 2. Authentication
