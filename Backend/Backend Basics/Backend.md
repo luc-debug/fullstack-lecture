@@ -110,6 +110,20 @@ style: |
 
 ---
 
+# Inhaltsverzeichnis
+
+1. MVC
+2. REST API
+3. RESTful Principles
+4. Idempotenz
+5. API Dokumentation
+6. API Versionierung
+7. Business Logic
+8. Databases Fundamentals
+9. Query Basics
+
+---
+
 # Einleitung
 
 ---
@@ -123,8 +137,8 @@ style: |
 - Model: Repräsentation der Daten
 - View: Darstellung der Daten für den Benutzer
 - Controller: Vermittler zwischen Model und View, verarbeitet Benutzereingaben; Geschäftslogik
-- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als User Frontend.
-  - zum Beispiel ASP .NET MVC, Spring MVC, Ruby on Rails
+- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als Frontend für Nutzer.
+  - zum Beispiel ASP.NET MVC, Spring MVC, Ruby on Rails
 
 ---
 
@@ -132,9 +146,9 @@ style: |
 
 ---
 ## Einleitung
-REST (represenbtational State Transfer)
+REST (Representational State Transfer)
 
-- Representational : Date
+- Representational: Daten
 
 
 ---
@@ -168,9 +182,7 @@ Die 6 Leitprinzipien für skalierbare Web-Services nach Roy Fielding
 
 ## 1. Uniform Interface
 
-Alles klar, verstanden! Wir lassen RPC und Vergleiche mit anderen Architekturen komplett weg und fokussieren uns zu 100 % auf die reine REST-Lehre.
-
-Hier ist die überarbeitete Version der Folien. Ich habe das "Falsch/Richtig"-Beispiel jetzt so umgebaut, dass es nur typische Fehler beim reinen REST-Design (wie das Einbauen von Verben in die URL) thematisiert.
+Das Uniform Interface ist das zentrale REST-Prinzip: Ressourcen werden über eindeutige URIs adressiert und mit standardisierten HTTP-Methoden bearbeitet.
 
 ---
 
@@ -183,7 +195,7 @@ Wir beginnen mit einem Überblick über die grundlegenden Prinzipien, die RESTfu
 ### 1. Uniform Interface
 
 - **Vorteil:** Das System wird vorhersehbar, einheitlich und extrem einfach erweiterbar.
-- **Wie wird es erreicht?** Durch strikte Einhaltung standardisierter Rege
+- **Wie wird es erreicht?** Durch strikte Einhaltung standardisierter Regeln
 - **RESTful Design:** Jede URI benennt **Substantive** (Ressourcen), auf die über standardisierte **HTTP-Verben** (wie `GET`, `POST`, `PUT`, `DELETE`) zugegriffen wird.
 
 ---
@@ -197,10 +209,10 @@ Wir beginnen mit einem Überblick über die grundlegenden Prinzipien, die RESTfu
 
 _Warum falsch?_ Das HTTP-Protokoll bringt die Aktions-Verben bereits mit. Zusätzliche Verben im Pfad machen die API unübersichtlich und redundant.
 
-- `POST /users` (Erstelle einen Nutzer)
-- `GET /users/45` (Hole Nutzer 45)
-- `PUT /users/45` (Aktualisiere Nutzer 45)
-- `DELETE /users/45` (Lösche Nutzer 45)
+- `POST /users` (Nutzer erstellen)
+- `GET /users/45` (Nutzer 45 abrufen)
+- `PUT /users/45` (Nutzer 45 aktualisieren)
+- `DELETE /users/45` (Nutzer 45 löschen)
 
 _Warum richtig?_ Die URI benennt nur das "Was" (die Ressource). Die HTTP-Methode definiert das "Wie" (die Aktion).
 
@@ -242,7 +254,7 @@ Dies zeigt, wie die verschiedenen Teile einer URI zusammenarbeiten, um Ressource
   Jede einzelne HTTP-Anfrage muss alle Informationen enthalten, die für das Verstehen und Verarbeiten notwendig sind (z.B. Authentifizierungs-Token im Header).
 
 - **Ergebnis:** Starke Skalierung möglich:
-- Ein State (z.B. Login Zustand ) würde massiven overhead erzeugen: DIes müsste im RAM oder in der Datenbank gespeichert werden. Wenn es gar keinen State (Zustand) gibt kann einfach sklaiert (=mehr Traffic auf Webse) werden
+- Ein Session-State (z. B. ein Login-Zustand) würde massiven Overhead erzeugen: Dies müsste im RAM oder in der Datenbank gespeichert werden. Wenn es gar keinen State (Zustand) gibt, kann einfach skaliert werden (= mehr Traffic auf die Webseite).
   - Massives **Load Balancing** wird möglich. Jeder Server im Cluster kann jeden Request sofort verarbeiten.
 
 ---
@@ -255,7 +267,7 @@ Server-Antworten müssen implizit oder explizit als cachebar deklariert werden. 
 ### 5. Layered System
 
 **Mehrschichtiges System (Layered System):**
-Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (= Stellvetreter z.B. Load Balancer, verteilt Traffic um auf verschiedene Server um Last zu verteiln) kommuniziert. Schichten verbessern die Sicherheit und die Skalierbarkeit.
+Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (= Stellvertreter, z. B. Load Balancer, die Traffic auf verschiedene Server verteilen) kommuniziert. Schichten verbessern die Sicherheit und die Skalierbarkeit.
 
 ---
 
@@ -309,12 +321,12 @@ Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (=
 <div style="display: flex; gap: 40px;">
 <div style="flex: 1; background: #0f172a; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
 <h3>🛗 Der Fahrstuhl-Knopf</h3>
-<p><strong>Idempotent:</strong> Egal wie oft du den Knopf für das 5. Stockwerk drückst: Der Fahrstuhl fährt in das 5. Stockwerk. Das Ergebnis bleibt beim 2. oder 100. Klick absolut identisch.</p>
+<p><strong>Idempotent:</strong> Egal wie oft Sie den Knopf für das 5. Stockwerk drücken: Der Fahrstuhl fährt in das 5. Stockwerk. Das Ergebnis bleibt beim 2. oder 100. Klick absolut identisch.</p>
 </div>
 
 <div style="flex: 1; background: #0f172a; padding: 25px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
 <h3>🍫 Der Snack-Automat</h3>
-<p><strong>Nicht Idempotent:</strong> Jedes Mal, wenn du den Knopf drückst (und bezahlst), fällt ein neuer Snack heraus. Dein Kontostand sinkt weiter und der Vorrat im Automaten verringert sich.</p>
+<p><strong>Nicht Idempotent:</strong> Jedes Mal, wenn Sie den Knopf drücken (und bezahlen), fällt ein neuer Snack heraus. Ihr Kontostand sinkt weiter und der Vorrat im Automaten verringert sich.</p>
 </div>
 </div>
 
@@ -327,7 +339,7 @@ In instabilen Netzwerken sind **Retries** (Wiederholungsanfragen) unvermeidlich.
 
 - **Das Problem:** Ein Client sendet einen Request, der Server verarbeitet ihn erfolgreich, aber die Server-Antwort geht auf dem Rückweg im Netzwerk verloren.
 - **Die Lösung:** Ist die HTTP-Methode _idempotent_, darf der Client (oder die Axios/Fetch-Logik im Frontend) den Request bei einem Timeout einfach gefahrlos noch einmal senden.
-- **Kritischer Anwendungsfall:** "Bestellung abschicken" (meist `POST`) vs. "Zahlungsstatus auf bezahlt setzen" (meist `PUT`). Du willst niemals versehentlich Doppelabbuchungen erzeugen.
+- **Kritischer Anwendungsfall:** "Bestellung abschicken" (meist `POST`) vs. "Zahlungsstatus auf bezahlt setzen" (meist `PUT`). Sie wollen niemals versehentlich Doppelabbuchungen erzeugen.
 
 ---
 
@@ -337,13 +349,13 @@ In instabilen Netzwerken sind **Retries** (Wiederholungsanfragen) unvermeidlich.
 <div style="flex: 1;">
 <h3><code>PUT</code> (Idempotent)</h3>
 <p style="color: #34d399;"><code>PUT /users/45</code></p>
-<p>Wenn du diesen Request 10-mal hintereinander abschickst, wird der Datensatz mit der ID 45 jedes Mal mit exakt denselben Werten überschrieben. Der Endzustand der Datenbank nach dem ersten und dem zehnten Request ist absolut identisch.</p>
+<p>Wenn Sie diesen Request 10-mal hintereinander abschicken, wird der Datensatz mit der ID 45 jedes Mal mit exakt denselben Werten überschrieben. Der Endzustand der Datenbank nach dem ersten und dem zehnten Request ist absolut identisch.</p>
 </div>
 
 <div style="flex: 1;">
 <h3><code>POST</code> (Nicht Idempotent)</h3>
 <p style="color: #f87171;"><code>POST /users</code></p>
-<p>Wenn du diesen Request 10-mal abschickst, erzeugst du im schlimmsten Fall 10 identische Nutzer mit 10 verschiedenen IDs in deiner Datenbank. Jede Wiederholung verändert den Zustand des Systems.</p>
+<p>Wenn Sie diesen Request 10-mal abschicken, erzeugen Sie im schlimmsten Fall 10 identische Nutzer mit 10 verschiedenen IDs in Ihrer Datenbank. Jede Wiederholung verändert den Zustand des Systems.</p>
 </div>
 </div>
 
@@ -409,8 +421,8 @@ Jeder dokumentierte Endpoint sollte mindestens folgende 4 Informationen liefern:
 
 ## Best Practices für exzellente Docs
 
-- **Nutze semantische HTTP-Statuscodes:** Dokumentiere nicht nur `200` und `500`. Zeige dem Frontend exakt, wann ein `422` (Unprocessable Entity) oder ein `409` (Conflict) fliegt.
-- **Typsicherheit generieren:** Nutze Tools wie `openapi-typescript`. Damit lässt sich die OpenAPI-Doku einlesen, um automatisch **TypeScript-Typen fürs Frontend** zu generieren.
+- **Nutzen Sie semantische HTTP-Statuscodes:** Dokumentieren Sie nicht nur `200` und `500`. Zeigen Sie dem Frontend exakt, wann ein `422` (Unprocessable Entity) oder ein `409` (Conflict) verwendet wird.
+- **Typsicherheit generieren:** Nutzen Sie Tools wie `openapi-typescript`. Damit lässt sich die OpenAPI-Doku einlesen, um automatisch **TypeScript-Typen fürs Frontend** zu generieren.
 - **Authentifizierung klarmachen:** Es muss sofort ersichtlich sein, welche Endpoints öffentlich sind und welche ein `Authorization: Bearer <Token>` benötigen.
 
 ---
@@ -518,15 +530,15 @@ _In der Praxis (z.B. bei Stripe, GitHub oder Twitter) hat sich die **URI-Version
 
 ## Best Practices für Versionierung
 
-1. **Halte es simpel:** Nutze nur Major-Versionen (z.B. `v1`, `v2`). Ein Schema wie `v1.4.2` in der API ist Overkill und führt zu Chaos im Backend-Routing.
-2. **Standard-Version definieren:** Wenn ein Client keinen Header oder Pfad angibt, route ihn entweder zur ältesten stabilen Version oder gib einen sauberen Error (`400 Bad Request`) zurück.
-3. **Graceful Sunset:** Wenn du `v1` abschaltest, kündige es rechtzeitig an (Deprecation Notices). Nutze in HTTP-Responses den standardisierten `Sunset`-Header mit einem Datum.
+1. **Halten Sie es simpel:** Nutzen Sie nur Major-Versionen (z. B. `v1`, `v2`). Ein Schema wie `v1.4.2` in der API ist Overkill und führt zu Chaos im Backend-Routing.
+2. **Standard-Version definieren:** Wenn ein Client keinen Header oder Pfad angibt, leiten Sie ihn entweder zur ältesten stabilen Version weiter oder geben Sie einen sauberen Error (`400 Bad Request`) zurück.
+3. **Graceful Sunset:** Wenn Sie `v1` abschalten, kündigen Sie dies rechtzeitig an (Deprecation Notices). Nutzen Sie in HTTP-Responses den standardisierten `Sunset`-Header mit einem Datum.
 
 ---
 
 # Stabile Verträge. **Gute APIs.**
 
-Versionierung ist das Sicherheitsnetz deiner Architektur.
+Versionierung ist das Sicherheitsnetz Ihrer Architektur.
 
 <div style="margin-top: 60px; font-size: 1.1rem; color: #64748b;">
 URI Path | Query Params | Custom Headers
@@ -589,15 +601,15 @@ So durchläuft der Request das Backend
 
 ## 💻 Aufgabe: Der VIP-Eingang
 
-Erstelle einen simplen Express-Server mit einer geschützten Route. Ziel ist es, die Verantwortlichkeiten strikt zwischen Middleware und Handler zu trennen.
+Erstellen Sie einen simplen Express-Server mit einer geschützten Route. Ziel ist es, die Verantwortlichkeiten strikt zwischen Middleware und Handler zu trennen.
 
 <div class="grid-2">
 <div class="tile" style="border-top: 4px solid #f87171;">
 <h3>1. Die Middleware (Der Türsteher)</h3>
-<p>Schreibe eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
+<p>Schreiben Sie eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
 <ul>
-  <li>Wenn ja: Reiche die Anfrage weiter.</li>
-  <li>Wenn nein: Blockiere die Anfrage mit Status <code>403 Forbidden</code> und einer Fehlermeldung.</li>
+  <li>Wenn ja: Leiten Sie die Anfrage weiter.</li>
+  <li>Wenn nein: Blockieren Sie die Anfrage mit Status <code>403 Forbidden</code> und einer Fehlermeldung.</li>
 </ul>
 </div>
 
@@ -605,15 +617,15 @@ Erstelle einen simplen Express-Server mit einer geschützten Route. Ziel ist es,
 
 <div class="tile" style="border-top: 4px solid #34d399;">
 <h3>2. Der Request Handler (Die Party)</h3>
-<p>Schreibe eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
+<p>Schreiben Sie eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
 <ul>
-  <li>Sende den Status <code>200 OK</code>.</li>
-  <li>Schicke ein JSON-Objekt zurück: <code>{ message: "Willkommen in der VIP-Lounge!" }</code></li>
+  <li>Senden Sie den Status <code>200 OK</code>.</li>
+  <li>Schicken Sie ein JSON-Objekt zurück: <code>{ message: "Willkommen in der VIP-Lounge!" }</code></li>
 </ul>
 </div>
 </div>
 
-**Route:** Verknüpfe beide Funktionen auf der Route `GET /api/vip`.
+**Route:** Verknüpfen Sie beide Funktionen auf der Route `GET /api/vip`.
 
 ---
 
@@ -648,7 +660,6 @@ app.get("/api/vip", checkAuth, getVipData);
 app.listen(3000, () => console.log("Server läuft auf Port 3000"));
 ```
 
-Note to myself, eigentlich denke ich müsste man die zwei Sachen vertauschen. OOP oder Sfunktioniert orient dier sdann mit wimlane müsste man
 
 ---
 
@@ -783,11 +794,11 @@ Die Wahl des Datenbanksystems hängt von den Anforderungen der Anwendung ab:
 Um in technischen Screenings und Live-Coding-Interviews zu bestehen, müssen beide Konzepte praktisch beherrscht werden:
 
 - **SQL Practice:**
-  - Du musst SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
-  - **Fokus im Interview:** Beherrsche `INNER JOIN` und `LEFT JOIN` im Effeff auf einfachem bis mittlerem Schwierigkeitsgrad.
+  - Sie müssen SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
+  - **Fokus im Interview:** Beherrschen Sie `INNER JOIN` und `LEFT JOIN` sicher auf einfachem bis mittlerem Schwierigkeitsgrad.
 - **NoSQL (MongoDB) Practice:**
-  - Mache dich mit dokumentenorientierten Abfragen vertraut.
-  - Nutze Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und dich auf typische Screening-Fragen vorzubereiten.
+  - Machen Sie sich mit dokumentenorientierten Abfragen vertraut.
+  - Nutzen Sie Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und sich auf typische Screening-Fragen vorzubereiten.
 
 # Query (Abfrage) **Basics**
 
@@ -802,12 +813,12 @@ Egal welche Architektur: Im Kern geht es immer um **CRUD** (Create, Read, Update
 <div class="grid-2">
 <div class="tile" style="border-left: 4px solid #3b82f6;">
 <h3 style="color: #60a5fa;">Der SQL-Ansatz</h3>
-<p><strong>Deklarativ:</strong> Du beschreibst exakt, <em>was</em> du haben willst, aber nicht, wie die Datenbank es intern beschafft. Die Syntax ist eine eigene, englisch-ähnliche Sprache (Structured Query Language).</p>
+<p><strong>Deklarativ:</strong> Sie beschreiben exakt, <em>was</em> Sie haben wollen, aber nicht, wie die Datenbank es intern beschafft. Die Syntax ist eine eigene, englisch-ähnliche Sprache (Structured Query Language).</p>
 </div>
 
 <div class="tile" style="border-left: 4px solid #a855f7;">
 <h3 style="color: #c084fc;">Der NoSQL-Ansatz</h3>
-<p><strong>Prozedural / Objektbasiert:</strong> (Am Beispiel MongoDB). Du rufst Methoden auf Collections auf und übergibst Filterbedingungen als JSON-Objekte. Fühlt sich für JavaScript-Entwickler extrem vertraut an.</p>
+<p><strong>Prozedural / Objektbasiert:</strong> (Am Beispiel MongoDB). Sie rufen Methoden auf Collections auf und übergeben Filterbedingungen als JSON-Objekte. Das fühlt sich für JavaScript-Entwickler extrem vertraut an.</p>
 </div>
 </div>
 
@@ -881,11 +892,11 @@ Der größte funktionale Unterschied beim Schreiben von Queries:
 ## 💻 Aufgabe:
 
 - **SQL Practice:**
-  - Du musst SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
-  - **Fokus im Interview:** Beherrsche `INNER JOIN` und `LEFT JOIN` im Effeff auf einfachem bis mittlerem Schwierigkeitsgrad.
+  - Sie müssen SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
+  - **Fokus im Interview:** Beherrschen Sie `INNER JOIN` und `LEFT JOIN` sicher auf einfachem bis mittlerem Schwierigkeitsgrad.
 - **NoSQL (MongoDB) Practice:**
-  - Mache dich mit dokumentenorientierten Abfragen vertraut.
-  - Nutze Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und dich auf typische Screening-Fragen vorzubereiten.
+  - Machen Sie sich mit dokumentenorientierten Abfragen vertraut.
+  - Nutzen Sie Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und sich auf typische Screening-Fragen vorzubereiten.
 
 ---
 

@@ -1,6 +1,13 @@
 ---
 marp: true
+theme: default
 paginate: true
+style: |
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
 ---
 
 # Entwicklung der Web-Architektur
@@ -43,14 +50,14 @@ paginate: true
 
 ## 1.4 Herausforderungen
 
-- so hat das Internet angefangen
-- ganz am Anfang sogar noch ohne JavaScript (Form submit ohne JavaScript)
+- So hat das Internet angefangen
+- Ganz am Anfang sogar noch ohne JavaScript (Form submit ohne JavaScript)
 
 ABER:
 
 🛑 Problem
 
-- keine aktuellen Daten: z.B. bei einer Nachrichtenseite, einem Online-Shop oder einem sozialen Netzwerk sind aktuelle (tagesaktuell bis sekunden aktuell) Inhalte essentiell
+- keine aktuellen Daten: z.B. bei einer Nachrichtenseite, einem Online-Shop oder einem sozialen Netzwerk sind aktuelle (tagesaktuell bis sekundenaktuell) Inhalte essentiell
 - keine Datenkomplexität abbildbar: große Datenmengen nicht wartbar
 
 ✅ Lösung: MPAs (Multi Page Applications)
@@ -219,7 +226,7 @@ jQuery machte vieles kürzer und verlässlicher.
 
 ### 3.3.3 React
 
-React verändert die Denkweise komplett. Statt DOM-Elemente manuell ein- oder auszublenden, aktualisierst du den **State** und React aktualisiert die UI.
+React verändert die Denkweise komplett. Statt DOM-Elemente manuell ein- oder auszublenden, aktualisieren Sie den **State** und React aktualisiert die UI.
 
 ```jsx
 import { useState } from "react";
@@ -275,7 +282,7 @@ export default function App() {
 
 **Plain JS / jQuery**
 
-Du sagst dem Browser:
+Sie sagen dem Browser:
 
 > "Finde dieses Element und ändere es."
 
@@ -285,7 +292,7 @@ hiddenBox.show();
 
 **React**
 
-Du sagst React:
+Sie sagen React:
 
 > "Wenn der State sichtbar sagt, rendere das Element."
 
@@ -309,11 +316,11 @@ Dieses deklarative Modell ist der zentrale Entwicklungsschritt von jQuery zu Rea
 
 ## 4.1 Fazit
 
-- jede Architektur hat ihre Stärken und Schwächen
+- Jede Architektur hat ihre Stärken und Schwächen
 - die Wahl hängt von den Anforderungen des Projekts ab (z.B. Performance, Interaktivität, SEO)
 - MPAs sind immer noch weit verbreitet, insbesondere für Content-lastige Websites, während SPAs für komplexe, interaktive Anwendungen bevorzugt werden
 - die Entwicklung von Web-Architekturen ist ein kontinuierlicher Prozess, der sich mit den Bedürfnissen der Nutzer und den technologischen Fortschritten weiterentwickelt
-- die Zukunft liegt in hybriden Ansätzen, die die Vorteile von Statig Pages, MPAs und SPAs kombinieren (z.B. durch serverseitiges Rendering oder statische Generierung mit dynamischen Komponenten) (siehe Advanced Concepts SPA Vorlesung)
+- die Zukunft liegt in hybriden Ansätzen, die die Vorteile von Static Pages, MPAs und SPAs kombinieren (z.B. durch serverseitiges Rendering oder statische Generierung mit dynamischen Komponenten) (siehe Advanced Concepts SPA Vorlesung)
 
 ---
 

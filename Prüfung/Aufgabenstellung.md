@@ -4,8 +4,8 @@
 
 ### Allgemeine Fokuspunkte
 
-- Viel (funktionierenden) Code zu erzeugen ist heute keine wirkliche leistung durhc AI mehr!
-- Ich lege Wert auf saubere, nach den hier in der Vorlesung besprochenen best-practise implementierten Lösungen
+- Viel (funktionierenden) Code zu erzeugen ist heute keine wirkliche Leistung durch AI mehr!
+- Ich lege Wert auf saubere, nach den hier in der Vorlesung besprochenen Best Practices implementierten Lösungen
 - Halb-gare Funktionen werde ich nicht beachten
 - Lieber wenige Funktionen, die funktionieren, gut durchdacht und vor allem bis zum Ende gedacht sind als viele halb gare
 
@@ -34,25 +34,24 @@ https://github.com/public-apis/public-apis
 
 #### Codequalität (5 BE)
 
-- IMplementierung eines Linters
-- IMplementierung eines Formatters
+- Implementierung eines Linters
+- Implementierung eines Formatters
 - Eingeschaltene Regeln
-- Einhaltung der Regeln sowie Formaiterung
+- Einhaltung der Regeln sowie Formatierung
 
 #### Web Performance (5 BE)
 
 - gute Performance der Anwendung
-- Keine genauer Lighthouse Score oder ähnliches, da dieser zu stark von Gerät zu Gerät schwankt, aber ich werde die Performance anhand der in de Vorlesung besprochenen Konzepte bewerten
+- Kein genauer Lighthouse Score oder ähnliches, da dieser zu stark von Gerät zu Gerät schwankt, aber ich werde die Performance anhand der in der Vorlesung besprochenen Konzepte bewerten
 
 #### Frontend (10 BE)
 
-- Überlegen Sie sich wie Sie die Daten der API im Frontendsinnvoll visualiseren
-- IMplementieren Sie dies nach der in der Vorlesung besprocehnene Bare Bone Method
+- Überlegen Sie sich, wie Sie die Daten der API im Frontend sinnvoll visualisieren
+- Implementieren Sie dies nach der in der Vorlesung besprochenen Bare-Bone-Methode
   - globale Statemanagement
   - Lift Up State
   - lokale State
-  - Dokumentieren Sie diesen Prozess sepeart in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
-- 
+  - Dokumentieren Sie diesen Prozess separat in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
 
 #### Funktionalität Frontend (10 BE)
 
@@ -60,9 +59,9 @@ https://github.com/public-apis/public-apis
 
 #### Funktionalität Backend (10 BE)
 
-- Implementierung einer Funktion welche Backend anbindung inkl. Datenbank eintrag benötigt
-- Zum Beispiel die ABspeicherung von Favoriten pro User
+- Implementierung einer Funktion, welche Backend-Anbindung inkl. Datenbankeintrag benötigt
+- Zum Beispiel die Abspeicherung von Favoriten pro User
 
 #### Auth (10 BE)
 
-Implementieren eines Auth Prozess
+Implementierung eines Auth-Prozesses

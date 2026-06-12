@@ -27,7 +27,7 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
 2. Komponenten
    - 2.1 Komponentenraster
    - 2.2 Wie brechen wir eine UI in Komponenten herunter?
-   - 2.3 Probleme mit zu große Komponenten
+   - 2.3 Probleme mit zu großen Komponenten
    - 2.4 Probleme mit zu kleinen Komponenten
    - 2.5 Die richtige Balance finden
    - 2.6 🛠️ Guideline zur Erstellung von Komponenten
@@ -133,7 +133,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ---
 
-## 2.3 Probleme mit zu große Komponenten
+## 2.3 Probleme mit zu großen Komponenten
 
 ![alt text](image-1.png)
 
@@ -737,7 +737,7 @@ _Abb. 2: Komponentenbaum_
 ## 4.4 Schritt 3: Datenfluss
 
 - Identifizieren von UI States
-  - State = "etwas , dass sich ändert
+  - State = "etwas , das sich ändert
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
   - essenzieller vs. abgeleiteter State
 
@@ -773,7 +773,7 @@ _Abb. 2: Komponentenbaum_
 - versteckten Architekturproblemen
 - Fokusverlust
 
-Dier Senior Workflow priorisiert Funktion vor Design.
+Der Senior Workflow priorisiert Funktion vor Design.
 
 ---
 

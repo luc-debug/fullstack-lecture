@@ -48,8 +48,8 @@ style: |
   </div>
   <div>
 
-- Die meisten entwickler arbeiten mit Fancy JavaScript Frameworks
-- Ohne jedoch wirklich zu wissen was darunter ist
+- Die meisten Entwickler arbeiten mit Fancy JavaScript Frameworks
+- Ohne jedoch wirklich zu wissen, was darunter ist
   </div>
 </div>
 
@@ -178,7 +178,7 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 > 💡 Hinweis: Auch mit HTTP/2 (Multiplexing) bleibt Bundling sinnvoll – Bundler ermöglichen zusätzlich Tree Shaking, Minification und Code Splitting, die über reine Request-Reduktion hinausgehen. (mehr dazu in der Web Performance Unit)
 
-- Wie eingangs schon erwähnt wurde zu Beginn der Entwicklung von JAvaScript kein OPaketverwaltung implementiert. Es gab also keine Möglichkeit, Module zu importieren. Das führte dazu, dass Entwickler ihre eigenen Lösungen für Modularität und Abhängigkeiten entwickeln mussten (z.B. durch globale Variablen oder IIFEs). Mit der Einführung von ES6-Modulen (`import`/`export`) wurde zwar eine standardisierte Syntax für Module geschaffen, aber die Browserunterstützung war anfangs begrenzt, was die Notwendigkeit von Bundlern weiter verstärkte. Bis heute können zum die zwar eraltetet aber immer noch genutzte Modulsystem CommonJS im Browser nicht verwednet werden.
+- Wie eingangs schon erwähnt, wurde zu Beginn der Entwicklung von JavaScript keine Paketverwaltung implementiert. Es gab also keine Möglichkeit, Module zu importieren. Das führte dazu, dass Entwickler ihre eigenen Lösungen für Modularität und Abhängigkeiten entwickeln mussten (z.B. durch globale Variablen oder IIFEs). Mit der Einführung von ES6-Modulen (`import`/`export`) wurde zwar eine standardisierte Syntax für Module geschaffen, aber die Browserunterstützung war anfangs begrenzt, was die Notwendigkeit von Bundlern weiter verstärkte. Bis heute können die zwar veralteten, aber immer noch genutzten Modulsysteme CommonJS im Browser nicht verwendet werden.
 
 ---
 
@@ -186,11 +186,11 @@ Prüfe mit [Can I Use](https://caniuse.com/), ab welcher Browser-Version bestimm
 
 - (Module) Bundler sind Tools, die verschiedene JavaScript-Dateien und andere Ressourcen (wie CSS, Bilder) in eine oder wenige Dateien bündeln, um die Anzahl der HTTP-Requests und damit die Ladezeit zu reduzieren.
 - Tools:
-  - Webpack:alt und langsam aber immer noch am meisten verbeitet
-  - Rollup bzw. Rolldown: Rolldown ist der Nachfolger von roll up und so zimeloch State of the Art
+  - Webpack: alt und langsam, aber immer noch am meisten verbreitet
+  - Rollup bzw. Rolldown: Rolldown ist der Nachfolger von Rollup und so ziemlich State of the Art
   - Parcel: Einfache Konfiguration, aber weniger flexibel als Webpack
   - Rspack: Webpack-Alternative mit Fokus auf Performance
-  - tsup bzw. tsdown: Bundler spezell für Libraries
+  - tsup bzw. tsdown: Bundler speziell für Libraries
 
 ---
 
@@ -233,7 +233,7 @@ Mittel 🟡
 
 ### 🛠️ Linter
 
-- Linting ist ein Aspekt der statische Codeanalyse; weitere aspekte werden nicht in der Vorlesung besprochen um den Umfang nicht zu sprengen
+- Linting ist ein Aspekt der statischen Codeanalyse; weitere Aspekte werden nicht in der Vorlesung besprochen, um den Umfang nicht zu sprengen
 - Linter analysieren den Quellcode, ohne ihn auszuführen, und finden potenzielle Fehler, Code-Smells und Verstöße gegen Coding-Conventions.
   - Tools: ESLint, Biome, Oxlint
 
@@ -244,11 +244,11 @@ TBD Beispiele für Code Smells
 ### 🛠️ Formatter
 
 - Formatter sorgen für ein einheitliches Code-Format (Einrückung, Zeilenlänge, etc.).
-  - Tools: Prettier, Biome, ESlint Stylisitc, Oxfmt
+  - Tools: Prettier, Biome, ESLint Stylistic, Oxfmt
 
-- Vortiele
-  - besser lesbar beim Coden
-  - wenn uahc noch dasselbe Format verwendet wird besser vergleich opaar bei git diff bei einem pull request zum Beispiel
+- Vorteile
+  - Bessere Lesbarkeit beim Entwickeln
+  - Wenn auch dasselbe Format verwendet wird, ist der Vergleich bei Git Diffs in Pull Requests übersichtlicher
 
 TBD: Bild von Pullrequest mit Formatierung vs. ohne Formatierung
 
