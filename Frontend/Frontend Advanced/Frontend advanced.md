@@ -737,7 +737,7 @@ _Abb. 2: Komponentenbaum_
 ## 4.4 Schritt 3: Datenfluss
 
 - Identifizieren von UI States
-  - State = "etwas , das sich ändert
+  - State = "etwas, das sich ändert"
   - wird zum Beispiel ein Bild oder ein Text ausgeblendet?
   - essenzieller vs. abgeleiteter State
 
