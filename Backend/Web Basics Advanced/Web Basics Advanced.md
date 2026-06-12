@@ -107,7 +107,9 @@ style: |
 ---
 
 # Web Basics Advanced
+
 ---
+
 # Wiederholung Web Basics
 
 ## Internet Protocol
@@ -295,9 +297,38 @@ HTTP verwendet Statuscodes, um den Erfolg oder Fehler einer Anfrage anzuzeigen
 
 ---
 
-
 ## Aufgabe
-siehe server.js
+
+Erstelle einen einfachen HTTP-Server mit dem eingebauten Node.js `http`-Modul **ohne externe Frameworks** (kein Express, kein Fastify). Der Server soll folgende Endpunkte bereitstellen:
+
+---
+
+| Methode | Route        | Beschreibung                                                                |
+| ------- | ------------ | --------------------------------------------------------------------------- |
+| `GET`   | `/`          | Gibt eine HTML-Seite mit einer Übersicht aller Routen zurück                |
+| `GET`   | `/health`    | Gibt ein JSON-Objekt mit dem Status und der Laufzeit (`uptime`) zurück      |
+| `GET`   | `/users`     | Gibt alle Benutzer als JSON-Array zurück                                    |
+| `GET`   | `/users/:id` | Gibt einen einzelnen Benutzer anhand der ID zurück (404 bei nicht gefunden) |
+| `POST`  | `/users`     | Legt einen neuen Benutzer an (erwartet `name` und `role` im JSON-Body)      |
+
+---
+
+**Anforderungen:**
+
+
+- Nutze passende HTTP-Statuscodes (200, 201, 400, 404)
+- Für unbekannte Routen: antworte mit 404 und einer Fehlermeldung
+
+Tipps:
+
+- `const http = require('http')` lädt das eingebaute HTTP-Modul von Node.js
+- Einen Server erstellst du mit `http.createServer((req, res) => { ... })`
+- Den Pfad und Query-Parameter kannst du mit `url.parse(req.url, true)` auslesen
+- Die HTTP-Methode steckt in `req.method`, der Pfad in `parsed.pathname`
+- JSON-Antworten sendest du typischerweise mit `res.writeHead(...); res.end(JSON.stringify(data))`
+- Für HTML kannst du `res.writeHead(...)` verwenden
+- Bei `POST`-Requests liest du den Body oft über `req.on('data', ...)` und `req.on('end', ...)`
+- IDs aus der URL kannst du z. B. mit einem Regex wie `pathname.match(/^\/users\/(\d+)$/)` auslesen
 
 
 ---
@@ -384,8 +415,8 @@ _(Der Server sagt: "Hier ist dein JSON (`Content-Type`). Ich habe es mit Brotli 
 
 In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn du eine Next.js-Anwendung baust und deployest, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
 
-
 ---
 
 ## Demo
+
 siehe Video
