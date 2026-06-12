@@ -16,14 +16,23 @@ style: |
 
 🧰: Aufgabe
 
-- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werde
+- 🟢 Leicht: Kann mit etwas Recherche und Hilfe gelöst werden
 - 🟡 Mittel: Erfordert etwas mehr Aufwand oder spezifisches Wissen
 - 🔴 Schwer: Erfordert umfangreiche Änderungen oder externe Unterstützung
 
-🛠️: Tool (Werkzeug); Ein stück Software das ein Problem löst
-💡: Konzept, wehes implementiert wird
-🚫 Problem beschreibung, welches das Konzeopt löst
+🛠️: Tool (Werkzeug); ein Stück Software, das ein Problem löst
+💡: Konzept, welches implementiert wird
+🚫 Problembeschreibung des Problems, welches das Konzept löst
 ✅: Lösungsbeschriebung des Problems, welches das Konzept löst
+
+---
+
+## Inhaltsverzeichnis
+
+- Motivation: Was ist Fullstack?
+- Roadmap
+  - Frontend Roadmap
+  - Backend Roadmap
 
 ---
 
@@ -33,7 +42,7 @@ TODO
 
 - Jobmarkt fordert End-to-end delivery
   - Anforderungsanalyse
-  - Projektmanagment (Scrum!)
+  - Projektmanagement (Scrum!)
   - Frontend
   - Backend
   - DevOps
@@ -42,7 +51,7 @@ TODO Videoinhaltergänzen Einleitung
 
 ---
 
-TODO :Vorstellung der Roadmap als Mindmap
+TODO: Vorstellung der Roadmap als Mindmap
 
 ---
 

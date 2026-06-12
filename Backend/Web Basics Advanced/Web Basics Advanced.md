@@ -110,6 +110,13 @@ style: |
 
 ---
 
+## Inhaltsverzeichnis
+
+1. Wiederholung Web Basics (IP, TCP, DNS, HTTP)
+2. HTTP Advanced (Content Negotiation, Content Type, Content Compression)
+
+---
+
 # Wiederholung Web Basics
 
 ## Internet Protocol
@@ -127,7 +134,7 @@ style: |
 
 - IP-Adressen können auch in Kombination mit Subnetzen verwendet werden, um Netzwerke zu segmentieren und die Verwaltung zu erleichtern.
 - IP operiert auf der Netzwerkschicht des OSI-Modells und ermöglicht die Kommunikation zwischen Geräten in verschiedenen Netzwerken.
-- Ein IP Paket besteht aus einem Header (metadata oder Daten über Daten), der Informationen über die Quelle und das Ziel enthält, sowie einem Payload, der die eigentlichen Daten enthält.
+- Ein IP Paket besteht aus einem Header mit Metadaten (Daten über Daten), der Informationen über die Quelle und das Ziel enthält, sowie einem Payload, der die eigentlichen Daten enthält.
   ![IP Paket](./img/IP.png)
 
 ---
@@ -135,7 +142,7 @@ style: |
 ## TCP Protocol
 
 - Transmission Control Protocol (TCP) ist ein verbindungsorientiertes Protokoll, das eine zuverlässige Datenübertragung zwischen zwei Endpunkten ermöglicht.
-- TCP verwendet eine Handshake-Mechanismus, um eine Verbindung zwischen Sender und Empfänger herzustellen, bevor Daten übertragen werden.
+- TCP verwendet einen Handshake-Mechanismus, um eine Verbindung zwischen Sender und Empfänger herzustellen, bevor Daten übertragen werden.
 - TCP garantiert die Reihenfolge der Datenpakete und stellt sicher, dass alle Pakete korrekt empfangen werden, indem es Bestätigungen (ACKs) verwendet.
 - TCP verwendet auch Flusskontrolle und Staukontrolle, um die Übertragungsgeschwindigkeit zu regulieren und Netzwerküberlastungen zu vermeiden.
 - TCP ist eines der Hauptprotokolle, die im Internet verwendet werden, insbesondere für Anwendungen wie Webbrowser, E-Mail und Dateiübertragungen.
@@ -190,7 +197,7 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ## HTTP Requests/ Responses
 
-- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP oder UDP Pakages in ein Request und Reponse Objekt. Somit wird die Entwicjklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um unterliegende Netzwerkschichten kümmern müssen.
+- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP oder UDP Pakages in ein Request und Reponse Objekt. Somit wird die Entwicklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um zugrunde liegende Netzwerkschichten kümmern müssen.
   ![alt text](img/Request_Response.png)
 
 - Sowohl HTTP-Anfragen als auch HTTP-Antworten bestehen aus einem HTTP-BODY (optional), der Daten enthält einem und HTTP-HEADER, der die Anfrage/Antwort selbst beschreiben (Ursprung, Codierung, Sicherheit, Caching, Inhaltstyp).
@@ -199,7 +206,7 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ### Der HTTP-Request (Die Anfrage)
 
-Das schickt dein Browser (oder deine React-App via `fetch`), wenn ein Nutzer eine Webseite aufruft. Im Prinzip ist es en simples Textdokument, welches dann interpretiert wird.
+Das schickt Ihr Browser (oder Ihre React-App via `fetch`), wenn ein Nutzer eine Webseite aufruft. Im Prinzip ist es ein simples Textdokument, welches dann interpretiert wird.
 
 ```http
 GET /artikel/http-basics HTTP/1.1
@@ -339,7 +346,7 @@ Tipps:
 
 Das Zusammenspiel dieser drei Konzepte ist im Grunde ein ständiger Dialog zwischen dem Client (z. B. einem Browser oder einer React-App) und dem Server. Das Ziel: Daten so effizient, passgenau und schnell wie möglich zu übertragen.
 
-Man kann es sich wie eine Bestellung im Restaurant vorstellen: Du sagst dem Kellner, was du gerne hättest und ob du Allergien hast (**Content Negotiation**). Der Koch bereitet das Essen zu, verpackt es platzsparend für den Transport (**Content Compression**) und klebt ein Etikett auf die Box, damit du weißt, was drin ist (**Content Type**).
+Man kann es sich wie eine Bestellung im Restaurant vorstellen: Sie sagen dem Kellner, was Sie möchten und ob Sie Allergien haben (**Content Negotiation**). Der Koch bereitet das Essen zu, verpackt es platzsparend für den Transport (**Content Compression**) und klebt ein Etikett auf die Box, damit Sie wissen, was drin ist (**Content Type**).
 
 Im Folgenden ist die genaue Aufschlüsselung, wie diese drei Komponenten ineinandergreifen:
 
@@ -357,7 +364,7 @@ Bevor der Server überhaupt Daten schickt, teilt der Client ihm mit, was er _ver
 
 ### 2. Content Type (Das tatsächliche Format)
 
-Nachdem der Server den "Wunschzettel" (Content Negotiation) gelesen hat, entscheidet er, was er zurückschickt. Der Server packt die Daten zusammen und muss dem Client nun exakt sagen, um welches Datenformat es sich handelt, damit der Browser (oder dein JavaScript-Code) weiß, wie er die Bytes interpretieren muss.
+Nachdem der Server den "Wunschzettel" (Content Negotiation) gelesen hat, entscheidet er, was er zurückschickt. Der Server packt die Daten zusammen und muss dem Client nun exakt sagen, um welches Datenformat es sich handelt, damit der Browser (oder Ihr JavaScript-Code) weiß, wie er die Bytes interpretieren muss.
 
 - Im Response-Header: **`Content-Type: application/json; charset=utf-8`**
 - **Der Zusammenhang:** Der `Content-Type` in der Response ist die direkte Antwort auf den `Accept`-Header im Request.
@@ -379,7 +386,7 @@ Da Netzwerkanfragen teuer sind (Ladezeit, Bandbreite), entscheidet der Server of
 
 ### Der gesamte Zyklus im Code
 
-Wenn du Daten aus einem Backend abrufst, sieht das Zusammenspiel in den HTTP-Headern genau so aus:
+Wenn Sie Daten aus einem Backend abrufen, sieht das Zusammenspiel in den HTTP-Headern genau so aus:
 
 **Der Request (Client ➡️ Server)**
 
@@ -391,7 +398,7 @@ Accept-Encoding: gzip, br
 
 ```
 
-_(Der Client sagt: "Gib mir die User als JSON. Du darfst das Paket gerne mit Gzip oder Brotli komprimieren.")_
+_(Der Client sagt: "Gib mir die User als JSON. Sie dürfen das Paket gerne mit Gzip oder Brotli komprimieren.")_
 
 ---
 
@@ -407,13 +414,14 @@ Content-Length: 4096
 
 ```
 
-_(Der Server sagt: "Hier ist dein JSON (`Content-Type`). Ich habe es mit Brotli gepackt (`Content-Encoding`), weil du mir vorhin erlaubt hast, das zu tun.")_
+_(Der Server sagt: "Hier ist Ihr JSON (`Content-Type`). Ich habe es mit Brotli gepackt (`Content-Encoding`), weil Sie mir vorhin erlaubt haben, das zu tun.")_
 
 ---
 
 ### Warum das für die Entwicklung wichtig ist
 
-In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn du eine Next.js-Anwendung baust und deployest, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
+In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn Sie eine Next.js-Anwendung bauen und deployen, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
+
 
 ---
 

@@ -12,11 +12,24 @@ style: |
 
 # Performance Optimizing
 
-_Vorabbemerkung: Die meisten folgenden Konzepte sind allgemein. Sie lassen sich somit auf alle CMSs (zum Beispiel Wordpress, TYPO3), SPA (zum Beispiel React) oder MPAs (zum Beispiel ASP .NET CORE) anwenden. Denn am Ende ist es egal womit DU deine Webseite baust: Am Ende wird immer ausschließlich HTML, CSS und JavaScript im Browser ausgeführt._
+_Vorabbemerkung: Die meisten folgenden Konzepte sind allgemein. Sie lassen sich somit auf alle CMSs (zum Beispiel Wordpress, TYPO3), SPAs (zum Beispiel React) oder MPAs (zum Beispiel ASP.NET Core) anwenden. Denn am Ende ist es egal, womit Sie Ihre Webseite bauen: Am Ende werden immer ausschließlich HTML, CSS und JavaScript im Browser ausgeführt._
 
 ---
 
-## 1 The Core web Vitals
+## Inhaltsverzeichnis
+
+1. The Core Web Vitals
+2. The Critical Rendering Path
+3. Fünf Schritte für die Performance-Optimierung
+   - 3.1 Performance Diagnosis
+   - 3.2 Optimierung des Servers
+   - 3.3 Optimierung der Assets
+   - 3.4 Optimierung des JavaScript Bundles
+   - 3.5 Code Splitting
+
+---
+
+## 1 The Core Web Vitals
 
 Verschiedene Metriken, welche die Performance einer Webseite messen
 
@@ -50,14 +63,14 @@ Verschiedene Metriken, welche die Performance einer Webseite messen
 
 🚫 Problem: 
 - Für die bessere Lesbarkeit verwenden wir Leerzeichen, Zeilenumbrüche, lange Variablennamen
-- Dies vergrößert die Bundlesize in der Production unnötig, wir haben davon nur ein Vorteil während des Developments
+- Dies vergrößert die Bundlesize in der Production unnötig, wir haben davon nur einen Vorteil während des Developments
 
 ✅ Lösung:
 
 Tools, wie Terser, oxc-minify, die
 - Leerzeichen und Zeilenumbrüche entfernen
 - Variablennamen ersetzen mit kürzeren Namen
-- ... und vieles mehr, dass zur Minification beiträgt
+- ... und vieles mehr, das zur Minification beiträgt
 
 ---
 
@@ -84,7 +97,7 @@ Beispiel: UI Bibliothek, von welcher nur eine Komponente verwendet wird. Ist es 
 
 ### 3.4.3 Code Splitting
 
-🚫 Problem: Ein einziges großes Bundle bedeutet, dass der Nutzer auch Code herunterlädt, den er auf der aktuellen Seite gar nicht braucht.
+🚫 Problem: Ein einziges großes Bundle bedeutet, dass Nutzende auch Code herunterladen, den sie auf der aktuellen Seite gar nicht brauchen.
 
 ✅ Lösung: Bundler können den Code in kleinere Teile aufteilen, die nur bei Bedarf geladen werden:
 
