@@ -23,3 +23,6 @@ Action Item mit A11y aufsetzen; Anschlie0end an Frontend Tooling
 
 
 Cumulocity Accessibily Page
+
+
+https://www.cumulocity.com/codex/design-system/accessibility/overview/
