@@ -304,7 +304,7 @@ HTTP verwendet Statuscodes, um den Erfolg oder Fehler einer Anfrage anzuzeigen
 
 ---
 
-## Aufgabe
+## Aufgabe: HTTP-API mit dem nativen Node.js http-Modul
 
 Erstelle einen einfachen HTTP-Server mit dem eingebauten Node.js `http`-Modul **ohne externe Frameworks** (kein Express, kein Fastify). Der Server soll folgende Endpunkte bereitstellen:
 
@@ -322,7 +322,6 @@ Erstelle einen einfachen HTTP-Server mit dem eingebauten Node.js `http`-Modul **
 
 **Anforderungen:**
 
-
 - Nutze passende HTTP-Statuscodes (200, 201, 400, 404)
 - Für unbekannte Routen: antworte mit 404 und einer Fehlermeldung
 
@@ -336,7 +335,6 @@ Tipps:
 - Für HTML kannst du `res.writeHead(...)` verwenden
 - Bei `POST`-Requests liest du den Body oft über `req.on('data', ...)` und `req.on('end', ...)`
 - IDs aus der URL kannst du z. B. mit einem Regex wie `pathname.match(/^\/users\/(\d+)$/)` auslesen
-
 
 ---
 
@@ -422,9 +420,52 @@ _(Der Server sagt: "Hier ist Ihr JSON (`Content-Type`). Ich habe es mit Brotli g
 
 In modernen Fullstack-Frameworks wie Next.js passieren viele dieser Schritte vollautomatisch im Hintergrund. Wenn Sie eine Next.js-Anwendung bauen und deployen, liest der integrierte Node-Server automatisch den `Accept-Encoding`-Header des Browsers aus. Unterstützt der Browser Brotli (`br`), komprimiert Next.js die statischen Assets (HTML, CSS, JS) on-the-fly mit Brotli, setzt den entsprechenden `Content-Encoding`-Header und liefert die Dateien extrem bandbreitenschonend aus, während gleichzeitig der korrekte `Content-Type` für das Frontend deklariert wird.
 
-
 ---
 
 ## Demo
 
 siehe Video
+
+---
+
+## Aufgabe: Content Negotiation & Compression
+
+Erweitere einen bestehenden Node.js HTTP-Server (ohne Frameworks) um folgende Funktionen:
+
+### 1. Content Negotiation (Accept Header)
+
+Der Server muss den `Accept`-Header auswerten und das Antwortformat bestimmen.
+
+### Unterstützte Formate:
+
+- `application/json` → JSON-Antwort
+- `text/html` → HTML-Antwort
+- alles andere → `406 Not Acceptable`
+
+---
+
+### 2. Content Compression (Accept-Encoding)
+
+Der Server soll zusätzlich den `Accept-Encoding`-Header unterstützen.
+
+### Verhalten:
+
+- Wenn `gzip` im `Accept-Encoding` enthalten ist:
+  - Response wird mit gzip komprimiert
+  - Header setzen:
+
+    ```
+    Content-Encoding: gzip
+    ```
+
+- sonst:
+  - unkomprimierte Antwort
+
+---
+
+### 3. Wichtige Header
+
+- `Accept` → bestimmt Format (JSON / HTML)
+- `Accept-Encoding` → bestimmt Kompression
+- `Content-Type` → Antwortformat
+- `Content-Encoding` → Kompression
