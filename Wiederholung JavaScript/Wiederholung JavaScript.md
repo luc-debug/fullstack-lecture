@@ -223,6 +223,8 @@ const movies = [
 ];
 ```
 
+---
+
 1. Filtere alle Filme **ab dem Jahr 2000** heraus.
 2. Finde den Film mit der **besten Bewertung**.
 3. Erstelle ein Array nur der **Titel** aller Filme.
