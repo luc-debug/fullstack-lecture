@@ -1,0 +1,4 @@
+- http: einfache endpoints bauen
+- http: content negotiation
+- rest: restful
+- if mit sequence diagramm
