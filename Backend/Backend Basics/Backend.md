@@ -4,6 +4,13 @@ theme: default
 paginate: true
 _class: title
 style: |
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
   /* Globale Stile & Farbpalette */
   section {
     background-color: #020617; /* Deep Navy Black */
@@ -44,7 +51,7 @@ style: |
   section:not(.title) h2 {
     border-left: 6px solid #10b981;
     padding-left: 25px;
-    font-size: 2.5rem;
+    font-size: 1.8rem;
     margin-bottom: 40px;
   }
 
@@ -128,28 +135,15 @@ style: |
 
 ---
 
-## MVC
-
-![alt text h:500px](img/MVC.png)
-
----
-
-- Model: Repräsentation der Daten
-- View: Darstellung der Daten für den Benutzer
-- Controller: Vermittler zwischen Model und View, verarbeitet Benutzereingaben; Geschäftslogik
-- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als Frontend für Nutzer.
-  - zum Beispiel ASP.NET MVC, Spring MVC, Ruby on Rails
-
----
-
 # REST API
 
 ---
+
 ## Einleitung
+
 REST (Representational State Transfer)
 
 - Representational: Daten
-
 
 ---
 
@@ -295,6 +289,39 @@ Der Client kann nicht wissen, ob er direkt mit dem Endserver oder einem Proxy (=
 
 ---
 
+## Aufgabe: RESTful URL-Design
+
+Hier sind mehrere API-Endpunkte aus einem (fiktiven) Bibliotheksverwaltungssystem. Analysiere jede URL und erkläre, **was gegen RESTful-Design-Prinzipien verstößt** und wie man es richtig formulieren würde.
+
+**Endpunkte**
+
+1. `GET /getAllBooks`
+2. `POST /books/createNewBook`
+3. `GET /books/5/delete`
+4. `GET /Books/5`
+5. `PUT /books/5/author/3`
+6. `GET /books?id=5`
+
+---
+
+7. `DELETE /books/5/2024-01-01`
+8. `POST /books/5`
+9. `GET /authors/3/books/getBooksByAuthor`
+10. `GET /books/active/true`
+
+### Aufgabenstellung
+
+Für jede URL:
+
+- Benenne den konkreten Verstoß (z.B. Verb in URL, falsche HTTP-Methode, inkonsistente Großschreibung, falsche Hierarchie, etc.)
+- Schreibe die korrigierte Version der URL inkl. der korrekten HTTP-Methode
+
+### Bonusfrage
+
+Bei Nummer 9 gibt es zwei mögliche "richtige" Lösungen, je nachdem, welche Ressource im Vordergrund steht. Nenne beide und erkläre den Unterschied.
+
+---
+
 ## Idempotenz
 
 > "Eine Operation ist idempotent, wenn sie mehrfach ausgeführt werden kann, ohne dass das Ergebnis über die erste Ausführung hinaus verändert wird."
@@ -427,7 +454,7 @@ Jeder dokumentierte Endpoint sollte mindestens folgende 4 Informationen liefern:
 
 ---
 
-# APIs sind Produkte. **Docs die Verpackung.**
+### APIs sind Produkte. **Docs die Verpackung.**
 
 Gute Dokumentation entscheidet über den Erfolg einer Architektur.
 
@@ -552,8 +579,6 @@ Vom HTTP-Request zur Datenbank und zurück
 
 ---
 
----
-
 ## Die Evolution der Business Logic
 
 Im Grunde genommen macht jedes Backend das Gleiche: Es nimmt einen **HTTP-Request** entgegen, jagt ihn durch die Geschäftslogik und spuckt eine **HTTP-Response** aus. Spannend wird es bei der Frage, wie wir diesen Code strukturieren, wenn die App wächst.
@@ -660,7 +685,6 @@ app.get("/api/vip", checkAuth, getVipData);
 app.listen(3000, () => console.log("Server läuft auf Port 3000"));
 ```
 
-
 ---
 
 # API Architektur & **Modellierung**
@@ -749,7 +773,7 @@ Die Grundlage für persistente Daten und stabile Geschäftsdomänen
 
 Datenbanken werden grundlegend in **relationale (SQL)** und **nicht-tabellarische (NoSQL)** Systeme unterteilt. Im echten Entwickleralltag überwiegt meist der relationale Ansatz, da sich Business-Logiken hervorragend über feste Beziehungen abbilden lassen.
 
-<div class="grid-2">
+<div class="grid-2"  style="display: flex; gap: 40px; margin-top: 30px;">
 <div class="tile" style="border-left: 4px solid #3b82f6;">
 <h3 style="color: #60a5fa;">SQL (Relational)</h3>
 <ul>
@@ -760,8 +784,6 @@ Datenbanken werden grundlegend in **relationale (SQL)** und **nicht-tabellarisch
   <li><em>Tech-Stack:</em> PostgreSQL, MySQL</li>
 </ul>
 </div>
-
----
 
 <div class="tile" style="border-left: 4px solid #a855f7;">
 <h3 style="color: #c084fc;">NoSQL (Non-Tabular)</h3>
@@ -789,97 +811,100 @@ Die Wahl des Datenbanksystems hängt von den Anforderungen der Anwendung ab:
 
 ---
 
-## 💻 Aufgabe:
+## SQL - Was ist das?
 
-Um in technischen Screenings und Live-Coding-Interviews zu bestehen, müssen beide Konzepte praktisch beherrscht werden:
+- im Prinzip eine Tabelle
+- schauen wir es uns am Beispiel dieser Tabelle an
 
-- **SQL Practice:**
-  - Sie müssen SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
-  - **Fokus im Interview:** Beherrschen Sie `INNER JOIN` und `LEFT JOIN` sicher auf einfachem bis mittlerem Schwierigkeitsgrad.
-- **NoSQL (MongoDB) Practice:**
-  - Machen Sie sich mit dokumentenorientierten Abfragen vertraut.
-  - Nutzen Sie Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und sich auf typische Screening-Fragen vorzubereiten.
-
-# Query (Abfrage) **Basics**
-
-Wie wir mit Datenbanken kommunizieren: SQL vs. NoSQL
+| id  | first_name | age | status   |
+| --- | ---------- | --- | -------- |
+| 1   | Anna       | 22  | active   |
+| 2   | Ben        | 16  | active   |
+| 3   | Clara      | 30  | inactive |
 
 ---
 
-## Die zwei Sprachen der Datenbeschaffung
+## Query (Abfrage) **Basics**
 
-Egal welche Architektur: Im Kern geht es immer um **CRUD** (Create, Read, Update, Delete). Aber _wie_ wir diese Anfragen (Queries) formulieren, unterscheidet sich fundamental:
+### Das kennt ihr schon: JavaScript Array
 
-<div class="grid-2">
-<div class="tile" style="border-left: 4px solid #3b82f6;">
-<h3 style="color: #60a5fa;">Der SQL-Ansatz</h3>
-<p><strong>Deklarativ:</strong> Sie beschreiben exakt, <em>was</em> Sie haben wollen, aber nicht, wie die Datenbank es intern beschafft. Die Syntax ist eine eigene, englisch-ähnliche Sprache (Structured Query Language).</p>
-</div>
+Bevor wir SQL und NoSQL betrachten – genau diese Logik habt ihr in JavaScript schon geschrieben:
 
-<div class="tile" style="border-left: 4px solid #a855f7;">
-<h3 style="color: #c084fc;">Der NoSQL-Ansatz</h3>
-<p><strong>Prozedural / Objektbasiert:</strong> (Am Beispiel MongoDB). Sie rufen Methoden auf Collections auf und übergeben Filterbedingungen als JSON-Objekte. Das fühlt sich für JavaScript-Entwickler extrem vertraut an.</p>
-</div>
-</div>
+```javascript
+const users = [
+  { id: 1, first_name: "Anna", age: 22, status: "active" },
+  { id: 2, first_name: "Ben", age: 16, status: "active" },
+  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
+];
+
+// Hole Namen aller User
+const result = users.map((u) => ({ first_name: u.first_name }));
+```
+
+> Genau das macht eine Datenbankabfrage – nur auf Millionen von Datensätzen, hochoptimiert und persistent gespeichert.
 
 ---
 
-## 🔍 SQL Query Basics
+### SQL Query Basics
 
-Die Anatomie einer Standard-SQL-Abfrage besteht fast immer aus denselben Klauseln:
+Die Anatomie einer Standard-SQL-Abfrage besteht immer aus diesen Klauseln:
 
 - `SELECT`: Bestimmt, **welche Spalten** zurückgegeben werden.
 - `FROM`: Bestimmt, aus **welcher Tabelle** gelesen wird.
-- `WHERE`: Die **Filterbedingung** (z.B. ID, Status, Datum).
-- `JOIN`: Verknüpft Datensätze aus **zwei Tabellen** anhand einer gemeinsamen ID.
 
 ```sql
 -- Hole Namen und Email aller aktiven User über 18
-SELECT first_name, email
-FROM users
-WHERE age > 18 AND status = 'active';
+SELECT first_name FROM users
+```
 
+oder alle Spalten
+
+```sql
+SELECT * FROM users
 ```
 
 ---
 
-## 📄 NoSQL Query Basics (MongoDB)
+### **CREATE** Eine Tabelle erstellen
 
-In MongoDB arbeiten wir nicht mit Tabellen und Zeilen, sondern mit **Collections** und **Dokumenten** (im Grunde JSON-Objekte).
+`INSERT INTO users (name) VALUES ('Tom');`
 
-- `db.collection.find()`: Die Standardmethode zum Lesen.
-- **Filter-Objekt:** Das erste Argument ist ein Objekt mit den Filter-Bedingungen.
-- **Operatoren:** Statt `>`, `<` oder `=` nutzen wir spezielle Keys wie `$gt` (greater than) oder `$eq` (equal).
+---
+
+### **READ** Eine Tabelle auslen
+
+`SELECT * FROM users;`
+
+- `WHERE`: Die **Filterbedingung** (z.B. ID, Status, Datum). -> Welche Zeilen werden zurückgege
 
 ```javascript
-// Exakt gleiche Logik wie die SQL-Query zuvor
-db.users.find(
-  { age: { $gt: 18 }, status: "active" }, // Filter (WHERE)
-  { first_name: 1, email: 1, _id: 0 }, // Projection (SELECT)
-);
+// Hole Namen aller aktiven User über 18
+const result = users
+  .filter((u) => u.age > 18 && u.status === "active")
+  .map((u) => ({ first_name: u.first_name }));
 ```
 
 ---
 
-## ⚔️ CRUD: Der direkte Syntax-Vergleich
+### **UPDATE** Eine Tabelle aktualisieren
 
-| Operation  | SQL (Relational)                           | MongoDB (NoSQL)                                         |
-| ---------- | ------------------------------------------ | ------------------------------------------------------- |
-| **CREATE** | `INSERT INTO users (name) VALUES ('Tom');` | `db.users.insertOne({ name: 'Tom' })`                   |
-| **READ**   | `SELECT * FROM users;`                     | `db.users.find({})`                                     |
-| **UPDATE** | `UPDATE users SET age = 20 WHERE id = 1;`  | `db.users.updateOne({ _id: 1 }, { $set: { age: 20 } })` |
-| **DELETE** | `DELETE FROM users WHERE id = 1;`          | `db.users.deleteOne({ _id: 1 })`                        |
-
-> Fällt etwas auf? SQL ist textbasiert und starr. MongoDB-Queries sind reine Datenstrukturen (JSON/BSON), die sich im Backend (z.B. in Express.js) direkt dynamisch zusammenbauen lassen.
+`UPDATE users SET age = 20 WHERE id = 1;`
 
 ---
 
-## Das "Join" Problem
+### **DELETE** Eine Tabelle löschen
 
-Der größte funktionale Unterschied beim Schreiben von Queries:
+`DELETE FROM users WHERE id = 1;`
 
-- **SQL ist fürs Verknüpfen gebaut:** Ein `INNER JOIN` in SQL ist hochoptimiert und der absolute Standardweg, um z. B. einen User mit seinen Bestellungen zu verknüpfen.
-- **NoSQL speichert Daten zusammen:** In MongoDB gibt es zwar `$lookup` (eine Art Join), aber eigentlich speichert man Daten, die oft zusammen abgerufen werden, direkt **in einem einzigen verschachtelten Dokument**. Man modelliert die Datenbank nach den Queries, nicht nach Beziehungen.
+---
+
+### Mehrere Tabellen
+
+#### Erstelle: ER Digramm
+
+#### Lesen: Join
+
+- `JOIN`: Verknüpft Datensätze aus **zwei Tabellen** anhand einer gemeinsamen ID.
 
 ---
 
@@ -922,3 +947,19 @@ PostgreSQL | MongoDB | ERD | Schema Design
 ---
 
 ## ORM
+
+---
+
+# Wrap it up
+
+## MVC
+
+![alt text h:500px](img/MVC.png)
+
+---
+
+- Model: Repräsentation der Daten
+- View: Darstellung der Daten für den Benutzer
+- Controller: Vermittler zwischen Model und View, verarbeitet Benutzereingaben; Geschäftslogik
+- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als Frontend für Nutzer.
+  - zum Beispiel ASP.NET MVC, Spring MVC, Ruby on Rails
