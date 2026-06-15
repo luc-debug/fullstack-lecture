@@ -113,7 +113,6 @@ style: |
     }
 ---
 
-
 # Business **Logic**
 
 Vom HTTP-Request zur Datenbank und zurück
@@ -301,5 +300,3 @@ Beide Patterns (Middleware & Sequenz-Modellierung) funktionieren unabhängig vom
 3. **FP oder OOP** sind lediglich die Werkzeuge, mit denen wir diese Architektur im Code umsetzen.
 
 **Egal welcher Stil:** Das Ziel ist die Entkopplung von technischer Infrastruktur und fachlicher Business Logic.
-
----
