@@ -5,35 +5,31 @@ paginate: true
 _class: title
 style: |
 
+  /* ─── Layout-Helfer ─── */
   .columns {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
-  /* Globale Stile & Farbpalette */
+  /* ─── Globale Stile & Farbpalette ─── */
   section {
-    background-color: #020617; /* Deep Navy Black */
-    color: #f1f5f9;            /* Light Gray Text */
+    background-color: #020617;
+    color: #f1f5f9;
     font-family: 'Urbanist', 'Segoe UI', sans-serif;
     padding: 60px;
   }
 
-  /* Farbdefinitionen für Hervorhebungen */
-  h1, h2, h3 {
-    color: #f8fafc;
-  }
+  h1, h2, h3 { color: #f8fafc; }
 
   h1 strong, h2 strong, h3 strong, em {
-    color: #10b981;          /* Emerald Green Accent */
+    color: #10b981;
     font-style: normal;
   }
 
-  p, li {
-    color: #cbd5e1;          /* Secondary Muted Text */
-  }
+  p, li { color: #cbd5e1; }
 
-  /* Titel-Folie (Spezial-Klasse) */
+  /* ─── Titel-Folie ─── */
   section.title {
     background: radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.12) 0%, #020617 60%);
     text-align: center;
@@ -42,75 +38,154 @@ style: |
     justify-content: center;
   }
 
-  section.title h1 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
+  section.title h1 { font-size: 3.5rem; margin-bottom: 10px; }
+
+  /* ─── Section Divider ─── */
+  section.section-divider {
+    background: radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.08) 0%, #020617 65%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  /* Inhalts-Folien Titel */
-  section:not(.title) h2 {
+  section.section-divider .num {
+    font-size: 9rem;
+    font-weight: 700;
+    color: rgba(16, 185, 129, 0.10);
+    line-height: 1;
+    margin-bottom: -10px;
+  }
+
+  section.section-divider h1 {
+    font-size: 2.8rem;
+    border-left: 6px solid #10b981;
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  section.section-divider p {
+    padding-left: 30px;
+    color: #475569;
+    font-size: 1rem;
+    margin-top: 12px;
+  }
+
+  /* ─── Inhalts-Folien Titel ─── */
+  section:not(.title):not(.section-divider) h2 {
     border-left: 6px solid #10b981;
     padding-left: 25px;
     font-size: 1.8rem;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
 
-  /* Kachel/Boxen-Stil für Listen oder Code */
-    /* Große Textboxen / Zitate / Info-Meldungen */
-    blockquote, .tile {
-    background: #0f172a; /* Tieferes, edles Dunkelblau */
-    border-left: 4px solid #10b981; /* Smaragdgrüne Akzentlinie links */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* ─── Blockquotes & Tiles ─── */
+  blockquote, .tile {
+    background: #0f172a;
+    border-left: 4px solid #10b981;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     border-radius: 0 12px 12px 0;
-    padding: 20px 25px;
-    margin: 20px 0;
-    }
+    padding: 18px 22px;
+    margin: 12px 0;
+  }
 
-    /* Dezent verfeinerter Text innerhalb von Blockquotes */
-    blockquote p {
-    color: #f1f5f9;
-    margin: 0;
-    font-style: italic;
-    }
+  blockquote p { color: #f1f5f9; margin: 0; font-style: italic; }
 
-    /* Einzelne Code-Wörter im fließenden Text (Inline Code) */
-    :not(pre) > code {
-    background: rgba(16, 185, 129, 0.15); /* Transparentes Smaragd-Grün */
-    color: #34d399; /* Etwas helleres, knackiges Grün für perfekte Lesbarkeit */
+  .tile h3 { margin-top: 0; }
+  .tile-blue   { border-left-color: #3b82f6 !important; }
+  .tile-purple { border-left-color: #a855f7 !important; }
+  .tile-yellow { border-left-color: #f59e0b !important; }
+  .tile-red    { border-left-color: #ef4444 !important; }
+
+  /* ─── Inline Code ─── */
+  :not(pre) > code {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 6px;
     padding: 2px 8px;
     font-size: 0.95em;
     font-family: 'Courier New', Courier, monospace;
-    }
+  }
 
-    table {
+  /* ─── Tabellen ─── */
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-    th {
-        background-color: #10b981; /* Knalliges Smaragdgrün */
-        color: #020617;            /* Tiefschwarzer Text für perfekten Kontrast */
-        font-weight: bold;
-        padding: 18px;
-        font-size: 1.3rem;
-        text-align: left;
-        border: 1px solid #10b981;
-    }
-    td {
-        padding: 18px;
-        border: 1px solid #334155;
-        background-color: #0f172a; /* Etwas helleres Slate-Schwarz für den Zeilenhintergrund */
-        color: #ffffff;            /* Kristallklares Weiß für optimale Lesbarkeit */
-        font-size: 1.2rem;
-    }
-    tr:nth-child(even) td {
-        background-color: #1e293b; /* Deutlich abgesetzte Zeilen für bessere Scanbarkeit */
-    }
+  }
+  th {
+    background-color: #10b981;
+    color: #020617;
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    text-align: left;
+    border: 1px solid #10b981;
+  }
+  td {
+    padding: 14px 18px;
+    border: 1px solid #334155;
+    background-color: #0f172a;
+    color: #ffffff;
+    font-size: 1.05rem;
+  }
+  tr:nth-child(even) td { background-color: #1e293b; }
+
+  /* ─── ER-Diagramm ─── */
+  .er-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .er-box {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 200px;
+  }
+  .er-head {
+    background: #10b981;
+    color: #020617;
+    font-weight: bold;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .er-row {
+    padding: 8px 16px;
+    border-top: 1px solid #1e293b;
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    font-family: 'Courier New', monospace;
+  }
+  .er-row.pk { color: #10b981; font-weight: bold; }
+  .er-row.fk { color: #f59e0b; }
+  .er-conn {
+    color: #475569;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.8;
+    padding: 0 8px;
+  }
+
+  /* ─── Warn-Box ─── */
+  .warn {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-left: 4px solid #ef4444;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 16px;
+    margin-top: 14px;
+    color: #fca5a5;
+    font-size: 0.9rem;
+  }
 ---
 
 # Databases **Fundamentals**
@@ -119,7 +194,17 @@ Die Grundlage für persistente Daten und stabile Geschäftsdomänen
 
 ---
 
-## SQL vs. NoSQL: Die zwei Welten
+<!-- _class: section-divider -->
+
+<div class="num">01</div>
+
+# SQL vs. **NoSQL**
+
+Die zwei grundlegenden Paradigmen der Datenspeicherung
+
+---
+
+## Vergleich SQL und NoSQL
 
 Datenbanken werden grundlegend in **relationale (SQL)** und **nicht-tabellarische (NoSQL)** Systeme unterteilt. Im echten Entwickleralltag überwiegt meist der relationale Ansatz, da sich Business-Logiken hervorragend über feste Beziehungen abbilden lassen.
 
@@ -166,6 +251,16 @@ Die Wahl des Datenbanksystems hängt von den Anforderungen der Anwendung ab:
 
 ---
 
+<!-- _class: section-divider -->
+
+<div class="num">02</div>
+
+# SQL **Grundlagen**
+
+Struktur, Abfragelogik und die Anatomie einer Query
+
+---
+
 ## SQL – Was ist das?
 
 Im Kern ist SQL eine strukturierte Tabelle mit festen Spalten.
@@ -184,7 +279,7 @@ Jede Spalte beschreibt ein bestimmtes Attribut.
 
 ---
 
-# CRUD – Die vier Grundoperationen
+## CRUD – Die vier Grundoperationen
 
 Jede Anwendung arbeitet permanent mit diesen vier Aktionen:
 
@@ -441,14 +536,22 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 
 ## Beispiel: Users & Orders
 
-### users
+<div class="columns">
+
+<div>
+
+**users**
 
 | id  | name |
 | --- | ---- |
 | 1   | Anna |
 | 2   | Ben  |
 
-### orders
+</div>
+
+<div>
+
+**orders**
 
 | id  | user_id | product  |
 | --- | ------- | -------- |
@@ -456,29 +559,69 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 | 2   | 1       | Mouse    |
 | 3   | 2       | Keyboard |
 
+</div>
+
+</div>
+
+`orders.user_id` verweist auf `users.id` → das ist ein **Foreign Key (FK)**
+
 ---
 
-# ER-Diagramm (Entity Relationship)
+## Primary Key & Foreign Key
 
-```text
-users
------
-id (PK)
-name
+<div class="columns">
 
-    1 ────────∞
+<div>
+<div class="tile">
 
-orders
-------
-id (PK)
-user_id (FK)
-product
-```
+### 🔑 Primary Key (PK)
 
-### Bedeutung
+- Eindeutiger Bezeichner **pro Zeile**
+- Darf nie `NULL` oder doppelt sein
+- Meist eine Auto-Increment-ID
+- Beispiel: `users.id`
 
-- Ein User kann viele Orders besitzen
-- Jede Order gehört genau einem User
+</div>
+</div>
+
+<div>
+<div class="tile tile-yellow">
+
+### 🔗 Foreign Key (FK)
+
+- Verweis auf einen PK **in einer anderen Tabelle**
+- Stellt **referenzielle Integrität** sicher
+- Definiert die Beziehung zwischen Entitäten
+- Beispiel: `orders.user_id → users.id`
+
+</div>
+</div>
+
+</div>
+
+---
+
+## ER-Diagramm
+
+<div class="er-wrap">
+  <div class="er-box">
+    <div class="er-head">users</div>
+    <div class="er-row pk">🔑 id (PK)</div>
+    <div class="er-row">name</div>
+    <div class="er-row">email</div>
+  </div>
+  <div class="er-conn">1<br>────<br>∞</div>
+  <div class="er-box">
+    <div class="er-head">orders</div>
+    <div class="er-row pk">🔑 id (PK)</div>
+    <div class="er-row fk">🔗 user_id (FK)</div>
+    <div class="er-row">product</div>
+    <div class="er-row">amount</div>
+  </div>
+</div>
+
+- Ein User kann **viele** Orders besitzen → **1:n (One-to-Many)**
+- Jede Order gehört **genau einem** User
 - `FK` = Foreign Key (Verweis auf andere Tabelle)
 
 ---
@@ -501,6 +644,55 @@ ON users.id = orders.user_id;
 | Anna | Laptop   |
 | Anna | Mouse    |
 | Ben  | Keyboard |
+
+---
+
+## INNER JOIN vs. LEFT JOIN
+
+<div class="columns">
+
+<div>
+
+**INNER JOIN** – nur Schnittmenge
+
+```sql
+SELECT users.name, orders.product
+FROM users
+INNER JOIN orders
+  ON users.id = orders.user_id;
+```
+
+| name | product  |
+| ---- | -------- |
+| Anna | Laptop   |
+| Ben  | Keyboard |
+
+❌ Clara – keine Orders → **fällt raus**
+
+</div>
+
+<div>
+
+**LEFT JOIN** – alle linken Zeilen
+
+```sql
+SELECT users.name, orders.product
+FROM users
+LEFT JOIN orders
+  ON users.id = orders.user_id;
+```
+
+| name  | product  |
+| ----- | -------- |
+| Anna  | Laptop   |
+| Ben   | Keyboard |
+| Clara | NULL     |
+
+✅ Clara – keine Orders → **NULL**
+
+</div>
+
+</div>
 
 ---
 
@@ -527,22 +719,6 @@ Sie modellieren:
 
 ---
 
-# Moderne Architektur
-
-Typischer Stack:
-
-```text
-Frontend
-   ↓
-Backend/API
-   ↓
-Database
-```
-
-Die Datenbank ist die zentrale Wahrheit des Systems.
-
----
-
 # Zusammenfassung
 
 - SQL = strukturierte relationale Daten
@@ -551,48 +727,6 @@ Die Datenbank ist die zentrale Wahrheit des Systems.
 - JOINs verbinden Geschäftslogik
 - Datenabfragen sind reine Logik
 - Gute Datenmodelle sind wichtiger als Frameworks
-
----
-
-# Daten abfragen ist **Logik.**
-
-## Das Tool entscheidet nur über die Syntax.
-
----
-
-## 💻 Aufgabe:
-
-- **SQL Practice:**
-  - Sie müssen SQL-Queries nicht zwingend auswendig im Schlaf schreiben können, aber das Verständnis für relationale Operationen ist Pflicht.
-  - **Fokus im Interview:** Beherrschen Sie `INNER JOIN` und `LEFT JOIN` sicher auf einfachem bis mittlerem Schwierigkeitsgrad.
-- **NoSQL (MongoDB) Practice:**
-  - Machen Sie sich mit dokumentenorientierten Abfragen vertraut.
-  - Nutzen Sie Tools wie `humongous.io`, um grundlegende CRUD-Queries gegen eine Live-NoSQL-Datenbank auszuführen und sich auf typische Screening-Fragen vorzubereiten.
-
----
-
-## Das SQL-Datenbankschema
-
-In der relationalen Welt ist das **Schema** das Fundament der Datenintegrität. Es beschreibt exakt die Struktur und die Datentypen aller Entitäten.
-
-> "Ein Schema macht Datenbankabfragen verlässlich, typsicher und vorhersagbar."
-
-- **Sicherer Vertrag:** Änderungen am Datenmodell erfordern explizite Migrationen (Hinzufügen von Tabellen, Spalten oder neuen Fremdschlüssel-Beziehungen).
-- **Visuelle Modellierung:** Beziehungen zwischen Entitäten (z. B. wie ein `actor` mit `movies` verknüpft ist oder wo `movie_reviews` andocken) werden in Entity-Relationship-Diagrammen (ERD) strukturiert.
-
----
-
-# Daten halten. **Struktur bewahren.**
-
-Die Wahl der Datenbank bestimmt das Schicksal der Skalierung.
-
-<div style="margin-top: 60px; font-size: 1.1rem; color: #64748b;">
-PostgreSQL | MongoDB | ERD | Schema Design
-</div>
-
----
-
-## ORM
 
 ---
 
