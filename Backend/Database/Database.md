@@ -292,9 +292,9 @@ Jede Anwendung arbeitet permanent mit diesen vier Aktionen:
 
 ---
 
-# 🟢 CREATE – Daten erstellen
+## 🟢 CREATE – Daten erstellen
 
-## JavaScript
+### JavaScript
 
 ```javascript id="c1"
 const users = [
@@ -315,7 +315,7 @@ users.push({
 
 ---
 
-## SQL
+### SQL
 
 ```sql id="c2"
 INSERT INTO users (id, first_name, age, status)
@@ -326,9 +326,9 @@ VALUES (4, 'Tom', 20, 'active');
 
 ---
 
-# 🔵 READ – Daten lesen
+## 🔵 READ – Daten lesen
 
-## JavaScript
+### JavaScript
 
 ```javascript id="r1"
 const users = [
@@ -345,7 +345,7 @@ const result = users.map((u) => ({ first_name: u.first_name }));
 
 ---
 
-## SQL
+### SQL
 
 Die Anatomie einer Standard-SQL-Abfrage besteht immer aus diesen Klauseln:
 
@@ -365,7 +365,7 @@ SELECT * FROM users
 
 ---
 
-# SQL Query Basics
+### Weitere Elemente eine Read Operation
 
 Die Anatomie einer SQL-Abfrage:
 
@@ -379,19 +379,7 @@ Die Anatomie einer SQL-Abfrage:
 
 ---
 
-## Beispiel
-
-```sql
-SELECT first_name
-FROM users
-WHERE age > 18
-ORDER BY age DESC
-LIMIT 5;
-```
-
----
-
-## Select mit Constraints
+### JavaScript
 
 ```javascript
 const result = users
@@ -399,19 +387,35 @@ const result = users
   .map((u) => ({ first_name: u.first_name }));
 ```
 
+➡️ `filter()` = Datensätze auswählen
+
+### SQL
+
 ```sql
-SELECT first_name
-FROM users
-WHERE age > 18 AND status = 'active';
+SELECT first_name FROM users WHERE age > 18 AND status = 'active';
 ```
 
-➡️ `filter()` = Datensätze auswählen
+### JavaScript
+
+```javascript
+const result = users
+  .filter((u) => u.age > 18)
+  .sort((a, b) => b.age - a.age)
+  .slice(0, 5)
+  .map((u) => ({ first_name: u.first_name }));
+```
+
+### SQL
+
+```sql
+SELECT first_name FROM users WHERE age > 18 ORDER BY age DESC LIMIT 5;
+```
 
 ---
 
-# 🟡 UPDATE – Daten aktualisieren
+## 🟡 UPDATE – Daten aktualisieren
 
-## JavaScript
+### JavaScript
 
 ```javascript id="u1"
 const users = [
@@ -425,21 +429,17 @@ const updatedUsers = users.map((u) => (u.id === 2 ? { ...u, age: 17 } : u));
 
 ➡️ Datensatz gezielt verändern
 
----
-
-## SQL
+### SQL
 
 ```sql id="u2"
-UPDATE users
-SET age = 17
-WHERE id = 2;
+UPDATE users SET age = 17 WHERE id = 2;
 ```
 
 ---
 
-# 🔴 DELETE – Daten löschen
+## 🔴 DELETE – Daten löschen
 
-## JavaScript
+### JavaScript
 
 ```javascript id="d1"
 const users = [
@@ -453,13 +453,10 @@ const filteredUsers = users.filter((u) => u.id !== 2);
 
 ➡️ Alles behalten außer dem Treffer
 
----
-
-## SQL
+### SQL
 
 ```sql id="d2"
-DELETE FROM users
-WHERE id = 2;
+DELETE FROM users WHERE id = 2;
 ```
 
 ---
@@ -693,14 +690,6 @@ LEFT JOIN orders
 </div>
 
 </div>
-
----
-
-# SQL ist keine Magie
-
-## Daten abfragen ist **Logik.**
-
-Das Tool entscheidet nur über die Syntax.
 
 ---
 
