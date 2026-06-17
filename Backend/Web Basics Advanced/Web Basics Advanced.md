@@ -4,29 +4,32 @@ theme: default
 paginate: true
 _class: title
 style: |
-  /* Globale Stile & Farbpalette */
+
+  /* ─── Layout-Helfer ─── */
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  /* ─── Globale Stile & Farbpalette ─── */
   section {
-    background-color: #020617; /* Deep Navy Black */
-    color: #f1f5f9;            /* Light Gray Text */
+    background-color: #020617;
+    color: #f1f5f9;
     font-family: 'Urbanist', 'Segoe UI', sans-serif;
     padding: 60px;
   }
 
-  /* Farbdefinitionen für Hervorhebungen */
-  h1, h2, h3 {
-    color: #f8fafc;
-  }
+  h1, h2, h3 { color: #f8fafc; }
 
   h1 strong, h2 strong, h3 strong, em {
-    color: #10b981;          /* Emerald Green Accent */
+    color: #10b981;
     font-style: normal;
   }
 
-  p, li {
-    color: #cbd5e1;          /* Secondary Muted Text */
-  }
+  p, li { color: #cbd5e1; }
 
-  /* Titel-Folie (Spezial-Klasse) */
+  /* ─── Titel-Folie ─── */
   section.title {
     background: radial-gradient(circle at 90% 10%, rgba(16, 185, 129, 0.12) 0%, #020617 60%);
     text-align: center;
@@ -35,89 +38,159 @@ style: |
     justify-content: center;
   }
 
-  section.title h1 {
-    font-size: 3.5rem;
-    margin-bottom: 10px;
+  section.title h1 { font-size: 3.5rem; margin-bottom: 10px; }
+
+  /* ─── Section Divider ─── */
+  section.section-divider {
+    background: radial-gradient(circle at 15% 85%, rgba(16, 185, 129, 0.08) 0%, #020617 65%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
-  /* Inhalts-Folien Titel */
-  section:not(.title) h2 {
+  section.section-divider .num {
+    font-size: 9rem;
+    font-weight: 700;
+    color: rgba(16, 185, 129, 0.10);
+    line-height: 1;
+    margin-bottom: -10px;
+  }
+
+  section.section-divider h1 {
+    font-size: 2.8rem;
+    border-left: 6px solid #10b981;
+    padding-left: 24px;
+    margin: 0;
+  }
+
+  section.section-divider p {
+    padding-left: 30px;
+    color: #475569;
+    font-size: 1rem;
+    margin-top: 12px;
+  }
+
+  /* ─── Inhalts-Folien Titel ─── */
+  section:not(.title):not(.section-divider) h2 {
     border-left: 6px solid #10b981;
     padding-left: 25px;
-    font-size: 2.5rem;
-    margin-bottom: 40px;
+    font-size: 1.8rem;
+    margin-bottom: 30px;
   }
 
-  /* Kachel/Boxen-Stil für Listen oder Code */
-    /* Große Textboxen / Zitate / Info-Meldungen */
-    blockquote, .tile {
-    background: #0f172a; /* Tieferes, edles Dunkelblau */
-    border-left: 4px solid #10b981; /* Smaragdgrüne Akzentlinie links */
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* ─── Blockquotes & Tiles ─── */
+  blockquote, .tile {
+    background: #0f172a;
+    border-left: 4px solid #10b981;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-right: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
     border-radius: 0 12px 12px 0;
-    padding: 20px 25px;
-    margin: 20px 0;
-    }
+    padding: 18px 22px;
+    margin: 12px 0;
+  }
 
-    /* Dezent verfeinerter Text innerhalb von Blockquotes */
-    blockquote p {
-    color: #f1f5f9;
-    margin: 0;
-    font-style: italic;
-    }
+  blockquote p { color: #f1f5f9; margin: 0; font-style: italic; }
 
-    /* Einzelne Code-Wörter im fließenden Text (Inline Code) */
-    :not(pre) > code {
-    background: rgba(16, 185, 129, 0.15); /* Transparentes Smaragd-Grün */
-    color: #34d399; /* Etwas helleres, knackiges Grün für perfekte Lesbarkeit */
+  .tile h3 { margin-top: 0; }
+  .tile-blue   { border-left-color: #3b82f6 !important; }
+  .tile-purple { border-left-color: #a855f7 !important; }
+  .tile-yellow { border-left-color: #f59e0b !important; }
+  .tile-red    { border-left-color: #ef4444 !important; }
+
+  /* ─── Inline Code ─── */
+  :not(pre) > code {
+    background: rgba(16, 185, 129, 0.15);
+    color: #34d399;
     border: 1px solid rgba(16, 185, 129, 0.3);
     border-radius: 6px;
     padding: 2px 8px;
     font-size: 0.95em;
     font-family: 'Courier New', Courier, monospace;
-    }
+  }
 
-    table {
+  /* ─── Tabellen ─── */
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin-top: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    }
-    th {
-        background-color: #10b981; /* Knalliges Smaragdgrün */
-        color: #020617;            /* Tiefschwarzer Text für perfekten Kontrast */
-        font-weight: bold;
-        padding: 18px;
-        font-size: 1.3rem;
-        text-align: left;
-        border: 1px solid #10b981;
-    }
-    td {
-        padding: 18px;
-        border: 1px solid #334155;
-        background-color: #0f172a; /* Etwas helleres Slate-Schwarz für den Zeilenhintergrund */
-        color: #ffffff;            /* Kristallklares Weiß für optimale Lesbarkeit */
-        font-size: 1.2rem;
-    }
-    tr:nth-child(even) td {
-        background-color: #1e293b; /* Deutlich abgesetzte Zeilen für bessere Scanbarkeit */
-    }
+  }
+  th {
+    background-color: #10b981;
+    color: #020617;
+    font-weight: bold;
+    padding: 14px 18px;
+    font-size: 1.1rem;
+    text-align: left;
+    border: 1px solid #10b981;
+  }
+  td {
+    padding: 14px 18px;
+    border: 1px solid #334155;
+    background-color: #0f172a;
+    color: #ffffff;
+    font-size: 1.05rem;
+  }
+  tr:nth-child(even) td { background-color: #1e293b; }
+
+  /* ─── ER-Diagramm ─── */
+  .er-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .er-box {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 200px;
+  }
+  .er-head {
+    background: #10b981;
+    color: #020617;
+    font-weight: bold;
+    padding: 10px 16px;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .er-row {
+    padding: 8px 16px;
+    border-top: 1px solid #1e293b;
+    color: #cbd5e1;
+    font-size: 0.88rem;
+    font-family: 'Courier New', monospace;
+  }
+  .er-row.pk { color: #10b981; font-weight: bold; }
+  .er-row.fk { color: #f59e0b; }
+  .er-conn {
+    color: #475569;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1.8;
+    padding: 0 8px;
+  }
+
+  /* ─── Warn-Box ─── */
+  .warn {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-left: 4px solid #ef4444;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 16px;
+    margin-top: 14px;
+    color: #fca5a5;
+    font-size: 0.9rem;
+  }
 ---
 
 # Web Basics Advanced
 
 ---
-
-## Inhaltsverzeichnis
-
-1. Wiederholung Web Basics (IP, TCP, DNS, HTTP)
-2. HTTP Advanced (Content Negotiation, Content Type, Content Compression)
-
----
-
-# Wiederholung Web Basics
 
 ## Internet Protocol
 
@@ -337,8 +410,6 @@ Tipps:
 - IDs aus der URL kannst du z. B. mit einem Regex wie `pathname.match(/^\/users\/(\d+)$/)` auslesen
 
 ---
-
-# HTTP Advanced
 
 ## Content Negotiation
 
