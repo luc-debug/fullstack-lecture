@@ -515,15 +515,9 @@ Datenbanken bieten:
 
 ---
 
-# Fazit
+<!-- _class: section-divider -->
 
-- SQL = strukturierte relationale Daten
-- CRUD = Grundlage jeder Anwendung
-- JavaScript Arrays = perfekte Vorbereitung auf SQL
-- Datenbanken speichern Business-Logik dauerhaft
-- Datenabfragen sind reine Logik
-
----
+<div class="num">03</div>
 
 # Beziehungen zwischen Tabellen
 
@@ -623,6 +617,10 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 
 ---
 
+## 💻 Aufgabe: ER-Diagramme
+
+---
+
 # JOIN – Tabellen verbinden
 
 Mit `JOIN` kombiniert SQL Daten aus mehreren Tabellen.
@@ -693,7 +691,22 @@ LEFT JOIN orders
 
 ---
 
-# Wichtig für echte Anwendungen
+## 💻 Aufgabe: JOIN üben
+
+- gehen Sie auf https://www.sql-practice.com/
+- filtern Sie nach JOIN
+
+---
+
+<!-- _class: section-divider -->
+
+<div class="num">04</div>
+
+# Zusammenfassung
+
+---
+
+## Wichtig für echte Anwendungen
 
 Datenbanken sind nicht nur Speicher.
 
@@ -708,7 +721,7 @@ Sie modellieren:
 
 ---
 
-# Zusammenfassung
+## Zusammenfassung
 
 - SQL = strukturierte relationale Daten
 - NoSQL = flexible hochskalierbare Daten
