@@ -348,3 +348,20 @@ Dieses deklarative Modell ist der zentrale Entwicklungsschritt von jQuery zu Rea
 | **Caching**             | Einfach (CDN-Caching funktioniert perfekt)   | Möglich (pro Seite separat)                     | Schwieriger (State-Management und dynamische Daten)       |
 | **SEO-Freundlich-keit** | Sehr gut (vollständig durchsuchbare Inhalte) | Gut (jedes HTML-Dokument ist separat indiziert) | Mäßig (serverseitiges Rendering oder Prerendering nötig ) |
 | **Beispiele**           | Portfolio-Websites, Blogs, Dokumentationen   | Online-Shops, Foren, Nachrichtenseiten          | Gmail, Trello, Google Maps                                |
+
+---
+
+# Architektur
+
+
+## MVC
+
+![alt text h:500px](img/MVC.png)
+
+---
+
+- Model: Repräsentation der Daten
+- View: Darstellung der Daten für den Benutzer
+- Controller: Vermittler zwischen Model und View, verarbeitet Benutzereingaben; Geschäftslogik
+- Früher war View ein HTML-Template, heute ist es oft die REST API. Zusätzlich gibt es dann eine Single Page Application (SPA) als Frontend für Nutzer.
+  - zum Beispiel ASP.NET MVC, Spring MVC, Ruby on Rails
