@@ -188,6 +188,15 @@ style: |
   }
 ---
 
+# TODOs
+
+[ ] JavaScript Update
+[ ] JavaScript Delete
+[ ] JOIN
+[ ] Beziehungen many to many
+
+---
+
 # Databases **Fundamentals**
 
 Die Grundlage für persistente Daten und stabile Geschäftsdomänen
@@ -297,18 +306,21 @@ Jede Anwendung arbeitet permanent mit diesen vier Aktionen:
 ### JavaScript
 
 ```javascript id="c1"
-const users = [
-  { id: 1, first_name: "Anna", age: 22, status: "active" },
-  { id: 2, first_name: "Ben", age: 16, status: "active" },
-  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
-];
-
 users.push({
   id: 4,
   first_name: "Tom",
   age: 20,
   status: "active",
 });
+```
+
+```diff
+const users = [
+  { id: 1, first_name: "Anna", age: 22, status: "active" },
+  { id: 2, first_name: "Ben", age: 16, status: "active" },
+  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
++ { id: 4, first_name: "Tom", age: 20, status: "active" },
+];
 ```
 
 ➡️ `push()` fügt einen neuen Datensatz hinzu.
@@ -320,6 +332,15 @@ users.push({
 ```sql id="c2"
 INSERT INTO users (id, first_name, age, status)
 VALUES (4, 'Tom', 20, 'active');
+```
+
+```diff
+ | id  | first_name | age | status   |
+ | --- | ---------- | --- | -------- |
+ | 1   | Anna       | 22  | active   |
+ | 2   | Ben        | 16  | active   |
+ | 3   | Clara      | 30  | inactive |
++| 4   | Tom        | 20  | active   |
 ```
 
 ➡️ SQL macht exakt dieselbe Operation persistent in der Datenbank.
@@ -339,6 +360,7 @@ const users = [
 
 // Hole Namen aller User
 const result = users.map((u) => ({ first_name: u.first_name }));
+// result = [{ first_name: "Anna" }, { first_name: "Ben" }, { first_name: "Clara" }]
 ```
 
 ➡️ `map()` = bestimmte Felder zurückgeben
@@ -355,6 +377,12 @@ Die Anatomie einer Standard-SQL-Abfrage besteht immer aus diesen Klauseln:
 ```sql
 -- Hole Namen aller User
 SELECT first_name FROM users
+
+  | first_name|
+  | ----------|
+  | Anna      |
+  | Ben       |
+  | Clara     |
 ```
 
 oder alle Spalten
@@ -382,33 +410,46 @@ Die Anatomie einer SQL-Abfrage:
 ### JavaScript
 
 ```javascript
-const result = users
-  .filter((u) => u.age > 18 && u.status === "active")
-  .map((u) => ({ first_name: u.first_name }));
-```
+const users = [
+  { id: 1, first_name: "Anna", age: 22, status: "active" },
+  { id: 2, first_name: "Ben", age: 16, status: "active" },
+  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
+];
 
-➡️ `filter()` = Datensätze auswählen
-
-### SQL
-
-```sql
-SELECT first_name FROM users WHERE age > 18 AND status = 'active';
-```
-
-### JavaScript
-
-```javascript
 const result = users
   .filter((u) => u.age > 18)
   .sort((a, b) => b.age - a.age)
   .slice(0, 5)
   .map((u) => ({ first_name: u.first_name }));
+
+// result = [{ first_name: "Clara" }, { first_name: "Anna" }]
 ```
+
+➡️ `filter()` = Datensätze auswählen
+
+---
 
 ### SQL
 
+```
+| id  | first_name | age | status   |
+| --- | ---------- | --- | -------- |
+| 1   | Anna       | 22  | active   |
+| 2   | Ben        | 16  | active   |
+| 3   | Clara      | 30  | inactive |
+```
+
 ```sql
 SELECT first_name FROM users WHERE age > 18 ORDER BY age DESC LIMIT 5;
+```
+
+```
+| first_name|
+| ----------|
+| Clara     |
+| Anna      |
+
+
 ```
 
 ---
@@ -512,6 +553,13 @@ Datenbanken bieten:
 - Sicherheit
 - Skalierung
 - gemeinsame Datenquelle
+
+---
+
+## 💻 Aufgabe: Basic Read OPerationen üben
+
+- gehen Sie auf https://www.sql-practice.com/
+- Üben Sie die Read Operationen
 
 ---
 
@@ -723,8 +771,8 @@ Sie modellieren:
 
 ## Zusammenfassung
 
-- SQL = strukturierte relationale Daten
-- NoSQL = flexible hochskalierbare Daten
+- SQL Datenbank = strukturierte relationale Daten
+- NoSQL Datenbank = flexible hochskalierbare Daten
 - CRUD = Basis jeder Anwendung
 - JOINs verbinden Geschäftslogik
 - Datenabfragen sind reine Logik
