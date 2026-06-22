@@ -188,15 +188,6 @@ style: |
   }
 ---
 
-# TODOs
-
-[ ] JavaScript Update
-[ ] JavaScript Delete
-[ ] JOIN
-[ ] Beziehungen many to many
-
----
-
 # Databases **Fundamentals**
 
 Die Grundlage für persistente Daten und stabile Geschäftsdomänen
@@ -603,13 +594,37 @@ Der Name "Anna" wird mehrfach gespeichert.
 
 ---
 
-## Beziehungstypen
+## Primary Key & Foreign Key
 
-| Typ | Beispiel           |
-| --- | ------------------ |
-| 1:1 | User ↔ Profile     |
-| 1:n | User ↔ Orders      |
-| n:m | Students ↔ Courses |
+<div class="columns">
+
+<div>
+<div class="tile">
+
+### 🔑 Primary Key (PK)
+
+- Eindeutiger Bezeichner **pro Zeile**
+- Darf nie `NULL` oder doppelt sein
+- Meist eine Auto-Increment-ID
+- Beispiel: `users.id`
+
+</div>
+</div>
+
+<div>
+<div class="tile tile-yellow">
+
+### 🔗 Foreign Key (FK)
+
+- Verweis auf einen PK **in einer anderen Tabelle**
+- Stellt **referenzielle Integrität** sicher
+- Definiert die Beziehung zwischen Entitäten
+- Beispiel: `orders.user_id → users.id`
+
+</div>
+</div>
+
+</div>
 
 ---
 
@@ -646,41 +661,17 @@ Der Name "Anna" wird mehrfach gespeichert.
 
 ---
 
-## Primary Key & Foreign Key
+## Beziehungstypen
 
-<div class="columns">
-
-<div>
-<div class="tile">
-
-### 🔑 Primary Key (PK)
-
-- Eindeutiger Bezeichner **pro Zeile**
-- Darf nie `NULL` oder doppelt sein
-- Meist eine Auto-Increment-ID
-- Beispiel: `users.id`
-
-</div>
-</div>
-
-<div>
-<div class="tile tile-yellow">
-
-### 🔗 Foreign Key (FK)
-
-- Verweis auf einen PK **in einer anderen Tabelle**
-- Stellt **referenzielle Integrität** sicher
-- Definiert die Beziehung zwischen Entitäten
-- Beispiel: `orders.user_id → users.id`
-
-</div>
-</div>
-
-</div>
+| Typ | Beispiel           |
+| --- | ------------------ |
+| 1:1 | User ↔ Profile     |
+| 1:n | User ↔ Orders      |
+| n:m | Students ↔ Courses |
 
 ---
 
-## ER-Diagramm
+### One-to-Many (1:n)
 
 <div class="er-wrap">
   <div class="er-box">
@@ -705,7 +696,7 @@ Der Name "Anna" wird mehrfach gespeichert.
 
 ---
 
-## Many-to-Many (n:m)
+### Many-to-Many (n:m)
 
 Ein Student kann viele Kurse besuchen.
 
@@ -729,7 +720,7 @@ courses
 
 ---
 
-## Many-to-Many Beispiel
+#### Many-to-Many Beispiel
 
 <div class="columns">
 
@@ -771,7 +762,7 @@ Ben besucht SQL.
 
 ---
 
-## ER-Diagramm für Many-to-Many
+#### ER-Diagramm für Many-to-Many
 
 <div class="er-wrap">
   <div class="er-box">
@@ -798,6 +789,47 @@ Ben besucht SQL.
 </div>
 
 ➡️ Eine n:m Beziehung wird immer über eine Zwischentabelle modelliert.
+
+---
+
+### One-to-One (1:1)
+
+Ein Datensatz aus Tabelle A ist mit genau **einem** Datensatz aus Tabelle B verknüpft.
+
+**Häufige Anwendungsfälle:**
+
+- **Performance:** Auslagerung von selten genutzten, großen Texten oder Blobs.
+- **Sicherheit:** Isolierte Speicherung sensibler Profildaten (z.B. User-Credentials getrennt von öffentlichen Infos).
+- **Struktur:** Logische Aufteilung einer zu großen Entität.
+
+---
+
+#### One-to-One Beispiel
+
+**users**
+
+| id  | name |
+| --- | ---- |
+| 1   | Anna |
+| 2   | Ben  |
+
+**profiles**
+
+| id  | user_id | website   |
+| --- | ------- | --------- |
+| 10  | 1       | anna.dev  |
+| 11  | 2       | ben.codes |
+
+➡️ Der Foreign Key `profiles.user_id` verweist auf `users.id`.
+Damit es eine 1:1 Beziehung bleibt, muss diese Spalte **UNIQUE** sein!
+
+---
+
+#### ER-Diagramm für One-to-One
+
+- Ein User hat **genau ein** Profil.
+- Jedes Profil gehört zu **genau einem** User.
+- Das `UNIQUE`-Constraint auf dem Foreign Key verhindert Duplikate.
 
 ---
 
