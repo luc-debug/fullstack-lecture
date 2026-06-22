@@ -297,6 +297,14 @@ const restkosten = semesterbeitrag - foerderung;
 
 ---
 
+Aufgabe: essentieller vs derived SAtate
+
+siehe PDF
+
+
+
+---
+
 ⚠️ **Best Practice:**
 
 - Der Zustand sollte möglichst nah an seinem Ursprungsort gespeichert werden.
