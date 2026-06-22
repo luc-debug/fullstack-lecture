@@ -569,6 +569,50 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 
 ---
 
+## Warum brauchen wir mehrere Tabellen?
+
+Statt Daten mehrfach zu speichern, speichern relationale Datenbanken Beziehungen.
+
+### Schlechte Lösung
+
+| Order  | User |
+| ------ | ---- |
+| Laptop | Anna |
+| Mouse  | Anna |
+
+Der Name "Anna" wird mehrfach gespeichert.
+
+---
+
+### Gute Lösung
+
+**users**
+
+| id  | name |
+| --- | ---- |
+| 1   | Anna |
+
+**orders**
+
+| id  | user_id | product |
+| --- | ------- | ------- |
+| 1   | 1       | Laptop  |
+| 2   | 1       | Mouse   |
+
+➡️ Daten werden normalisiert gespeichert.
+
+---
+
+## Beziehungstypen
+
+| Typ | Beispiel           |
+| --- | ------------------ |
+| 1:1 | User ↔ Profile     |
+| 1:n | User ↔ Orders      |
+| n:m | Students ↔ Courses |
+
+---
+
 ## Beispiel: Users & Orders
 
 <div class="columns">
@@ -661,6 +705,102 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 
 ---
 
+## Many-to-Many (n:m)
+
+Ein Student kann viele Kurse besuchen.
+
+Ein Kurs hat viele Studenten.
+
+Direkte Speicherung ist nicht möglich.
+
+```text
+students
+   n
+    \
+     \
+      enrollments
+     /
+    /
+   n
+courses
+```
+
+➡️ Dafür benötigt man eine Zwischentabelle.
+
+---
+
+## Many-to-Many Beispiel
+
+<div class="columns">
+
+<div>
+
+**students**
+
+| id  | name |
+| --- | ---- |
+| 1   | Anna |
+| 2   | Ben  |
+
+</div>
+
+<div>
+
+**courses**
+
+| id  | title |
+| --- | ----- |
+| 1   | SQL   |
+| 2   | React |
+
+</div>
+
+</div>
+
+**enrollments**
+
+| student_id | course_id |
+| ---------- | --------- |
+| 1          | 1         |
+| 1          | 2         |
+| 2          | 1         |
+
+Anna besucht SQL und React.
+
+Ben besucht SQL.
+
+---
+
+## ER-Diagramm für Many-to-Many
+
+<div class="er-wrap">
+  <div class="er-box">
+    <div class="er-head">students</div>
+    <div class="er-row pk">🔑 id</div>
+    <div class="er-row">name</div>
+  </div>
+
+  <div class="er-conn">1<br />────<br />∞</div>
+
+  <div class="er-box">
+    <div class="er-head">enrollments</div>
+    <div class="er-row fk">student_id</div>
+    <div class="er-row fk">course_id</div>
+  </div>
+
+  <div class="er-conn">∞<br />────<br />1</div>
+
+  <div class="er-box">
+    <div class="er-head">courses</div>
+    <div class="er-row pk">🔑 id</div>
+    <div class="er-row">title</div>
+  </div>
+</div>
+
+➡️ Eine n:m Beziehung wird immer über eine Zwischentabelle modelliert.
+
+---
+
 ## 💻 Aufgabe: ER-Diagramme
 
 ---
@@ -731,6 +871,36 @@ LEFT JOIN orders
 
 </div>
 
+</div>
+
+---
+
+## JOIN über mehrere Tabellen
+
+<div class="columns">
+
+Welche Kurse besucht Anna?
+
+```sql
+SELECT students.name, courses.title
+FROM students
+JOIN enrollments
+  ON students.id = enrollments.student_id
+JOIN courses
+  ON courses.id = enrollments.course_id;
+```
+
+</div>
+<div>
+Ergebnis
+
+| name | title |
+| ---- | ----- |
+| Anna | SQL   |
+| Anna | React |
+| Ben  | SQL   |
+
+</div>
 </div>
 
 ---
