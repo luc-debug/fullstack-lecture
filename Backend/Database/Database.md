@@ -456,49 +456,45 @@ SELECT first_name FROM users WHERE age > 18 ORDER BY age DESC LIMIT 5;
 
 ## 🟡 UPDATE – Daten aktualisieren
 
-### JavaScript
+```sql
+UPDATE users
+SET age = 17
+WHERE id = 2;
+```
 
-```javascript id="u1"
+```diff
 const users = [
-  { id: 1, first_name: "Anna", age: 22, status: "active" },
-  { id: 2, first_name: "Ben", age: 16, status: "active" },
-  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
+  { id: 1, first_name: "Anna", age: 22 },
+- { id: 2, first_name: "Ben", age: 16 },
++ { id: 2, first_name: "Ben", age: 17 },
+  { id: 3, first_name: "Clara", age: 30 }
 ];
-
-const updatedUsers = users.map((u) => (u.id === 2 ? { ...u, age: 17 } : u));
 ```
 
-➡️ Datensatz gezielt verändern
-
-### SQL
-
-```sql id="u2"
-UPDATE users SET age = 17 WHERE id = 2;
-```
+➡️ Wichtig: Ohne `WHERE` würden **alle Datensätze** geändert werden.
 
 ---
 
 ## 🔴 DELETE – Daten löschen
 
-### JavaScript
+```sql
+DELETE FROM users
+WHERE id = 2;
+```
 
-```javascript id="d1"
+```diff
 const users = [
-  { id: 1, first_name: "Anna", age: 22, status: "active" },
-  { id: 2, first_name: "Ben", age: 16, status: "active" },
-  { id: 3, first_name: "Clara", age: 30, status: "inactive" },
+  { id: 1, first_name: "Anna" },
+- { id: 2, first_name: "Ben" },
+  { id: 3, first_name: "Clara" }
 ];
-
-const filteredUsers = users.filter((u) => u.id !== 2);
 ```
 
-➡️ Alles behalten außer dem Treffer
+➡️ Der Datensatz wird vollständig entfernt.
 
-### SQL
-
-```sql id="d2"
-DELETE FROM users WHERE id = 2;
-```
+<div class="warn">
+⚠️ DELETE ohne WHERE löscht alle Datensätze der Tabelle.
+</div>
 
 ---
 
