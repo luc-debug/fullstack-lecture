@@ -51,12 +51,7 @@ Eine strukturierte Vorgehensweise zur Entwicklung moderner UIs
 
 ---
 
-- 3.4 Zusammenfassung State
-  - 3.4.1 State Management Patterns in React
-  - 3.4.2 State-Architektur-Beispiel
-  - 3.4.3 State-Anti-Patterns
-
-1. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
+4. Der Senior Workflow für moderne Frontend-Komponentenentwicklung
    - 4.1 Die 5 Schritte
    - 4.2 Schritt 1: Komponentenstruktur und Hierarchie festlegen
    - 4.3 Schritt 2: HTML Struktur
@@ -114,10 +109,10 @@ Sonst entstehen:
 <div>
 
 ![Komponentenraster w:600px](component-raster.png)
+
 </div>
 <div>
 Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Komponenten erkennen
-
 
 </div>
 </div>
@@ -213,6 +208,30 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 # 3. State
 
+---
+
+## 3.1 Wiederholung: Was ist State?
+
+State = Zustand
+
+<div class="columns">
+
+<div>
+
+![alt text](image-8.png)
+
+</div>
+
+![alt text](image-9.png)
+
+</div>
+
+---
+
+## 3.2 für was brauchen wir State?
+
+<div class="columns">
+<div>
 🛑 Problem
 
 - willkürliche Änderungen am DOM
@@ -225,18 +244,98 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 - schwer zu verstehen
 - schwer zu optimieren
 - globale Namespace-Verschmutzung
+</div>
 
+<div>
 ✅ Lösung: State-Management
 
 - State ist die einzige Quelle der Wahrheit
 - UI ist eine Funktion des State
 - State-Änderungen führen zu vorhersehbaren UI-Updates
+</div> 
+</div>
 
 ---
 
-## 3.1 State machine pattern
+## Szenario: To-Do-Liste mit Fortschrittsbalken
 
-TODO
+Ein Klick auf eine Checkbox muss **4 Dinge gleichzeitig** aktualisieren:
+
+- Text durchstreichen
+- Fortschrittsbalken
+- Zähler ("3/5 erledigt")
+- "Alles geschafft!"-Banner
+
+---
+
+### Vorher: Plain JavaScript
+
+Du bist der **Kurier**, der zu Fuß jede einzelne Stelle im Haus anläuft.
+
+```js
+// EIN Klick → 4 manuelle Lieferungen
+checkbox.addEventListener("click", () => {
+  todo[2].done = true; // 1. Daten ändern
+
+  document.getElementById("text-2").classList.add("done"); // 2. Text
+  document.getElementById("bar").style.width = "60%"; // 3. Balken
+  document.getElementById("count").textContent = "3/5"; // 4. Zähler
+});
+```
+
+**Das Problem:**  
+Eine Änderung = 5 Zeilen, 5 separate DOM-Anfassungen.  
+Vergisst du den Balken, lügt die App.  
+Löscht du ein Todo, brauchst du **noch mehr** manuelle Updates.
+
+---
+
+### Nachher: React mit State
+
+Du bist der **Architekt**, der den Plan ändert. Der Bauroboter (React) baut alles automatisch neu.
+
+```tsx
+const [todos, setTodos] = useState([...])
+
+// EIN Klick → EINE Datenänderung. Fertig.
+const toggle = (id) => setTodos(todos.map(t =>
+  t.id === id ? { ...t, done: !t.done } : t
+))
+
+// Alles andere ergibt sich automatisch:
+return (
+  <>
+    {todos.map(t => (
+      <p className={t.done ? 'done' : ''}>{t.text}</p>  // Text
+    ))}
+    <div style={{ width: `${percent}%` }} />             // Balken
+    <p>{doneCount}/{total}</p>                           // Zähler
+  </>
+)
+```
+
+---
+
+## Der Unterschied auf einen Blick
+
+|                         | Plain JS                       | React State                           |
+| ----------------------- | ------------------------------ | ------------------------------------- |
+| **Deine Aufgabe**       | Jede Lampe einzeln umschalten  | Nur den Schalter betätigen            |
+| **Quelle der Wahrheit** | DOM + Variable (2 Wahrheiten)  | State (1 Wahrheit)                    |
+| **Fehler**              | Vergessene Zeile = kaputte UI  | Unmöglich, eine Stelle zu "vergessen" |
+| **Erweiterung**         | Neue Anzeige = neuer DOM-Query | Neue Anzeige = neues `{state}`        |
+
+---
+
+## Fazit
+
+> **State ist ein Spiegel.**  
+> In Plain JS hältst du den Spiegel selbst in der Hand und musst bei jeder Bewegung alle Bilder einzeln anpassen.  
+> Mit State stellst du dich nur hin – der Spiegel zeigt automatisch das richtige Bild.
+
+<!-- ## 3.1 State machine pattern
+
+TODO -->
 
 ---
 
@@ -257,21 +356,23 @@ Lokaler State bedeutet: State innerhalb einer Komponente
 Abgeleiteten State bevorzugen, anstatt State zu duplizieren.
 
 ```
+
 Hochschul-Semesterplaner
 
 ┌──────────────────────────────────────────────┐
-│ Hochschul-Semesterplaner                     │
-│                                              │
-│ Belegte Module:      [      5         ]      │ ← Essenzieller State
-│ ECTS pro Modul:      [      6         ]      │ ← Essenzieller State
-│ Semesterbeitrag:     [    150€        ]      │ ← Essenzieller State
-│ BAföG / Förderung:   [    400€        ]      │ ← Essenzieller State
-│                                              │
-│ ------------------------------------------   │
-│ Gesamt-ECTS:         [     30         ]      │ ← Abgeleiteter State
-│ Restkosten:          [      0€        ]      │ ← Abgeleiteter State
-│ Vollzeitstatus:      [   Vollzeit     ]      │ ← Abgeleiteter State
+│ Hochschul-Semesterplaner │
+│ │
+│ Belegte Module: [ 5 ] │ ← Essenzieller State
+│ ECTS pro Modul: [ 6 ] │ ← Essenzieller State
+│ Semesterbeitrag: [ 150€ ] │ ← Essenzieller State
+│ BAföG / Förderung: [ 400€ ] │ ← Essenzieller State
+│ │
+│ ------------------------------------------ │
+│ Gesamt-ECTS: [ 30 ] │ ← Abgeleiteter State
+│ Restkosten: [ 0€ ] │ ← Abgeleiteter State
+│ Vollzeitstatus: [ Vollzeit ] │ ← Abgeleiteter State
 └──────────────────────────────────────────────┘
+
 ```
 
 ---
@@ -297,11 +398,9 @@ const restkosten = semesterbeitrag - foerderung;
 
 ---
 
-Aufgabe: essentieller vs derived SAtate
+## Aufgabe: essential vs derived State
 
 siehe PDF
-
-
 
 ---
 
@@ -659,7 +758,7 @@ export default function ProductFilter() {
 }
 ```
 
----
+<!-- ---
 
 ## 3.4 Zusammenfassung State
 
@@ -675,7 +774,7 @@ TODO
 
 ### 3.4.3 State-Anti-Patterns
 
-TODO
+TODO -->
 
 ---
 
@@ -814,19 +913,4 @@ Der Senior Workflow priorisiert Funktion vor Design.
 
 ---
 
-### 4.7.3 Fazit
-
-Der Senior Workflow ist:
-
-- komponentenorientiert
-- iterativ
-- architekturfokussiert
-
-Sie hilft dabei, Frontend-Komponenten:
-
-- strukturiert
-- verständlich
-- wartbar
-- skalierbar
-
-zu entwickeln.
+## Demo: Thomann Webseite

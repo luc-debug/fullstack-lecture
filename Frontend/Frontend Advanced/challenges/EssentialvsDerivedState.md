@@ -1,9 +1,3 @@
-Ah, verstanden! Nicht die mathematische Logik soll komplexer werden (wie Arrays und Filter), sondern das **UI-Layout**. Der Lerneffekt ist viel höher, wenn Eingaben und Berechnungen im UI bunt gemischt sind. So müssen die Studierenden bei jeder Zeile neu nachdenken, statt einfach stumpf die obere Hälfte in `useState` zu gießen.
-
-Hier ist ein perfektes, mittelschweres Beispiel: Ein **Event-Catering-Planer**. Die Berechnungen sind einfache Mathematik, aber im UI wechseln sich Eingabe (essentiell) und Ausgabe (abgeleitet) ständig ab. Ein genialer Nebeneffekt: Einige abgeleitete Werte bauen sogar aufeinander auf!
-
----
-
 ### Aufgabenstellung für die Studierenden
 
 **Ziel:** Analysiert das UI-Mockup für den **Event-Catering-Planer**. Die Werte sind hier wild gemischt. Identifiziert für jede Zeile, ob es sich um **essenziellen State** (Eingabefeld via `useState`) oder **abgeleiteten State** (reine JavaScript-Berechnung während des Renders) handelt.
@@ -30,7 +24,7 @@ Hier ist ein perfektes, mittelschweres Beispiel: Ein **Event-Catering-Planer**. 
 **Eure Aufgabe:**
 
 1. Erstellt die nötigen `useState`-Hooks für die Werte, die der Nutzer direkt verändern kann.
-2. Berechnet die restlichen Felder rein mit JavaScriptvariablen.
+2. Berechnet die restlichen Felder rein mit JavaScript Variablen.
 
 ---
 
