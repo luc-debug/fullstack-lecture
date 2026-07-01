@@ -72,30 +72,13 @@ Die zwei wichtigsten Skills als Frontend Dev:
 - UI in Komponenten zerlegen
 - State richtig verorten und managen
 
+-> Damit bauen erreichen wir eine zukunftsfähige Architektur
+
 Sonst entstehen:
 
-| Ohne Methode         | Mit Method                                          | Auswirkung                            | Design Pattern         |
-| -------------------- | --------------------------------------------------- | ------------------------------------- | ---------------------- |
-| Styling vor Struktur | Struktur vor Styling → verhindert zu frühes Styling | Klarere Priorisierung, weniger Rework | Separation of Concerns |
-
----
-
-| Ohne Methode                                        | Mit Methode                       | Auswirkung                              | Design Pattern           |
-| --------------------------------------------------- | --------------------------------- | --------------------------------------- | ------------------------ |
-| Unklarer State / State-Chaos durch falsches Lifting | Klare State-Hierarchie            | Vorhersehbare Datenflüsse, weniger Bugs | Single Source of Truth   |
-| Refactoring erst nach Feature-Fertigstellung        | Saubere Architektur von Anfang an | Weniger technische Schulden             | Clean Architecture       |
-| Tests schwer zu schreiben                           | Testbare Komponenten by Design    | Höhere Testbarkeit, schnellere QA       | Testability by Design    |
-| Lange Debug-Sessions                                | Klare Datenflüsse                 | Schnellere Fehleranalyse                | Unidirectional Data Flow |
-
----
-
-| Ohne Methode                                      | Mit Method                             | Auswirkung                                   | Design Pattern                  |
-| ------------------------------------------------- | -------------------------------------- | -------------------------------------------- | ------------------------------- |
-| Vermischte Verantwortlichkeiten                   | Trennung von Verantwortlichkeiten      | Wiederverwendbarkeit, bessere Skalierbarkeit | Separation of Concerns          |
-| Alle fangen an, aber nichts wird zu Ende gebracht | Schrittweise Entwicklung mit Fokus     | Höhere Abschlussrate, bessere Iteration      | Iterative Development           |
-| Schwer wartbarer Code                             | Architektur by Design → Wartbarkeit    | Langfristig stabilere Codebasis              | Maintainability                 |
-| Nicht wissen, wo anfangen                         | Komplexität reduzieren durch Zerlegung | Schnellere Entwicklungszeit                  | Divide and Conquer              |
-| Chaotische Props                                  | Fest definierte Schnittstellen         | Klarere Kommunikation zwischen Komponenten   | Interface Segregation Principle |
+- Schwer zu testen -> Wenn es keine Tests gibt, testet der Kunde -> das ist schlecht
+- Schwer zu erweitern -> aufgrund einer schelchten Architekrur skaliert die Anwendung nicht -> eigentlich einfache Features dauern lange zu implementieren
+- Schwer zu warten -> Änderungen an bestehenden Code schwierig, wie zum Beispiel Bug-Suche oder Migration -> resultiert aus fehlendenmVerständnis und schwer zu debuggender Anwendung
 
 ---
 
@@ -144,7 +127,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ## 2.4 Probleme mit zu kleinen Komponenten
 
-![alt text](image-3.png)
+![width:1000px](image-3.png)
 
 ---
 
@@ -156,7 +139,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ## 2.5 Die richtige Balance finden
 
-![alt text](image-4.png)
+![width:1000px](image-4.png)
 
 1. Logische Trennungen: Komponenten sollten verschiedene Bereiche der Benutzeroberfläche (UI) klar voneinander abgrenzen – basierend auf Inhalt oder Layout. Jede Komponente sollte über eine klar definierte Zuständigkeit verfügen.
 2. Wiederverwendbarkeit: Entwerfen Sie Komponenten so, dass sie in verschiedenen Bereichen der Anwendung wiederverwendbar sind. Wiederverwendbare Elemente wie Schaltflächen oder Labels fördern die Konsistenz und reduzieren Redundanzen.
@@ -167,7 +150,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 
 ## 2.6 🛠️ Guideline zur Erstellung von Komponenten
 
-![alt text](image-5.png)
+![width:1000px](image-5.png)
 
 ---
 
@@ -178,10 +161,6 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 - Wiederverwendbarkeit: Lagern Sie Teile, die an anderer Stelle nützlich sind, in neue Komponenten aus.
 - Verantwortlichkeiten und Komplexität: Wenn eine Komponente zu komplex ist oder zu viele Verantwortlichkeiten trägt, ziehen Sie deren Aufteilung in Betracht.
 - Persönlicher Programmierstil: Passen Sie die Größe der Komponenten an Ihre persönlichen Programmierpräferenzen an.
-
----
-
-![alt text](image-6.png)
 
 ---
 
@@ -203,6 +182,7 @@ Als erfahrener Entwickler schauen wir auf ein Frontend und können sofort Kompon
 - Gehen Sie auf eine Webseite Ihrer Wahl
 - Machen Sie einen Screenshot
 - Zeichnen Sie die Komponenten ein
+- z.B. eine Anzeige auf https://www.kleinanzeigen.de/
 
 ---
 
@@ -270,7 +250,7 @@ Ein Klick auf eine Checkbox muss **4 Dinge gleichzeitig** aktualisieren:
 
 ### Vorher: Plain JavaScript
 
-Du bist der **Kurier**, der zu Fuß jede einzelne Stelle im Haus anläuft.
+Sie sind der **Kurier**, der zu Fuß jede einzelne Stelle im Haus anläuft.
 
 ```js
 // EIN Klick → 4 manuelle Lieferungen
@@ -292,7 +272,7 @@ Löscht du ein Todo, brauchst du **noch mehr** manuelle Updates.
 
 ### Nachher: React mit State
 
-Du bist der **Architekt**, der den Plan ändert. Der Bauroboter (React) baut alles automatisch neu.
+Sie sind der **Architekt**, der den Plan ändert. Der Bauroboter (React) baut alles automatisch neu.
 
 ```tsx
 const [todos, setTodos] = useState([...])
@@ -359,19 +339,19 @@ Abgeleiteten State bevorzugen, anstatt State zu duplizieren.
 
 Hochschul-Semesterplaner
 
-┌──────────────────────────────────────────────┐
-│ Hochschul-Semesterplaner │
-│ │
-│ Belegte Module: [ 5 ] │ ← Essenzieller State
-│ ECTS pro Modul: [ 6 ] │ ← Essenzieller State
-│ Semesterbeitrag: [ 150€ ] │ ← Essenzieller State
+┌─────────────────────────────┐
+│ Hochschul-Semesterplaner    │
+│                             │
+│ Belegte Module: [ 5 ]       │ ← Essenzieller State
+│ ECTS pro Modul: [ 6 ]       │ ← Essenzieller State
+│ Semesterbeitrag: [ 150€ ]   │ ← Essenzieller State
 │ BAföG / Förderung: [ 400€ ] │ ← Essenzieller State
-│ │
-│ ------------------------------------------ │
-│ Gesamt-ECTS: [ 30 ] │ ← Abgeleiteter State
-│ Restkosten: [ 0€ ] │ ← Abgeleiteter State
-│ Vollzeitstatus: [ Vollzeit ] │ ← Abgeleiteter State
-└──────────────────────────────────────────────┘
+│                             │
+│ --------------------------- │
+│ Gesamt-ECTS: [ 30 ]         │ ← Abgeleiteter State
+│ Restkosten: [ 0€ ]          │ ← Abgeleiteter State
+│ Vollzeitstatus: [ Vollzeit ]│ ← Abgeleiteter State
+└─────────────────────────────┘
 
 ```
 
@@ -644,8 +624,8 @@ function ProductPage({ query, setQuery }) {
 
 ✅ **Lösung:** Einen globalen State-Mechanismus wie die React Context API verwenden (oder vergleichbare Lösungen in anderen SPAs).
 
-⚠️ **Problem:** Context kann weitreichende Top-down-Re-Renders auslösen.
-✅ **Optimierung:** Tools wie Redux, Zustand oder selektor-basierte State-Manager verwenden, um nur die Komponenten neu zu rendern, die tatsächlich vom geänderten State abhängen.
+🚫 **Problem:** Context kann weitreichende Top-down-Re-Renders auslösen.
+✅ **Lösung:** Tools wie Redux, Zustand oder selektor-basierte State-Manager verwenden, um nur die Komponenten neu zu rendern, die tatsächlich vom geänderten State abhängen.
 
 ---
 
@@ -739,8 +719,8 @@ export default function UserProfile() {
 
 ### 3.3.4 URL
 
-- State wird in Query-Parametern, Pfad-Parametern oder Hash gespeichert
-- Nützlich für Filter, Paginierung, Suchstatus, Deep Linking
+- State wird in Query-Parametern oder Pfad-Parametern gespeichert
+- Nützlich für Filter, Paginierung, Suchstatus
 - Teilbar und als Lesezeichen speicherbar
 
 ```jsx
@@ -789,13 +769,11 @@ TODO -->
 
 ## 4.1 Die 5 Schritte
 
-```text
 1. Komponentenstruktur
 2. HTML Struktur
 3. Datenfluss
 4. Funktionalität
 5. Styling
-```
 
 Jede Komponente wird in genau dieser Reihenfolge entwickelt.
 
@@ -914,3 +892,26 @@ Der Senior Workflow priorisiert Funktion vor Design.
 ---
 
 ## Demo: Thomann Webseite
+
+https://www.tldraw.com/f/6ILM5hhs_NHVaPgEUzfY4?d=v-4171.-1865.7154.3917.page
+
+---
+
+## Aufgabe
+
+Erstellen Sie eine React App mit den folgenden Funktionen.
+Bevor Sie mit der Implementierungen anfangen, erstellen Sie alle gerade gezeigten Dokumente
+
+- Am Anfang der Seite soll sich ein Menü befinden.
+- Unter dem Menü soll eine Suchleiste (Search Bar) angezeigt werden.
+- Unter der Suchleiste sollen die Produkte angezeigt werden, die der Suche entsprechen.
+- Wenn keine Suche eingegeben wurde, sollen alle Produkte angezeigt werden.
+- Jedes Produkt soll links ein Bild und rechts einen Text enthalten.
+- Unter dem Text soll sich ein **„Kopieren“-Button** befinden, der den aktuellen Link kopiert.
+- Nach dem Klick auf den Button soll für **3 Sekunden** der Text **„Kopiert!“** im Button angezeigt werden.
+
+---
+
+- Neben dem Kopieren-Button soll sich ein **Warenkorb-Icon** befinden.
+- Wird das Warenkorb-Icon angeklickt, soll sich das Icon ändern, um zu signalisieren, dass sich das Produkt im Warenkorb befindet.
+- Zusätzlich soll im Menü jederzeit die **aktuelle Anzahl der Produkte im Warenkorb** angezeigt werden.
