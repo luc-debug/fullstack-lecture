@@ -26,7 +26,7 @@ style: |
 ✅: Lösungsbeschriebung des Problems, welches das Konzept löst
 
 ---
-
+<!-- 
 ## Inhaltsverzeichnis
 
 - Motivation: Was ist Fullstack?
@@ -53,7 +53,7 @@ TODO Videoinhaltergänzen Einleitung
 
 TODO: Vorstellung der Roadmap als Mindmap
 
----
+--- -->
 
 ## Roadmap
 
