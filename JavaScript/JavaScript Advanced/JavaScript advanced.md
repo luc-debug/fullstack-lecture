@@ -92,6 +92,8 @@ function getLabel(istAktiv) {
 }
 ```
 
+---
+
 > **Wichtig:** Verschachtelte Ternary Operatoren vermeiden — sie werden schnell unlesbar!
 
 ```javascript
@@ -99,6 +101,15 @@ function getLabel(istAktiv) {
 const ergebnis = a > b ? "a" : b > c ? "b" : "c";
 
 // ✅ Besser: if/else oder separate Variablen verwenden
+let ergebnis;
+
+if (a > b) {
+  ergebnis = "a";
+} else if (b > c) {
+  ergebnis = "b";
+} else {
+  ergebnis = "c";
+}
 ```
 
 ---
@@ -472,6 +483,8 @@ const response = {
   },
 };
 ```
+
+---
 
 Schreiben Sie Ausdrücke, die folgende Werte sicher extrahieren (ohne Fehler!):
 
@@ -911,17 +924,17 @@ const { name, ...others } = user;
 
 Die 9 Konzepte dieser Vorlesung sind die **Grundlagen für professionelle React-Entwicklung**:
 
-| Thema                          | Zweck                 | React-Anwendung                        |
-| ------------------------------ | --------------------- | -------------------------------------- |
-| **Ternary Operator**           | Bedingte Werte        | Bedingtes JSX-Rendering                |
-| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung   | Stile/Klassen, optionales Rendering    |
-| **Nullish Coalescing `??`**    | Sichere Defaultwerte  | Props-Fallbacks, localStorage          |
-| **Optional Chaining `?.`**     | Sichere Zugriffe      | Verschachtelte API-Daten               |
-| **Array Destructuring**        | Werte entpacken       | `useState` Hook                        |
-| **Object Destructuring**       | Werte entpacken       | Props extrahieren                      |
-| **Spread `...`**               | Shallow Copy, Merging | Immutable State-Updates                |
-| **Array-Methoden**             | Arrays transformieren | Filtern, Mappen, Reduzieren von Listen |
-| **Promises**                   | Asynchrone Operationen | API-Fetching in `useEffect`           |
+| Thema                          | Zweck                  | React-Anwendung                        |
+| ------------------------------ | ---------------------- | -------------------------------------- |
+| **Ternary Operator**           | Bedingte Werte         | Bedingtes JSX-Rendering                |
+| **Short-Circuit `&&`, `\|\|`** | Bedingte Ausführung    | Stile/Klassen, optionales Rendering    |
+| **Nullish Coalescing `??`**    | Sichere Defaultwerte   | Props-Fallbacks, localStorage          |
+| **Optional Chaining `?.`**     | Sichere Zugriffe       | Verschachtelte API-Daten               |
+| **Array Destructuring**        | Werte entpacken        | `useState` Hook                        |
+| **Object Destructuring**       | Werte entpacken        | Props extrahieren                      |
+| **Spread `...`**               | Shallow Copy, Merging  | Immutable State-Updates                |
+| **Array-Methoden**             | Arrays transformieren  | Filtern, Mappen, Reduzieren von Listen |
+| **Promises**                   | Asynchrone Operationen | API-Fetching in `useEffect`            |
 
 ---
 
