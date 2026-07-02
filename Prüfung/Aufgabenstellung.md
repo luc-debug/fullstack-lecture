@@ -21,14 +21,14 @@
 ## Technologien, welche verwendet werden müssen:
 
 - React als SPA-Framework
-- TypeScript als Programmiersprache
+- TypeScript als Programmiersprache (Backend und Frontend)
 - shadcn.ui als UI-Komponentenbibliothek
 - Tailwind CSS als CSS-Framework
 - drizzle als ORM
 
 ## Anforderungen an die Anwendung:
 
-https://github.com/public-apis/public-apis
+https://swapi.dev
 
 ### Bewertung
 
@@ -39,23 +39,17 @@ https://github.com/public-apis/public-apis
 - Eingeschaltene Regeln
 - Einhaltung der Regeln sowie Formatierung
 
-#### Web Performance (5 BE)
-
-- gute Performance der Anwendung
-- Kein genauer Lighthouse Score oder ähnliches, da dieser zu stark von Gerät zu Gerät schwankt, aber ich werde die Performance anhand der in der Vorlesung besprochenen Konzepte bewerten
-
 #### Frontend (10 BE)
 
 - Überlegen Sie sich, wie Sie die Daten der API im Frontend sinnvoll visualisieren
-- Implementieren Sie dies nach der in der Vorlesung besprochenen Bare-Bone-Methode
-  - globale Statemanagement
-  - Lift Up State
-  - lokale State
-  - Dokumentieren Sie diesen Prozess separat in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
+- Implementieren Sie dies nach dem in der Vorlesung besprochenen Senior Dev Workflow
+- Dokumentieren Sie diesen Prozess separat in einem Dokument, damit ich nachvollziehen kann, wie Sie vorgegangen sind
 
 #### Funktionalität Frontend (10 BE)
 
-- Implementieren Sie min. 2 Funktionen im Frontend wie Sortieren und Filtern
+- Implementieren Sie min. 2 Funktionen im Frontend 
+  - zum Beispiel Sortieren und Filtern einer Liste
+  
 
 #### Funktionalität Backend (10 BE)
 
