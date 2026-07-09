@@ -90,6 +90,17 @@ style: |
     margin: 12px 0;
   }
 
+  section::after {
+  content: attr(data-marpit-pagination) ' / ' attr(data-marpit-pagination-total);
+  position: absolute;
+  bottom: 24px;
+  right: 40px;
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  }
+
   blockquote p { color: #f1f5f9; margin: 0; font-style: italic; }
 
   .tile h3 { margin-top: 0; }
@@ -431,7 +442,7 @@ const result = users
 ```
 
 ```sql
-SELECT first_name FROM users WHERE age > 18 ORDER BY age DESC LIMIT 5;
+SELECT first_name FROM users WHERE age > 18 ORDER BY age DESC LIMIT 2
 ```
 
 ```
@@ -454,12 +465,12 @@ WHERE id = 2;
 ```
 
 ```diff
-const users = [
-  { id: 1, first_name: "Anna", age: 22 },
-- { id: 2, first_name: "Ben", age: 16 },
-+ { id: 2, first_name: "Ben", age: 17 },
-  { id: 3, first_name: "Clara", age: 30 }
-];
+| id  | first_name | age |
+| --- | ---------- | --- |
+| 1   | Anna       | 22  |
+-| 2   | Ben        | 16  |
++| 2   | Ben        | 17  |
+| 3   | Clara      | 30  |
 ```
 
 ➡️ Wichtig: Ohne `WHERE` würden **alle Datensätze** geändert werden.
@@ -474,11 +485,11 @@ WHERE id = 2;
 ```
 
 ```diff
-const users = [
-  { id: 1, first_name: "Anna" },
-- { id: 2, first_name: "Ben" },
-  { id: 3, first_name: "Clara" }
-];
+| id  | first_name |
+| --- | ---------- |
+| 1   | Anna       |
+-| 2   | Ben        |
+| 3   | Clara      |
 ```
 
 ➡️ Der Datensatz wird vollständig entfernt.
