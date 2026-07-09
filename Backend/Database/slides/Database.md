@@ -360,7 +360,7 @@ const result = users.map((u) => ({ first_name: u.first_name }));
 
 ### SQL
 
-Die Anatomie einer Standard-SQL-Abfrage besteht immer aus diesen Klauseln:
+Die Anatomie einer Standard-SQL-Abfrage kann aus diesen Klauseln bestehen:
 
 - `SELECT`: Bestimmt, **welche Spalten** zurückgegeben werden.
 - `FROM`: Bestimmt, aus **welcher Tabelle** gelesen wird.
@@ -384,7 +384,7 @@ SELECT * FROM users
 
 ---
 
-### Weitere Elemente eine Read Operation
+### Weitere Elemente einer Read Operation
 
 Die Anatomie einer SQL-Abfrage:
 
@@ -543,7 +543,7 @@ Datenbanken bieten:
 
 ---
 
-## 💻 Aufgabe: Basic Read OPerationen üben
+## 💻 Aufgabe: Basic Read Operationen üben
 
 - gehen Sie auf https://www.sql-practice.com/
 - Üben Sie die Read Operationen
@@ -823,6 +823,13 @@ Ein Datensatz aus Tabelle A ist mit genau **einem** Datensatz aus Tabelle B verk
 ➡️ Der Foreign Key `profiles.user_id` verweist auf `users.id`.
 Damit es eine 1:1 Beziehung bleibt, muss diese Spalte **UNIQUE** sein!
 
+```sql
+ALTER TABLE profiles
+ADD CONSTRAINT unique_profiles_user_id UNIQUE (user_id);
+```
+
+➡️ So wird technisch erzwungen, dass ein User nur ein Profil haben kann.
+
 ---
 
 #### ER-Diagramm für One-to-One
@@ -855,6 +862,18 @@ ON users.id = orders.user_id;
 | Anna | Laptop   |
 | Anna | Mouse    |
 | Ben  | Keyboard |
+
+### JavaScript Denkweise dazu
+
+```javascript
+const result = users.flatMap((u) =>
+  orders
+    .filter((o) => o.user_id === u.id)
+    .map((o) => ({ name: u.name, product: o.product }))
+);
+```
+
+➡️ `JOIN` entspricht hier einer Kombination aus `filter()` und `map()` über beide Arrays.
 
 ---
 
