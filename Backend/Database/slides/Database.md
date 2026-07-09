@@ -536,28 +536,32 @@ users
 
 ---
 
-# Warum Datenbanken trotzdem wichtig sind
+**JavaScript Arrays**
 
-JavaScript Arrays:
+| Problem                                            | Konsequenz                                                                                                |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Array existiert nur im RAM des laufenden Prozesses | → Kein Mechanismus schreibt den Zustand automatisch dauerhaft weg                                         |
+| Prozess terminiert (Neustart, Crash, Deployment)   | → Kompletter Datenverlust, da nichts persistiert wurde                                                    |
+| Suche im Array ist linear (O(n))                   | → Bei Millionen Datensätzen wird jede Abfrage spürbar langsamer, bis das System unbenutzbar wird          |
+| Array lebt nur in einer einzelnen Prozessinstanz   | → Bei mehreren Server-Instanzen (Skalierung) hat jede Instanz ihren eigenen, widersprüchlichen Datenstand |
 
-- sind nur im RAM
-- verschwinden beim Neustart
-- sind nicht für Millionen Datensätze optimiert
+---
 
-Datenbanken bieten:
+**Warum Datenbanken das lösen**
 
-- Persistenz
-- Performance
-- Sicherheit
-- Skalierung
-- gemeinsame Datenquelle
+| Problem (ohne DB)                                         | Konsequenz (mit DB gelöst)                                                               |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| Keine dauerhafte Speicherung                              | Persistenz: Daten liegen auf Disk und überleben Neustarts und Abstürze                   |
+| Lineare Suche skaliert nicht                              | Performance: Indexstrukturen machen Zugriffe auch bei riesigen Datenmengen schnell       |
+| Kein Zugriffsschutz, keine Nachvollziehbarkeit            | Sicherheit: Rollenbasierte Zugriffskontrolle, Verschlüsselung, Audit-Logs                |
+| Mehrere Prozesse haben je eigenen, inkonsistenten Zustand | Zentrale Datenquelle: Alle Instanzen greifen auf denselben, konsistenten Datenbestand zu |
 
 ---
 
 ## 💻 Aufgabe: Basic Read Operationen üben
 
-- gehen Sie auf https://www.sql-practice.com/
-- Üben Sie die Read Operationen
+- Rufen Sie https://www.sql-practice.com/ auf
+- Üben Sie SQL Kommandos
 
 ---
 
@@ -575,7 +579,7 @@ Relationale Datenbanken werden mächtig, sobald Tabellen miteinander verbunden w
 
 Statt Daten mehrfach zu speichern, speichern relationale Datenbanken Beziehungen.
 
-### Schlechte Lösung
+### 🚫 Schlechte Lösung
 
 | Order  | User |
 | ------ | ---- |
@@ -586,7 +590,7 @@ Der Name "Anna" wird mehrfach gespeichert.
 
 ---
 
-### Gute Lösung
+### ✅ Gute Lösung
 
 **users**
 
@@ -767,9 +771,7 @@ courses
 | 1          | 2         |
 | 2          | 1         |
 
-Anna besucht SQL und React.
-
-Ben besucht SQL.
+Anna besucht den SQL-Kurs und den React-Kurs. Ben besucht nur den SQL-Kurs.
 
 ---
 
@@ -809,7 +811,7 @@ Ein Datensatz aus Tabelle A ist mit genau **einem** Datensatz aus Tabelle B verk
 
 **Häufige Anwendungsfälle:**
 
-- **Performance:** Auslagerung von selten genutzten, großen Texten oder Blobs.
+- **Performance:** Auslagerung von selten genutzten, großen Texten.
 - **Sicherheit:** Isolierte Speicherung sensibler Profildaten (z.B. User-Credentials getrennt von öffentlichen Infos).
 - **Struktur:** Logische Aufteilung einer zu großen Entität.
 
@@ -874,13 +876,15 @@ ON users.id = orders.user_id;
 | Anna | Mouse    |
 | Ben  | Keyboard |
 
+---
+
 ### JavaScript Denkweise dazu
 
 ```javascript
 const result = users.flatMap((u) =>
   orders
     .filter((o) => o.user_id === u.id)
-    .map((o) => ({ name: u.name, product: o.product }))
+    .map((o) => ({ name: u.name, product: o.product })),
 );
 ```
 
