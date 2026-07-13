@@ -73,9 +73,11 @@ TODO: Vorstellung der Roadmap als Mindmap
 - Backend Basics (4UE)
   - [ ] REST
     - [ ] kleine Express App mit Postman (1 UE)
-  - [ ] Controller (2 UE)
+  - [ ] Business Logic (2 UE)
+    - [x] Middleware (0.5 UE) 
     - [ ] Sequence Diagramm (0.5 UE)
-  - [x]Database Query Language (2 UE)
+    - [ ] Restful Design (0.5 UE)
+  - [x] Database Query Language (2 UE)
     -  [x]SQL Aufgaben (0.75UE)
     -  [x]ER-Diagramme (0.75 UE)
   - Challenge (1 UE)
