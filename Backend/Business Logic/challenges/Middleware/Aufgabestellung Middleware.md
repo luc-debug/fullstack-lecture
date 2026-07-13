@@ -199,102 +199,32 @@ style: |
   }
 ---
 
-# Databases **Fundamentals**
-
-Die Grundlage für persistente Daten und stabile Geschäftsdomänen
-
----
-
-## Die Evolution der Business Logic
-
-Kernaufgabe jedes Backends: **HTTP-Request &rarr; Geschäftslogik &rarr; HTTP-Response**. Die architektonische Herausforderung wächst jedoch mit der Skalierung.
-
-<div class="grid-2">
-  <div class="tile" style="border-color: rgba(248, 113, 113, 0.3);">
-    <h3 style="color: #f87171;">Phase 1: Der Prototyp (if/else)</h3>
-    <p>Alles in einer einzigen Datei. Routing und Logik werden imperativ in simplen Verzweigungen (z.B. <code>if url === '/users'</code>) abgehandelt.</p>
-    <p><strong>Das Problem:</strong> Mangelnde <em>Separation of Concerns</em>. Sobald Validierung, Datenbanken und Error-Handling hinzukommen, entsteht unwartbarer und untestbarer Spaghetti-Code.</p>
-  </div>
-
----
-
-  <div class="tile" style="border-color: rgba(16, 185, 129, 0.3);">
-    <h3 style="color: #34d399;">Phase 2: Strukturierte Architektur</h3>
-    <p>Die monolithische Logik wird in spezialisierte, wiederverwendbare Schichten zerlegt. Die Umsetzung variiert nach Paradigma:</p>
-    <ul>
-      <li><strong>FP:</strong> Modularisierung durch entkoppelte Funktionen (z. B. Next.js Route Handler).</li>
-      <li><strong>OOP:</strong> Strukturierung durch Controller- und Service-Klassen mittels <em>Dependency Injection</em> (z. B. NestJS).</li>
-    </ul>
-  </div>
-</div>
-
----
-
-## Das Middleware & Request Handler Pattern
-
-Um diese Struktur zu erreichen, etablieren moderne Frameworks eine saubere Kette von Verantwortlichkeiten:
-
-- **Middleware:** Eine Funktion, die HTTP-Anfragen abfängt, _bevor_ sie die eigentliche Geschäftslogik erreichen. Sie ist perfekt geeignet, um Requests zu modifizieren, Tokens zu authentifizieren oder Logs zu schreiben.
-- **Request Handler:** Die finale Funktion am Ende der Kette. Sie enthält die eigentliche Geschäftslogik (z. B. den Datenbankaufruf) und sendet die fertige HTTP-Antwort (`Response`) an den Client zurück.
-- **Request Handler/ Delegate Pattern:** Das Prinzip, diese Bausteine als Pipeline zu organisieren. Jede Middleware entscheidet aktiv, ob sie die Anfrage an den nächsten Block _delegiert_ (`next()`) oder abricht.
-
----
-
-# Systemarchitektur: **Die Pipeline**
-
-So durchläuft der Request das Backend
-
-<br>
-
-![width:900px](img/Middleware.png)
-
----
-
 ## 💻 Aufgabe: Middleware: Der VIP-Eingang
 
 ---
 
-## Modellierung mit Sequenzdiagrammen
-
-Warum sind Sequenzdiagramme das perfekte Werkzeug für das Middleware-Pattern? Weil HTTP-Anfragen von Natur aus **sequentiell** ablaufen.
-
-> Das Diagramm zeigt nicht "Wie wird sortiert?", sondern "**Wer spricht wann mit wem?**"
-
-- **Visualisierung der Kette:** Man sieht sofort, wo eine Middleware den Request abbricht (z. B. 401 Unauthorized).
-- **Zuständigkeiten:** Es wird klar, welche Komponente für die Datenvalidierung zuständig ist und welche für den Datenbank-Query.
-- **Schnittstellen:** Die Pfeile im Diagramm definieren die Methoden-Aufrufe oder Funktions-Parameter.
-
----
-
-## Zusammenfassung
-
-1. Das **Middleware-Pattern** ist das infrastrukturelle Gerüst (Die Pipeline).
-2. Das **Sequenzdiagramm** ist der Bauplan für den Datenfluss (Die Logik).
-3. **FP oder OOP** sind lediglich die Werkzeuge, mit denen wir diese Architektur im Code umsetzen.
-
-**Egal welcher Stil:** Das Ziel ist die Entkopplung von technischer Infrastruktur und fachlicher Business Logic.
-
----
-
-### Das "Duo" der Backend-Architektur
-
-Um eine professionelle REST-API zu bauen, trennen wir zwischen der **technischen Struktur** und dem **logischen Ablauf**:
+Erstellen Sie einen simplen Express-Server mit einer geschützten Route. Ziel ist es, die Verantwortlichkeiten strikt zwischen Middleware und Handler zu trennen.
 
 <div class="grid-2">
-<div class="tile">
-<h3>1. Die Struktur</h3>
-<p>Das <strong>Middleware & Request Handler Pattern</strong> bildet das Skelett der API. Es definiert, wie ein Request die technische Pipeline (Auth, Validierung, Logging) durchläuft, bevor er die Logik erreicht.</p>
-</div>
-
-<div class="tile">
-<h3>2. Das Verhalten</h3>
-<p><strong>Sequenzdiagramme</strong> modellieren die eigentliche Business Logic. Sie zeigen visuell, wie Daten zwischen Middleware, Handlern, Services und Datenbanken fließen.</p>
-</div>
+<div class="tile" style="border-top: 4px solid #f87171;">
+<h3>1. Die Middleware (Der Türsteher)</h3>
+<p>Schreiben Sie eine Middleware-Funktion <code>checkAuth</code>. Sie prüft, ob der HTTP-Header <code>x-role</code> den Wert <code>"vip"</code> hat.</p>
+<ul>
+  <li>Wenn ja: Leiten Sie die Anfrage weiter.</li>
+  <li>Wenn nein: Blockieren Sie die Anfrage mit Status <code>403 Forbidden</code> und einer Fehlermeldung.</li>
+</ul>
 </div>
 
 ---
 
-### Ausblick
+<div class="tile" style="border-top: 4px solid #34d399;">
+<h3>2. Der Request Handler (Die Party)</h3>
+<p>Schreiben Sie eine Handler-Funktion <code>getVipData</code>. Diese wird nur aufgerufen, wenn die Middleware die Anfrage durchlässt.</p>
+<ul>
+  <li>Senden Sie den Status <code>200 OK</code>.</li>
+  <li>Schicken Sie ein JSON-Objekt zurück: <code>{ message: "Willkommen in der VIP-Lounge!" }</code></li>
+</ul>
+</div>
+</div>
 
-- Selbst mit Sequenzdiagrammen und dem Request Pattern habe nwir noch spghetti code
-- Lösugn CSR PAttern und anderen Design Principles wie Solid
+**Route:** Verknüpfen Sie beide Funktionen auf der Route `GET /api/vip`.
