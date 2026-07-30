@@ -268,33 +268,17 @@ Warum sind Sequenzdiagramme das perfekte Werkzeug für das Middleware-Pattern? W
 
 ## Zusammenfassung
 
-1. Das **Middleware-Pattern** ist das infrastrukturelle Gerüst (Die Pipeline).
-2. Das **Sequenzdiagramm** ist der Bauplan für den Datenfluss (Die Logik).
-3. **FP oder OOP** sind lediglich die Werkzeuge, mit denen wir diese Architektur im Code umsetzen.
+### 1. Die Struktur
+<p>Das <strong>Middleware & Request Handler Pattern</strong> bildet das infrastrukturelle Gerüst (=Skelett) der API. Es definiert, wie ein Request die technische Pipeline (Auth, Validierung, Logging) durchläuft, bevor er die Logik erreicht.</p>
+
+### 2. Das Verhalten
+<p><strong>Sequenzdiagramme</strong> modellieren die eigentliche Business Logic. Sie agieren als Bauplan und zeigen visuell, wie Daten zwischen Middleware, Handlern, Services und Datenbanken fließen.</p>
 
 **Egal welcher Stil:** Das Ziel ist die Entkopplung von technischer Infrastruktur und fachlicher Business Logic.
 
 ---
 
-### Das "Duo" der Backend-Architektur
-
-Um eine professionelle REST-API zu bauen, trennen wir zwischen der **technischen Struktur** und dem **logischen Ablauf**:
-
-<div class="grid-2">
-<div class="tile">
-<h3>1. Die Struktur</h3>
-<p>Das <strong>Middleware & Request Handler Pattern</strong> bildet das Skelett der API. Es definiert, wie ein Request die technische Pipeline (Auth, Validierung, Logging) durchläuft, bevor er die Logik erreicht.</p>
-</div>
-
-<div class="tile">
-<h3>2. Das Verhalten</h3>
-<p><strong>Sequenzdiagramme</strong> modellieren die eigentliche Business Logic. Sie zeigen visuell, wie Daten zwischen Middleware, Handlern, Services und Datenbanken fließen.</p>
-</div>
-</div>
-
----
-
 ### Ausblick
 
-- Selbst mit Sequenzdiagrammen und dem Request Pattern habe nwir noch spghetti code
-- Lösugn CSR PAttern und anderen Design Principles wie Solid
+- Selbst mit Sequenzdiagrammen und dem Request Pattern haben wir noch "Spaghetti Code"
+- Lösung: CSR (Service-Repository) Pattern und anderen Design Principles wie SOLID

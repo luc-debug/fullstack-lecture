@@ -1,0 +1,219 @@
+flowchart LR
+
+
+    BackendRoadmap[Backend Roadmap] --> Fundamentals
+    BackendRoadmap --> REST["REST APIs"]
+    BackendRoadmap -->  AdvancedAPIDesign["Advanced API Design"]
+    BackendRoadmap --> EDS["Event Driven Systems"]
+    BackendRoadmap --> Arch["Architecture"]
+
+
+    Fundamentals --> OOP
+    Fundamentals --> Testing
+    Fundamentals --> Storage
+    Fundamentals --> Networking
+
+    Networking --> IP[IP Protocol]
+    Networking --> HTTP
+
+    IP --> DNS[Domain Name System]
+    IP --> TLS
+    IP --> TCP
+
+    HTTP --> Request
+    HTTP --> Response
+    HTTP --> Headers
+    HTTP --> WM[Web Mechanisms]
+
+    Request --> UQP[URL Query Parameters]
+    Request --> Verbs[HTTP Verbs]
+
+    Response --> Status[Response Status Codes]
+
+    subgraph HTTPWebMechanisms[HTTP Web Mechanisms]
+        direction TB
+        Basic[Basic Authentication]
+        Content[Content Negotiation]
+        CORS1[CORS]
+        Cache[HTTP Caching]
+    end
+
+    WM --> Basic
+    WM --> Content
+    WM --> CORS1
+    WM --> Cache
+
+    %% OOP
+    OOP --> SOLID["SOLID Principles"]
+    OOP --> ClassDesign["Class Design"]
+    OOP --> DesignPrinciples["Design Principles"]
+
+    ClassDesign --> Inheritance["Class Inheritance"]
+    ClassDesign --> Access["Access Modifiers"]
+    ClassDesign --> Abstract["Abstract Classes"]
+
+    DesignPrinciples --> DI["Dependency Injection"]
+    DesignPrinciples --> IOC["Inversion of Control"]
+
+    %% Testing
+    Testing --> Unit["Unit Testing"]
+    Testing --> Integration["Integration Testing"]
+    Testing --> E2E["End To End Testing"]
+
+    %% Storage
+    Storage --> Hardware["Storage Hardware"]
+    Storage --> SQL
+    Storage --> NoSQL
+
+    Hardware --> RAM
+    Hardware --> Disk
+
+    SQL --> Select["Select Queries"]
+    SQL --> Tables["Basic Table Definition"]
+    SQL --> Columns["Column Types"]
+    SQL --> Joins["Inner / Right / Left Joins"]
+    SQL --> ACID["ACID Transaction"]
+
+
+    REST --> RESTDesign["REST API Design"]
+    REST --> Observability["API Observability"]
+    REST --> MVC
+    REST --> Security["Web Security"]
+
+    %% REST API Design
+    RESTDesign --> APIDocs["API Documentation"]
+    RESTDesign --> APITesting["API testing"]
+    RESTDesign --> APIDesign["API Design"]
+
+    APIDocs --> Swagger
+    APIDocs --> Sequence["Sequence Diagrams"]
+
+    APIDesign --> HATEOAS
+    APIDesign --> Endpoint["REST Endpoint Design"]
+    APIDesign --> AntiPatterns["REST Antipatterns"]
+
+    %% API Observability
+    Observability --> Logging
+    Observability --> Monitoring
+
+    Logging --> HTTPLogging["HTTP Logging"]
+    Logging --> BusinessLogs["Business Logic Logs"]
+    Logging --> PushPull["Push / Pull Systems"]
+
+    Monitoring --> APM["APM Metrics"]
+
+    %% MVC
+    MVC --> Model
+    MVC --> View
+    MVC --> Controller
+
+    Model --> CodeFirst["Code First vs DB First Approaches"]
+    Model --> ORMs
+
+    ORMs --> Migrations["Database Migrations"]
+
+    %% Web Security
+    Security --> SQLInjection["SQL Injection"]
+    Security --> CSRF["Cross Site Request Forgery"]
+    Security --> MITM["Man In The Middle Attacks"]
+    Security --> OWASP
+
+    SQLInjection --> SQLParams["SQL Parameters"]
+
+    CSRF --> CORS
+    MITM --> HTTPS
+
+
+    AdvancedAPIDesign --> Scalability
+    AdvancedAPIDesign --> Availability
+    AdvancedAPIDesign --> GraphQL
+    AdvancedAPIDesign --> AdvancedSecurity["Advanced Security"]
+    AdvancedAPIDesign --> SOA
+
+    %% Scalability
+    Scalability --> Caching
+    Scalability --> RateLimiting["Rate Limiting"]
+    Scalability --> Compression
+
+    %% Availability
+    Availability --> Healthchecks
+
+    %% GraphQL
+    GraphQL --> Resolvers["Resolver Functions"]
+    GraphQL --> NPlusOne["The n+1 problem"]
+
+    %% Advanced Security
+    AdvancedSecurity --> DDOS["DDOS Attacks"]
+    AdvancedSecurity --> XSS["XSS Attacks"]
+    AdvancedSecurity --> OAuth
+
+    %% SOA
+    SOA --> ServiceDefinition["Service Definition"]
+    SOA --> DependencyGraph["Service Dependency Graph"]
+
+
+    EDS["Event Driven Systems"] --> EventQueue["Event Queue"]
+    EDS --> PubSub["Pub / Sub Systems"]
+    EDS --> CQRS
+
+    EventQueue --> Consistency["Eventual Consistency"]
+
+
+    Arch["Architecture"] --> DistSystems["Distributed Systems"]
+    Arch --> Microservices
+    Arch --> Deployment
+
+    %% Distributed Systems
+    DistSystems --> DistDB["Distributed Databases"]
+    DistSystems --> SharedCache["Shared Cache"]
+    DistSystems --> Secrets["Secrets Managers"]
+    DistSystems --> DistLogging["Distributed Logging"]
+
+    DistDB --> Sharding["Database Sharding"]
+    DistDB --> Replicas["Read / Write Replicas"]
+    DistDB --> DBCache["Database caching"]
+
+    SharedCache --> Redis
+    SharedCache --> Memcached
+
+    DistLogging --> Profiling
+
+    %% Microservices
+    Microservices --> MonoVsMicro["Monolith v.s. Microservices"]
+
+    %% Deployment
+    Deployment --> VirtualServers["Virtual Servers"]
+    Deployment --> Containers
+    Deployment --> Serverless
+
+    VirtualServers --> EC2
+    VirtualServers --> ServerSecurity["Server Security"]
+
+    Containers --> ECS
+
+    Serverless --> Lambda
+
+    %% Colors
+    class Fundamentals,HTTP,Verbs,UQP,Response,Status green;
+    class OOP,DesignPrinciples,DI,IOC,Hardware,RAM,Disk yellow;
+    class SQL pink;
+    class NoSQL,E2E red;
+
+    %% Frontend LEcture
+    classDef green fill:#3ec63e,stroke:#3ec63e,color:#fff;
+    %% Other Lectures
+    classDef yellow fill:#f2df22,stroke:#f2df22,color:#444;
+    %% Fullstack Lecture
+    classDef pink fill:#f15b92,stroke:#f15b92,color:#fff;
+    %% Self study (after graduation)
+    classDef red fill:red,stroke:#f15b92,color:#fff;
+
+    subgraph Legend
+        G["Frontend"]
+        Y["Andere Vorlesungen"]
+        R["Fullstack"]
+    end
+
+    class G green;
+    class Y yellow;
+    class R pink;
