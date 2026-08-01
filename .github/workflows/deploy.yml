@@ -34,6 +34,7 @@ jobs:
       - name: Build
         run: |
           nr build introduction/introduction.md --base /${{github.event.repository.name}}/ --out "$GITHUB_WORKSPACE/dist"
+          nr build JavaScript/slides/javascript-advanced.md --base /${{github.event.repository.name}}/web-development/ --out dist/web-development
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
