@@ -1,0 +1,6 @@
+- Höfliche Anrede mit Sie-Form
+- Rechtschreib- und Grammatikprüfung
+- Überall dasselbe Layout und Design (CSS-Klassen)
+- Keine Abgeschnittenen Wörter -> dann neue Folie
+- TOC
+- Sonst nichts
