@@ -59,28 +59,34 @@ TODO: Vorstellung der Roadmap als Mindmap
 
 ### Frontend Roadmap (12 UE)
 
-- Wiederholung und Erweiterung JavaScript (2UE)
-- Entwicklung der Web-Architektur & Wiederholung Frontends durch kleine React ToDo App (2UE)
-- Frontend Tooling & Challenge (4UE)
+- 🎓 Wiederholung und Erweiterung JavaScript (2UE)
+  - 🧰 Wiederholung JavaScript (1UE)
+- 🎓 Entwicklung der Web-Architektur
+  - 🧰 Wiederholung Frontends durch kleine React ToDo App (2UE)
+- 🎓 Frontend Tooling
+  - 🧰 Challenge (4UE)
 <!-- - Performance Optimizing & Challenge (4UE) -->
-- Frontend Training in Depth & Challenge (4UE)
+- 🎓 Frontend Training in Depth
+  - 🧰 Challenge (4UE)
 
 ---
 
 ### Backend Roadmap (15 UE)
 
-- [ ] Web Basics Advanced (2 UE)
+- [ ] 🎓 Web Basics Advanced (2 UE)
+  - [ ] 🧰 HTTP-API mit nativem http-Modul (1 UE)
+  - [ ] 🧰 Content Negotiation (0.5 UE) 
 - Backend Basics (4UE)
-  - [ ] REST
-    - [ ] kleine Express App mit Postman (1 UE)
-  - [ ] Business Logic (2 UE)
-    - [x] Middleware (0.5 UE) 
-    - [ ] Sequence Diagramm (0.5 UE)
-    - [ ] Restful Design (0.5 UE)
-  - [x] Database Query Language (2 UE)
-    -  [x]SQL Aufgaben (0.75UE)
-    -  [x]ER-Diagramme (0.75 UE)
-  - Challenge (1 UE)
+  - [ ] 🎓 REST
+    - [ ] 🧰 Restful Design (0.5 UE)
+    - [ ] 🧰 kleine Express App mit Postman (1 UE)
+  - [ ] 🎓 Business Logic (2 UE)
+    - [x] 🧰 Middleware (0.5 UE) 
+    - [ ] 🧰 Sequence Diagramm (0.5 UE)
+  - [x] 🎓 Database Query Language (2 UE)
+    -  [x] 🧰 SQL Aufgaben (0.75UE)
+    -  [x] 🧰 ER-Diagramme (0.75 UE)
+  - 🧰 Fullstack Challenge (1 UE)
 <!-- - Backend Advanced (? fraglich ob nicht zu viel)
   - MVC
   - ORM Einführung
