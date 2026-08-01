@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         run: |
-          nr build introduction/introduction.md --base /${{github.event.repository.name}}/ --out dist
+          nr build introduction/introduction.md --base /${{github.event.repository.name}}/ --out "$GITHUB_WORKSPACE/dist"
 
       - name: Setup Pages
         uses: actions/configure-pages@v6
