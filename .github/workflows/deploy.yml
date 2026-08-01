@@ -33,7 +33,7 @@ jobs:
 
       - name: Build
         run: |
-          nr build Introduction/introduction.md --base /${{github.event.repository.name}}/ --out dist
+          nr build introduction/introduction.md --base /${{github.event.repository.name}}/ --out dist
           nr build JavaScript/slides/javascript-advanced.md --base /${{github.event.repository.name}}/web-development/ --out dist/web-development
 
       - name: Setup Pages
