@@ -35,6 +35,7 @@ jobs:
         run: |
           nr build introduction/introduction.md --base /${{github.event.repository.name}}/ --out "$GITHUB_WORKSPACE/dist"
           nr build JavaScript/slides/javascript-advanced.md --base /${{github.event.repository.name}}/javascript-advanced/ --out "$GITHUB_WORKSPACE/dist/javascript-advanced"
+          nr build:web-basics-advanced --base /${{github.event.repository.name}}/web-basics-advanced/ --out "$GITHUB_WORKSPACE/dist/web-basics-advanced"
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

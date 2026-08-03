@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "build": "slidev build",
+    "build:javascript-advanced": "slidev build ./JavaScript/slides/javascript-advanced.md",
+    "build:web-basics-advanced": "slidev build ./backend/web/web-basics-advanced.md",
     "dev": "slidev --open",
     "dev:javascript-advanced": "slidev ./JavaScript/slides/javascript-advanced.md --open",
+    "dev:web-basics-advanced": "slidev ./backend/web/web-basics-advanced.md --open",
     "export": "slidev export"
   },
   "dependencies": {
