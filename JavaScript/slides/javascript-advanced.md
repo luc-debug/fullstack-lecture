@@ -1,18 +1,14 @@
 ---
-marp: true
-theme: default
-paginate: true
-style: |
-  .columns {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem;
-  }
+theme: the-unnamed
 ---
 
 # JavaScript Advanced
 
 ## Luca Berres
+
+---
+
+<Toc />
 
 ---
 
@@ -40,6 +36,151 @@ style: |
 [7.1 Argumente sammeln](#7.1--argumente-sammeln-collecting-arguments)
 [7.2 Rest mit Array-Destructuring](#7.2--rest-with-array-destructuring)
 [7.3 Rest mit Objekt-Destructuring](#7.3--rest-with-object-destructuring)
+
+---
+
+---
+theme: seriph
+title: JavaScript reduce, from many values to one
+info: |
+  An animated visual explanation of JavaScript Array.prototype.reduce().
+class: text-center
+highlighter: shiki
+lineNumbers: false
+drawings:
+  persist: false
+transition: slide-left
+mdc: true
+---
+
+
+
+<div class="kicker">JavaScript · Array methods</div>
+
+# <span class="hero">`reduce()` turns<br><span class="yellow">many values</span> into one.</span>
+
+<div class="mt-8 text-xl text-zinc-600 dark:text-zinc-300">
+It carries a running result through the array, one item at a time.
+</div>
+
+<div class="mt-10 flex justify-center items-center gap-3">
+  <div class="pill">2</div><div class="pill">4</div><div class="pill">6</div>
+  <div class="arrow">→</div>
+  <div class="pill acc">12</div>
+</div>
+
+<div class="abs-br m-6 small">Press → to unfold the idea</div>
+
+---
+layout: center
+---
+
+<div class="kicker text-center">The mental model</div>
+<h1 class="text-center text-5xl font-black mt-3">A tiny loop with a memory</h1>
+
+<div class="grid grid-cols-3 gap-4 mt-10 items-stretch">
+  <div v-click class="card text-center">
+    <div class="text-4xl">🧠</div>
+    <div class="font-black text-xl mt-2">Accumulator</div>
+    <div class="small mt-1">The running result</div>
+  </div>
+  <div v-click class="card text-center">
+    <div class="text-4xl">📦</div>
+    <div class="font-black text-xl mt-2">Current item</div>
+    <div class="small mt-1">The value being visited</div>
+  </div>
+  <div v-click class="card text-center">
+    <div class="text-4xl">🔁</div>
+    <div class="font-black text-xl mt-2">Return value</div>
+    <div class="small mt-1">Becomes the next accumulator</div>
+  </div>
+</div>
+
+<div v-click class="mt-7 text-center text-xl font-semibold">
+`reduce((accumulator, current) => nextAccumulator, initialValue)`
+</div>
+
+---
+layout: center
+---
+
+<div class="kicker text-center">Watch it reduce</div>
+<h1 class="text-center text-5xl font-black mt-3">Add `[2, 4, 6]`</h1>
+
+<div class="mt-10 flex flex-col gap-3 max-w-3xl mx-auto">
+  <div class="card flex items-center gap-5">
+    <span class="small w-20">Start</span><span class="pill acc">0</span><span class="arrow">+</span><span class="pill">2</span><span class="arrow">→</span><span class="pill acc">2</span>
+  </div>
+  <div v-click class="card flex items-center gap-5">
+    <span class="small w-20">Next</span><span class="pill acc">2</span><span class="arrow">+</span><span class="pill">4</span><span class="arrow">→</span><span class="pill acc">6</span>
+  </div>
+  <div v-click class="card flex items-center gap-5">
+    <span class="small w-20">Next</span><span class="pill acc">6</span><span class="arrow">+</span><span class="pill">6</span><span class="arrow">→</span><span class="pill acc">12</span>
+  </div>
+</div>
+
+<div v-click class="mt-6 text-center text-2xl font-black">Final result: <span class="yellow">12</span></div>
+
+---
+layout: two-cols
+layoutClass: gap-10
+---
+
+<div class="kicker">The code</div>
+# Read it left to right
+
+```js {1|2|3|1-3}
+const total = [2, 4, 6].reduce(
+  (sum, number) => sum + number,
+  0
+)
+```
+
+::right::
+
+<div class="mt-14 space-y-4">
+  <div v-click class="card"><b>1.</b> Visit every number</div>
+  <div v-click class="card"><b>2.</b> Return the updated sum</div>
+  <div v-click class="card"><b>3.</b> Start the sum at <code>0</code></div>
+</div>
+
+<div v-click class="mt-6 p-4 rounded-xl bg-yellow-100 text-yellow-950 font-semibold">
+If the callback does not return, the next accumulator becomes <code>undefined</code>.
+</div>
+
+---
+layout: center
+---
+
+<div class="kicker text-center">Reduce is not only for sums</div>
+<h1 class="text-center text-5xl font-black mt-3">Build any single result</h1>
+
+<div class="grid grid-cols-3 gap-5 mt-10">
+  <div v-click class="card"><div class="text-3xl">🧮</div><b>Number</b><div class="small">total, average, maximum</div></div>
+  <div v-click class="card"><div class="text-3xl">🗂️</div><b>Object</b><div class="small">group or index records</div></div>
+  <div v-click class="card"><div class="text-3xl">🧵</div><b>String / Array</b><div class="small">compose or flatten values</div></div>
+</div>
+
+<div v-click class="mt-8 text-center text-xl">
+The accumulator's <b>type</b> is determined by the initial value.
+</div>
+
+---
+layout: center
+---
+
+<div class="kicker text-center">Remember this</div>
+<h1 class="text-center text-6xl font-black mt-4">Take one item.<br>Update the memory.<br>Return it.</h1>
+
+<div v-click class="mt-10 text-center">
+  <code class="text-xl">array.reduce(reducer, initialValue)</code>
+</div>
+
+<div v-click class="mt-8 text-center text-zinc-500">
+Use <code>reduce()</code> when the output is one accumulated result.<br>
+Use <code>map()</code> when you want one transformed item for every input item.
+</div>
+
 
 ---
 
@@ -264,7 +405,7 @@ const movies = [
 
 ---
 
-# 1. Ternary Operator
+# Ternary Operator
 
 ---
 
@@ -482,8 +623,8 @@ function getUserDisplay(user) {
 # 3. Nullish Coalescing
 
 ---
-
-<!-- header: Nullish Coalescing -->
+layout: two-cols-header
+---
 
 ## Nullish Coalescing Operator (`??`)
 
@@ -491,7 +632,7 @@ Der `??`-Operator wurde in ES2020 eingeführt und löst ein Problem von `||`:
 
 > 📖 `??` gibt die rechte Seite **nur** zurück, wenn die linke Seite `null` oder `undefined` ist — **nicht** bei `0`, `""` oder `false`.
 
-<div class="columns">
+::left::
 
 ```javascript
 // || (Short-Circuit)
@@ -501,6 +642,8 @@ false || true; // → true   ⚠️
 null || "Wert"; // → "Wert" ✅
 ```
 
+::right::
+
 ```javascript
 // ?? (Nullish Coalescing)
 0 ?? 42; // → 0      ✅
@@ -508,8 +651,6 @@ null || "Wert"; // → "Wert" ✅
 false ?? true; // → false  ✅
 null ?? "Wert"; // → "Wert" ✅
 ```
-
-</div>
 
 ---
 
