@@ -10,19 +10,130 @@ duration: 35min
 
 # Web Basics Advanced
 
+
 ---
 
-## Internet Protocol
+
+# Netzwerkklassen und Netzwerktechnologien
+
+```mermaid
+graph TD
+
+    N[Netzwerkklassen]
+
+    N --> PAN["PAN<br/>Personal Area Network"]
+    N --> LAN["LAN<br/>Local Area Network"]
+    N --> MAN["MAN<br/>Metropolitan Area Network"]
+    N --> WAN["WAN<br/>Wide Area Network"]
+
+    PAN --> WPAN["WPAN <br/>Wireless Personal Area Network"]
+
+    WAN --> Internet[Internet]
+    WAN --> Mobilfunk[Mobilfunk]
+    WAN --> LPWAN["LPWAN<br/>Low Power Wide Area Network"]
+
+    %% Technologien
+
+    WPAN --> Bluetooth[Bluetooth]
+    WPAN --> NFC[NFC]
+    WPAN --> ZigBee[ZigBee]
+
+    LAN --> Ethernet[Ethernet]
+    LAN --> WLAN[WLAN]
+
+    Mobilfunk --> G4[4G / LTE]
+    Mobilfunk --> G5[5G]
+
+    LPWAN --> LoRaWAN[LoRaWAN]
+    LPWAN --> NBIoT[NB-IoT]
+    LPWAN --> Sigfox[Sigfox]
+
+
+    %% Farben Netzwerkklassen
+    classDef netclass fill:#4A90E2,color:#fff,stroke:#1F4E79,stroke-width:2px;
+
+    %% Farben Technologien
+    classDef tech fill:#58D68D,color:#000,stroke:#1D8348,stroke-width:2px;
+
+    %% Farben Funktechnologien/Protokolle
+    classDef radio fill:#F5B041,color:#000,stroke:#AF601A,stroke-width:2px;
+
+    class N,PAN,WPAN,LAN,MAN,WAN,Internet,Mobilfunk,LPWAN netclass;
+
+    class Bluetooth,NFC,ZigBee,Ethernet,WLAN,G4,G5,NBIoT,Sigfox,LoRaWAN tech;
+
+```
+
+**PAN → LAN → MAN → WAN** beschreibt die zunehmende Reichweite.
+
+🟦 Blau = Netzwerkklassen <br> 🟩 Grün = Netzwerktechnologien<br>
+
+---
+
+# Die relevanteste Netzwerkprotokoll-Familie: Die Internetprotokollfamilie
+
+<table>
+  <tbody>
+    <tr>
+      <th>OSI-Modell</th>
+      <th>Technologie-Beispiele</th>
+      <th>TCP/IP-Stack</th>
+      <th>Technologie-Beispiele</th>
+    </tr>
+    <tr>
+      <td>Anwendung (7)</td>
+      <td>HTTP, HTTPS, DNS, SMTP</td>
+      <td rowspan="3">Anwendung</td>
+      <td rowspan="3">HTTP, HTTPS, DNS, SMTP</td>
+    </tr>
+    <tr>
+      <td>Darstellung (6)</td>
+      <td>TLS, JPEG, UTF-8</td>
+    </tr>
+    <tr>
+      <td>Sitzung (5)</td>
+      <td>RPC, NetBIOS</td>
+    </tr>
+    <tr>
+      <td>Transport (4)</td> 
+      <td>TCP, UDP</td>
+      <td>Transport</td>
+      <td>TCP, UDP</td>
+    </tr>
+    <tr>
+      <td>Vermittlung (3)</td>
+      <td>IP, ICMP, ARP</td>
+      <td>Internet</td>
+      <td>IP</td>
+    </tr>
+    <tr>
+      <td>Sicherung (2)</td>
+      <td>Ethernet, WLAN, LoRaWAN</td>
+      <td rowspan="2">Netzzugang</td>
+      <td rowspan="2">Ethernet</td>
+    </tr>
+    <tr>
+      <td>Bitübertragung (1)</td>
+      <td>Kabel, Glasfaser, Funk, LoRa</td>
+    </tr>
+  </tbody>
+</table>
+
+- **OSI** erklärt, **wie** Netzwerkkommunikation theoretisch funktioniert, **TCP/IP** beschreibt, **wie das Internet tatsächlich arbeitet**.
+- Mehrere OSI-Schichten werden im TCP/IP-Stack zusammengefasst
+
+---
+
+## 2.1 Internet Protocol
 
 🚫 **Problem:** Milliarden von Geräten sind weltweit vernetzt — aber wie findet ein Datenpaket seinen Weg vom Absender zum richtigen Empfänger?
 
 ✅ **Lösung:** Das Internet Protocol (IP) gibt jedem Gerät eine eindeutige Adresse und definiert, wie Datenpakete adressiert und über Netzwerke weitergeleitet werden.
 
 Ein IP-Paket besteht aus einem **Header** (Metadaten über Quelle und Ziel in Form einer IP-Adresse) und einem **Payload** (die eigentlichen Nutzdaten).
-  ![IP Paket](./img/IP.png)
+![IP Paket](./img/IP.png)
 
 ---
-
 
 ### 🚫 Problem 1: Es gibt mehr Geräte als öffentliche IPv4-Adressen
 
@@ -63,8 +174,8 @@ Internet
   - IPv4: `192.168.1.1`
   - IPv6: `2001:db8:85a3::8a2e:370:7334`
 
-💡 Fazit: 
-Private Netze + NAT = heutige praktische Lösung des IPv4-Mangels, da IPv6 noch aufgrund von u.a. Hardwarekompatibilität nicht flächendeckend eingesetzt wird. 
+💡 Fazit:
+Private Netze + NAT = heutige praktische Lösung des IPv4-Mangels, da IPv6 noch aufgrund von u.a. Hardwarekompatibilität nicht flächendeckend eingesetzt wird.
 
 IPv6 = langfristige architektonische Lösung des IPv4-Mangels
 
@@ -104,11 +215,9 @@ Die Skalierbarkeit des Internets basiert auf vier zentralen Konzepten:
 - **DHCP** automatisiert die Adressvergabe.
 - **Subnetze** strukturieren große Netzwerke effizient.
 
-
-
 ---
 
-## TCP Protocol
+## 2.2 TCP Protocol
 
 - Transmission Control Protocol (TCP) ist ein verbindungsorientiertes Protokoll, das eine zuverlässige Datenübertragung zwischen zwei Endpunkten ermöglicht.
 - TCP verwendet einen Handshake-Mechanismus, um eine Verbindung zwischen Sender und Empfänger herzustellen, bevor Daten übertragen werden.
@@ -125,7 +234,7 @@ Die Skalierbarkeit des Internets basiert auf vier zentralen Konzepten:
 
 ---
 
-## DNS
+## 2.3 DNS
 
 - Domain Name System (DNS) ist ein hierarchisches und dezentralisiertes System, das die Übersetzung von menschenlesbaren Domainnamen in IP-Adressen ermöglicht.
 - DNS besteht aus verschiedenen Komponenten, darunter:
@@ -150,7 +259,7 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ---
 
-## HTTP
+## 2.4 HTTP
 
 - Hypertext Transfer Protocol (HTTP) ist ein Protokoll, das die Kommunikation zwischen Webbrowsern und Webservern ermöglicht.
 - HTTP ist ein zustandsloses Protokoll, was bedeutet, dass jede Anfrage unabhängig von vorherigen Anfragen behandelt wird.
@@ -164,7 +273,7 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ---
 
-## HTTP Requests/ Responses
+### 2.4.1 HTTP Requests/ Responses
 
 - HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP oder UDP Pakages in ein Request und Reponse Objekt. Somit wird die Entwicklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um zugrunde liegende Netzwerkschichten kümmern müssen.
   ![alt text](./img/Request_Response.png)
@@ -173,7 +282,7 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ---
 
-### Der HTTP-Request (Die Anfrage)
+## 2.4.1.1 Der HTTP-Request (Die Anfrage)
 
 Das schickt Ihr Browser (oder Ihre React-App via `fetch`), wenn ein Nutzer eine Webseite aufruft. Im Prinzip ist es ein simples Textdokument, welches dann interpretiert wird.
 
