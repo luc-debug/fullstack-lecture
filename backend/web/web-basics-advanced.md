@@ -14,21 +14,97 @@ duration: 35min
 
 ## Internet Protocol
 
-- Internet Protocol (IP) ist ein Protokoll, das die Adressierung und Weiterleitung von Datenpaketen im Internet ermöglicht.
-- Es gibt zwei Versionen von IP: IPv4 und IPv6.
-- IPv4 verwendet 32-Bit-Adressen, während IPv6 128-Bit-Adressen verwendet, um die wachsende Anzahl von Geräten im Internet zu unterstützen.
-- IP-Adressen werden in der Regel in vier Oktetten dargestellt, z.B.
-  - IPv4: `192.168.1.1`
-  - IPv6: `2001:0db8:85a3:0000:0000:8a2e:0370:7334`
-  - IP-Adressen können statisch oder dynamisch zugewiesen werden, abhängig von der Netzwerkkonfiguration.
-- IP-Adressen können auch in privaten Netzwerken verwendet werden, die nicht direkt mit dem Internet verbunden sind, z.B. `192.168.x.x` oder `10.x.x.x`.
+🚫 **Problem:** Milliarden von Geräten sind weltweit vernetzt — aber wie findet ein Datenpaket seinen Weg vom Absender zum richtigen Empfänger?
+
+✅ **Lösung:** Das Internet Protocol (IP) gibt jedem Gerät eine eindeutige Adresse und definiert, wie Datenpakete adressiert und über Netzwerke weitergeleitet werden.
+
+Ein IP-Paket besteht aus einem **Header** (Metadaten über Quelle und Ziel in Form einer IP-Adresse) und einem **Payload** (die eigentlichen Nutzdaten).
+  ![IP Paket](./img/IP.png)
 
 ---
 
-- IP-Adressen können auch in Kombination mit Subnetzen verwendet werden, um Netzwerke zu segmentieren und die Verwaltung zu erleichtern.
-- IP operiert auf der Netzwerkschicht des OSI-Modells und ermöglicht die Kommunikation zwischen Geräten in verschiedenen Netzwerken.
-- Ein IP Paket besteht aus einem Header mit Metadaten (Daten über Daten), der Informationen über die Quelle und das Ziel enthält, sowie einem Payload, der die eigentlichen Daten enthält.
-  ![IP Paket](./img/IP.png)
+
+### 🚫 Problem 1: Es gibt mehr Geräte als öffentliche IPv4-Adressen
+
+IPv4 verwendet 32-Bit-Adressen und bietet damit nur rund 4,3 Milliarden mögliche Adressen.
+
+#### ✅ Lösung A: Private Netzwerke + NAT
+
+- Geräte in lokalen Netzwerken erhalten **private IP-Adressen**:
+  - `10.0.0.0/8`
+  - `172.16.0.0/12`
+  - `192.168.0.0/16`
+- Diese Adressbereiche können weltweit mehrfach verwendet werden.
+- **NAT (Network Address Translation)** übersetzt die privaten Adressen beim Zugriff auf das Internet in eine öffentliche IP-Adresse.
+- Dadurch können viele Geräte dieselbe öffentliche IPv4-Adresse teilen.
+
+---
+
+**Beispiel:**
+
+```text
+Laptop      192.168.1.10
+Smartphone  192.168.1.11
+Smart-TV    192.168.1.12
+      │
+      ▼
+Router (NAT)
+Öffentliche IP: 80.123.45.67
+      │
+      ▼
+Internet
+```
+
+<br>
+
+#### ✅ Lösung B: IPv6
+
+- **IPv6** erweitert den Adressraum von 32 auf 128 Bit und schafft damit praktisch unbegrenzt viele Adressen.
+  - IPv4: `192.168.1.1`
+  - IPv6: `2001:db8:85a3::8a2e:370:7334`
+
+💡 Fazit: 
+Private Netze + NAT = heutige praktische Lösung des IPv4-Mangels, da IPv6 noch aufgrund von u.a. Hardwarekompatibilität nicht flächendeckend eingesetzt wird. 
+
+IPv6 = langfristige architektonische Lösung des IPv4-Mangels
+
+---
+
+#### **🚫 Problem 2: Geräte wechseln ständig das Netzwerk**
+
+Laptops und Smartphones verbinden sich regelmäßig mit unterschiedlichen Netzwerken. Eine manuelle Konfiguration wäre aufwendig und fehleranfällig.
+
+#### **✅ Lösung: DHCP**
+
+- **DHCP (Dynamic Host Configuration Protocol)** vergibt IP-Adressen automatisch.
+- Geräte erhalten beim Verbinden eine passende Konfiguration.
+- Statische IP-Adressen werden hauptsächlich für Server und Netzwerkkomponenten verwendet.
+
+<br>
+
+#### **🚫 Problem 3: Große Netzwerke werden unübersichtlich**
+
+Wenn alle Geräte im selben Netzwerk liegen, steigen Verwaltungsaufwand und Netzwerkverkehr.
+
+✅ Lösung: Subnetze
+
+- Netzwerke werden in kleinere logische Bereiche aufgeteilt.
+- Vorteile:
+  - bessere Übersicht
+  - einfachere Verwaltung
+
+---
+
+### 💡 Fazit
+
+Die Skalierbarkeit des Internets basiert auf vier zentralen Konzepten:
+
+- **IPv6** erweitert den verfügbaren Adressraum.
+- **Private Netzwerke und NAT** reduzieren den Bedarf an öffentlichen IPv4-Adressen.
+- **DHCP** automatisiert die Adressvergabe.
+- **Subnetze** strukturieren große Netzwerke effizient.
+
+
 
 ---
 
