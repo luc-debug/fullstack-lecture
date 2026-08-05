@@ -19,27 +19,27 @@ duration: 35min
 ```mermaid
 graph TD
 
-    N[Netzwerkklassen]
 
-    N --> PAN["PAN<br/>Personal Area Network"]
-    N --> LAN["LAN<br/>Local Area Network"]
-    N --> MAN["MAN<br/>Metropolitan Area Network"]
-    N --> WAN["WAN<br/>Wide Area Network"]
 
-    PAN --> WPAN["WPAN <br/>Wireless Personal Area Network"]
+     PAN["PAN<br/>Personal Area Network"]
+     LAN["LAN<br/>Local Area Network"]
+     MAN["MAN<br/>Metropolitan Area Network"]
+     WAN["WAN<br/>Wide Area Network"]
 
-    WAN --> Internet[Internet]
+    %% Unterkategorien
+    PAN --> WPAN["WPAN<br/>Wireless PAN"]
     WAN --> Mobilfunk[Mobilfunk]
-    WAN --> LPWAN["LPWAN<br/>Low Power Wide Area Network"]
+    WAN --> LPWAN["LPWAN<br/>Low Power WAN"]
 
     %% Technologien
-
     WPAN --> Bluetooth[Bluetooth]
     WPAN --> NFC[NFC]
     WPAN --> ZigBee[ZigBee]
 
     LAN --> Ethernet[Ethernet]
     LAN --> WLAN[WLAN]
+
+    MAN --> MetroEth[Metro-Ethernet]
 
     Mobilfunk --> G4[4G / LTE]
     Mobilfunk --> G5[5G]
@@ -48,25 +48,38 @@ graph TD
     LPWAN --> NBIoT[NB-IoT]
     LPWAN --> Sigfox[Sigfox]
 
-
-    %% Farben Netzwerkklassen
+    %% Farben
     classDef netclass fill:#4A90E2,color:#fff,stroke:#1F4E79,stroke-width:2px;
-
-    %% Farben Technologien
+    classDef subcat fill:#F5B041,color:#000,stroke:#AF601A,stroke-width:2px;
     classDef tech fill:#58D68D,color:#000,stroke:#1D8348,stroke-width:2px;
 
-    %% Farben Funktechnologien/Protokolle
-    classDef radio fill:#F5B041,color:#000,stroke:#AF601A,stroke-width:2px;
-
-    class N,PAN,WPAN,LAN,MAN,WAN,Internet,Mobilfunk,LPWAN netclass;
-
-    class Bluetooth,NFC,ZigBee,Ethernet,WLAN,G4,G5,NBIoT,Sigfox,LoRaWAN tech;
+    class N,PAN,LAN,MAN,WAN netclass;
+    class WPAN,Mobilfunk,LPWAN subcat;
+    class Bluetooth,NFC,ZigBee,Ethernet,WLAN,MetroEth,G4,G5,LoRaWAN,NBIoT,Sigfox tech;
 
 ```
 
 **PAN → LAN → MAN → WAN** beschreibt die zunehmende Reichweite.
 
-🟦 Blau = Netzwerkklassen <br> 🟩 Grün = Netzwerktechnologien<br>
+🟦 Blau = Netzwerkklassen (Reichweite) <br> 🟧 Orange = Unterkategorien (verfeinern eine Klasse) <br> 🟩 Grün = Netzwerktechnologien (konkrete Implementierungen)<br>
+
+---
+
+# Netzwerktechnologie vs. Netzwerkprotokoll
+
+| | Netzwerktechnologie | Netzwerkprotokoll |
+|---|---|---|
+| **Was?** | Ein physischer/technischer Standard für die Datenübertragung | Ein Regelwerk, das festlegt, wie Daten formatiert und interpretiert werden |
+| **Frage** | *Womit* wird übertragen? (Medium, Hardware) | *Wie* wird kommuniziert? (Format, Ablauf) |
+| **Beispiele** | Ethernet (Kabel), WLAN (Funk), Glasfaser | HTTP, TCP, IP, DNS |
+| **OSI-Bezug** | Primär Schicht 1–2 | Primär Schicht 3–7 |
+
+
+---
+
+**Die Beziehung:** Protokolle *laufen über* Technologien. Eine Technologie stellt den physischen Kanal bereit — ein Protokoll definiert, was darüber "gesprochen" wird. Beispiel: HTTP (Protokoll) läuft über TCP (Protokoll), das über IP (Protokoll) übertragen wird, das wiederum über Ethernet oder WLAN (Technologie) transportiert wird.
+
+> 💡 Die Grenze ist nicht immer scharf: Ethernet definiert sowohl eine Technologie (Kabel, Stecker, Signale) als auch Protokolle auf Schicht 2 (Frame-Format, MAC-Adressen). Deshalb taucht es in der folgenden Tabelle auf beiden unteren Schichten auf.
 
 ---
 
