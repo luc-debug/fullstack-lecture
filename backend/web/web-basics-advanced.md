@@ -12,7 +12,94 @@ duration: 35min
 
 ---
 
-# Netzwerkklassen und Netzwerktechnologien
+<style>
+  .slidev-toc li::marker {
+  content: "";
+}
+  </style>
+
+<Toc />
+
+---
+
+# Grundbegriffe der Netzwerktechnik
+
+---
+
+## Netzwerkreferenzmodelle
+
+<table>
+  <tbody>
+    <tr>
+      <th>OSI-Modell</th>
+      <th>Technologie-Beispiele</th>
+      <th>TCP/IP-Stack</th>
+      <th>Technologie-Beispiele</th>
+    </tr>
+    <tr>
+      <td>Anwendung (7)</td>
+      <td>HTTP, HTTPS, DNS, SMTP</td>
+      <td rowspan="3">Anwendung</td>
+      <td rowspan="3">HTTP, HTTPS, DNS, SMTP</td>
+    </tr>
+    <tr>
+      <td>Darstellung (6)</td>
+      <td>TLS, JPEG, UTF-8</td>
+    </tr>
+    <tr>
+      <td>Sitzung (5)</td>
+      <td>RPC, NetBIOS</td>
+    </tr>
+    <tr>
+      <td>Transport (4)</td> 
+      <td>TCP, UDP</td>
+      <td>Transport</td>
+      <td>TCP, UDP</td>
+    </tr>
+    <tr>
+      <td>Vermittlung (3)</td>
+      <td>IP, ICMP, ARP</td>
+      <td>Internet</td>
+      <td>IP</td>
+    </tr>
+    <tr>
+      <td>Sicherung (2)</td>
+      <td>Ethernet, WLAN, LoRaWAN</td>
+      <td rowspan="2">Netzzugang</td>
+      <td rowspan="2">Ethernet</td>
+    </tr>
+    <tr>
+      <td>Bitübertragung (1)</td>
+      <td>Kabel, Glasfaser, Funk, LoRa</td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+- **OSI** erklärt, **wie** Netzwerkkommunikation theoretisch funktioniert, **TCP/IP** beschreibt, **wie das Internet tatsächlich arbeitet**.
+- Mehrere OSI-Schichten werden im TCP/IP-Stack zusammengefasst
+
+---
+
+## Netzwerktechnologie vs. Netzwerkprotokoll
+
+|               | Netzwerktechnologie                                          | Netzwerkprotokoll                                                          |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| **Was?**      | Ein physischer/technischer Standard für die Datenübertragung | Ein Regelwerk, das festlegt, wie Daten formatiert und interpretiert werden |
+| **Frage**     | _Womit_ wird übertragen? (Medium, Hardware)                  | _Wie_ wird kommuniziert? (Format, Ablauf)                                  |
+| **Beispiele** | Ethernet (Kabel), WLAN (Funk), Glasfaser                     | HTTP, TCP, IP, DNS                                                         |
+| **OSI-Bezug** | Primär Schicht 1–2                                           | Primär Schicht 3–7                                                         |
+
+---
+
+**Die Beziehung:** Protokolle _laufen über_ Technologien. Eine Technologie stellt den physischen Kanal bereit — ein Protokoll definiert, was darüber "gesprochen" wird. Beispiel: HTTP (Protokoll) läuft über TCP (Protokoll), das über IP (Protokoll) übertragen wird, das wiederum über Ethernet oder WLAN (Technologie) transportiert wird.
+
+> 💡 Die Grenze ist nicht immer scharf: Ethernet definiert sowohl eine Technologie (Kabel, Stecker, Signale) als auch Protokolle auf Schicht 2 (Frame-Format, MAC-Adressen). Deshalb taucht es in der folgenden Tabelle auf beiden unteren Schichten auf.
+
+---
+
+## Netzwerktechnologien kategorisiert nach Netzwerkklassen
 
 ```mermaid
 graph TD
@@ -65,86 +152,15 @@ graph TD
 
 ```
 
-**PAN → LAN → MAN → WAN** beschreibt die zunehmende Reichweite.
-
 🟦 Blau = Netzwerkklassen (Reichweite) <br> 🟩 Grün = Netzwerktechnologien (konkrete Implementierungen)<br>🔴 Rahmen = OSI Schicht 1 (Bitübertragungsschicht)<br>🟣 Rahmen = OSI Schicht 2 (Sicherungsschicht)<br>🔴 gestrichelter roter Rahmen = Schicht 1 + 2
 
-> 💡Eine Netzwerktechnologie kann auch mehreren Netzwerkklassen zugeordnet sein
+- **PAN → LAN → MAN → WAN** beschreibt die zunehmende Reichweite.
+
+- Eine Netzwerktechnologie kann auch mehreren Netzwerkklassen zugeordnet sein
 
 ---
 
-# Netzwerktechnologie vs. Netzwerkprotokoll
-
-|               | Netzwerktechnologie                                          | Netzwerkprotokoll                                                          |
-| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
-| **Was?**      | Ein physischer/technischer Standard für die Datenübertragung | Ein Regelwerk, das festlegt, wie Daten formatiert und interpretiert werden |
-| **Frage**     | _Womit_ wird übertragen? (Medium, Hardware)                  | _Wie_ wird kommuniziert? (Format, Ablauf)                                  |
-| **Beispiele** | Ethernet (Kabel), WLAN (Funk), Glasfaser                     | HTTP, TCP, IP, DNS                                                         |
-| **OSI-Bezug** | Primär Schicht 1–2                                           | Primär Schicht 3–7                                                         |
-
----
-
-**Die Beziehung:** Protokolle _laufen über_ Technologien. Eine Technologie stellt den physischen Kanal bereit — ein Protokoll definiert, was darüber "gesprochen" wird. Beispiel: HTTP (Protokoll) läuft über TCP (Protokoll), das über IP (Protokoll) übertragen wird, das wiederum über Ethernet oder WLAN (Technologie) transportiert wird.
-
-> 💡 Die Grenze ist nicht immer scharf: Ethernet definiert sowohl eine Technologie (Kabel, Stecker, Signale) als auch Protokolle auf Schicht 2 (Frame-Format, MAC-Adressen). Deshalb taucht es in der folgenden Tabelle auf beiden unteren Schichten auf.
-
----
-
-# Netzwerkreferenzmodelle: ISO/OSI- und TCP/IP-Modell
-
-<table>
-  <tbody>
-    <tr>
-      <th>OSI-Modell</th>
-      <th>Technologie-Beispiele</th>
-      <th>TCP/IP-Stack</th>
-      <th>Technologie-Beispiele</th>
-    </tr>
-    <tr>
-      <td>Anwendung (7)</td>
-      <td>HTTP, HTTPS, DNS, SMTP</td>
-      <td rowspan="3">Anwendung</td>
-      <td rowspan="3">HTTP, HTTPS, DNS, SMTP</td>
-    </tr>
-    <tr>
-      <td>Darstellung (6)</td>
-      <td>TLS, JPEG, UTF-8</td>
-    </tr>
-    <tr>
-      <td>Sitzung (5)</td>
-      <td>RPC, NetBIOS</td>
-    </tr>
-    <tr>
-      <td>Transport (4)</td> 
-      <td>TCP, UDP</td>
-      <td>Transport</td>
-      <td>TCP, UDP</td>
-    </tr>
-    <tr>
-      <td>Vermittlung (3)</td>
-      <td>IP, ICMP, ARP</td>
-      <td>Internet</td>
-      <td>IP</td>
-    </tr>
-    <tr>
-      <td>Sicherung (2)</td>
-      <td>Ethernet, WLAN, LoRaWAN</td>
-      <td rowspan="2">Netzzugang</td>
-      <td rowspan="2">Ethernet</td>
-    </tr>
-    <tr>
-      <td>Bitübertragung (1)</td>
-      <td>Kabel, Glasfaser, Funk, LoRa</td>
-    </tr>
-  </tbody>
-</table>
-
-- **OSI** erklärt, **wie** Netzwerkkommunikation theoretisch funktioniert, **TCP/IP** beschreibt, **wie das Internet tatsächlich arbeitet**.
-- Mehrere OSI-Schichten werden im TCP/IP-Stack zusammengefasst
-
----
-
-# 2. Internetprotokollfamilie
+# 2. Die Internetprotokollfamilie
 
 Eine Sammlung aus Protokollen, die den TCP/IP-Stack implementieren
 
