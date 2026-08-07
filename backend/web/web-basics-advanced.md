@@ -16,17 +16,14 @@ duration: 35min
 
 ```mermaid
 graph TD
-
-    
-
-    Netzwerkklassen ---> PAN["PAN<br/>Personal Area Network"]
-    Netzwerkklassen --->  LAN["LAN<br/>Local Area Network"]
-    Netzwerkklassen ---> MAN["MAN<br/>Metropolitan Area Network"]
-    Netzwerkklassen ---> WAN["WAN<br/>Wide Area Network"]
+    PAN["PAN<br/>Personal Area Network"]
+    LAN["LAN<br/>Local Area Network"]
+    MAN["MAN<br/>Metropolitan Area Network"]
+    WAN["WAN<br/>Wide Area Network"]
 
     %% Unterkategorien
     PAN --> WPAN["WPAN<br/>Wireless PAN"]
-    WAN --> Mobilfunk[Mobilfunk]
+    WAN --> WWAN["WWAN<br/>Wireless WAN"]
     WAN --> LPWAN["LPWAN<br/>Low Power WAN"]
 
     %% Technologien
@@ -39,27 +36,40 @@ graph TD
 
     MAN --> MetroEth[Metro-Ethernet]
 
-    Mobilfunk --> G4[4G / LTE]
-    Mobilfunk --> G5[5G]
+    WWAN --> G4[4G / LTE]
+    WWAN --> G5[5G]
 
     LPWAN --> LoRaWAN[LoRaWAN]
     LPWAN --> NBIoT[NB-IoT]
     LPWAN --> Sigfox[Sigfox]
 
-    %% Farben
-    classDef netclass fill:#4A90E2,color:#fff,stroke:#1F4E79,stroke-width:2px;
-    classDef subcat fill:#F5B041,color:#000,stroke:#AF601A,stroke-width:2px;
-    classDef tech fill:#58D68D,color:#000,stroke:#1D8348,stroke-width:2px;
+    LoRaWAN --> Lora[LoRa]
 
-    class N,PAN,LAN,MAN,WAN netclass;
-    class WPAN,Mobilfunk,LPWAN subcat;
-    class Bluetooth,NFC,ZigBee,Ethernet,WLAN,MetroEth,G4,G5,LoRaWAN,NBIoT,Sigfox tech;
+    %% Grundfarben
+    classDef netclass fill:#4A90E2,color:white,stroke:#1F4E79,stroke-width:2px;
+    classDef subcat fill:#F5B041,color:black,stroke:#AF601A,stroke-width:2px;
+    classDef tech fill:#58D68D,color:black,stroke:#1D8348,stroke-width:2px;
+
+    %% OSI Layer
+    classDef osi1 fill:#58D68D,color:black,stroke:#E74C3C,stroke-width:4px;
+    classDef osi2 fill:#58D68D,color:black,stroke:#8E44AD,stroke-width:4px;
+    classDef osi12 fill:#58D68D,color:black,stroke:#C0392B,stroke-width:4px,stroke-dasharray: 8 3;
+
+    class PAN,LAN,MAN,WAN netclass;
+    class WPAN,WWAN,LPWAN subcat;
+
+    class NFC,G4,G5,Lora osi1;
+    class Ethernet,WLAN,Bluetooth,ZigBee,LoRaWAN,NBIoT,Sigfox osi12;
+    class Lora osi2;
+    class MetroEth tech;
 
 ```
 
 **PAN → LAN → MAN → WAN** beschreibt die zunehmende Reichweite.
 
-🟦 Blau = Netzwerkklassen (Reichweite) <br> 🟧 Orange = Unterkategorien (verfeinern eine Klasse) <br> 🟩 Grün = Netzwerktechnologien (konkrete Implementierungen)<br>
+🟦 Blau = Netzwerkklassen (Reichweite) <br> 🟩 Grün = Netzwerktechnologien (konkrete Implementierungen)<br>🔴 Rahmen = OSI Schicht 1 (Bitübertragungsschicht)<br>🟣 Rahmen = OSI Schicht 2 (Sicherungsschicht)<br>🔴 gestrichelter roter Rahmen = Schicht 1 + 2
+
+> 💡Eine Netzwerktechnologie kann auch mehreren Netzwerkklassen zugeordnet sein
 
 ---
 
@@ -137,6 +147,19 @@ graph TD
 # 2. Internetprotokollfamilie
 
 Eine Sammlung aus Protokollen, die den TCP/IP-Stack implementieren
+
+- **IP** (Internet Protocol) → Adressierung und Routing von Datenpaketen
+- **TCP** (Transmission Control Protocol) → zuverlässige, verbindungsorientierte Datenübertragung
+- **UDP** (User Datagram Protocol) → schnelle, verbindungslose Datenübertragung
+- **HTTP** (Hypertext Transfer Protocol) → Kommunikation zwischen Webbrowsern und Webservern
+- **DNS** (Domain Name System) → Übersetzung von Domainnamen in IP-Adressen
+
+> HTTP ist hierbei das wichitgste Protkoll, die anderen sollte man schonmal gehört haben, um die Funktionsweise des Internets zu verstehen.
+
+> UDP wurde früher benutzt für "unzuverlässige" Übertragungen, z.B. für Streaming oder Online-Gaming, wo Geschwindigkeit wichtiger ist als absolute Zuverlässigkeit.
+> Heute ist es mit HTTP 3.0 aber so, dass HTTP UDP benutzt, um die Geschwindigkeit zu erhöhen und die Latenz zu reduzieren, während es gleichzeitig Mechanismen implementiert, um die Zuverlässigkeit der Übertragung zu gewährleisten.
+
+> Sonderfall DNS: DNS wurde unabhängig von TCP/IP entwickelt, ist aber heute ein integraler Bestandteil der Internetprotokollfamilie.
 
 ---
 
