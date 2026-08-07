@@ -147,7 +147,6 @@ graph TD
 
     class NFC,G4,G5,Lora osi1;
     class Ethernet,WLAN,Bluetooth,ZigBee,LoRaWAN,NBIoT,Sigfox osi12;
-    class Lora osi2;
     class MetroEth tech;
 
 ```
@@ -170,10 +169,10 @@ Eine Sammlung aus Protokollen, die den TCP/IP-Stack implementieren
 - **HTTP** (Hypertext Transfer Protocol) → Kommunikation zwischen Webbrowsern und Webservern
 - **DNS** (Domain Name System) → Übersetzung von Domainnamen in IP-Adressen
 
-> HTTP ist hierbei das wichitgste Protkoll, die anderen sollte man schonmal gehört haben, um die Funktionsweise des Internets zu verstehen.
+> HTTP ist hierbei das wichtigste Protokoll, die anderen sollte man schon mal gehört haben, um die Funktionsweise des Internets zu verstehen.
 
 > UDP wurde früher benutzt für "unzuverlässige" Übertragungen, z.B. für Streaming oder Online-Gaming, wo Geschwindigkeit wichtiger ist als absolute Zuverlässigkeit.
-> Heute ist es mit HTTP 3.0 aber so, dass HTTP UDP benutzt, um die Geschwindigkeit zu erhöhen und die Latenz zu reduzieren, während es gleichzeitig Mechanismen implementiert, um die Zuverlässigkeit der Übertragung zu gewährleisten.
+> Heute ist es mit HTTP/3 aber so, dass HTTP UDP benutzt, um die Geschwindigkeit zu erhöhen und die Latenz zu reduzieren, während es gleichzeitig Mechanismen implementiert, um die Zuverlässigkeit der Übertragung zu gewährleisten.
 
 > Sonderfall DNS: DNS wurde unabhängig von TCP/IP entwickelt, ist aber heute ein integraler Bestandteil der Internetprotokollfamilie.
 
@@ -330,10 +329,10 @@ https://itnext.io/dns-the-best-explanation-ever-hopefully-13cea019b72b
 
 ### 2.4.1 HTTP Requests/ Responses
 
-- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP oder UDP Pakages in ein Request und Reponse Objekt. Somit wird die Entwicklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um zugrunde liegende Netzwerkschichten kümmern müssen.
+- HTTP arbeitet auf der Anwendungsschicht des OSI-Modells. Es gruppiert mehrere TCP- oder UDP-Pakete in ein Request- und Response-Objekt. Somit wird die Entwicklung von Webanwendungen vereinfacht, da Entwickler (wir!) sich nicht um zugrunde liegende Netzwerkschichten kümmern müssen.
   ![alt text](./img/Request_Response.png)
 
-- Sowohl HTTP-Anfragen als auch HTTP-Antworten bestehen aus einem HTTP-BODY (optional), der Daten enthält einem und HTTP-HEADER, der die Anfrage/Antwort selbst beschreiben (Ursprung, Codierung, Sicherheit, Caching, Inhaltstyp).
+- Sowohl HTTP-Anfragen als auch HTTP-Antworten bestehen aus einem HTTP-BODY (optional), der Daten enthält, und einem HTTP-HEADER, der die Anfrage/Antwort selbst beschreibt (Ursprung, Codierung, Sicherheit, Caching, Inhaltstyp).
 
 ---
 
