@@ -10,21 +10,19 @@ duration: 35min
 
 # Web Basics Advanced
 
-
 ---
-
 
 # Netzwerkklassen und Netzwerktechnologien
 
 ```mermaid
 graph TD
 
+    
 
-
-     PAN["PAN<br/>Personal Area Network"]
-     LAN["LAN<br/>Local Area Network"]
-     MAN["MAN<br/>Metropolitan Area Network"]
-     WAN["WAN<br/>Wide Area Network"]
+    Netzwerkklassen ---> PAN["PAN<br/>Personal Area Network"]
+    Netzwerkklassen --->  LAN["LAN<br/>Local Area Network"]
+    Netzwerkklassen ---> MAN["MAN<br/>Metropolitan Area Network"]
+    Netzwerkklassen ---> WAN["WAN<br/>Wide Area Network"]
 
     %% Unterkategorien
     PAN --> WPAN["WPAN<br/>Wireless PAN"]
@@ -67,23 +65,22 @@ graph TD
 
 # Netzwerktechnologie vs. Netzwerkprotokoll
 
-| | Netzwerktechnologie | Netzwerkprotokoll |
-|---|---|---|
-| **Was?** | Ein physischer/technischer Standard für die Datenübertragung | Ein Regelwerk, das festlegt, wie Daten formatiert und interpretiert werden |
-| **Frage** | *Womit* wird übertragen? (Medium, Hardware) | *Wie* wird kommuniziert? (Format, Ablauf) |
-| **Beispiele** | Ethernet (Kabel), WLAN (Funk), Glasfaser | HTTP, TCP, IP, DNS |
-| **OSI-Bezug** | Primär Schicht 1–2 | Primär Schicht 3–7 |
-
+|               | Netzwerktechnologie                                          | Netzwerkprotokoll                                                          |
+| ------------- | ------------------------------------------------------------ | -------------------------------------------------------------------------- |
+| **Was?**      | Ein physischer/technischer Standard für die Datenübertragung | Ein Regelwerk, das festlegt, wie Daten formatiert und interpretiert werden |
+| **Frage**     | _Womit_ wird übertragen? (Medium, Hardware)                  | _Wie_ wird kommuniziert? (Format, Ablauf)                                  |
+| **Beispiele** | Ethernet (Kabel), WLAN (Funk), Glasfaser                     | HTTP, TCP, IP, DNS                                                         |
+| **OSI-Bezug** | Primär Schicht 1–2                                           | Primär Schicht 3–7                                                         |
 
 ---
 
-**Die Beziehung:** Protokolle *laufen über* Technologien. Eine Technologie stellt den physischen Kanal bereit — ein Protokoll definiert, was darüber "gesprochen" wird. Beispiel: HTTP (Protokoll) läuft über TCP (Protokoll), das über IP (Protokoll) übertragen wird, das wiederum über Ethernet oder WLAN (Technologie) transportiert wird.
+**Die Beziehung:** Protokolle _laufen über_ Technologien. Eine Technologie stellt den physischen Kanal bereit — ein Protokoll definiert, was darüber "gesprochen" wird. Beispiel: HTTP (Protokoll) läuft über TCP (Protokoll), das über IP (Protokoll) übertragen wird, das wiederum über Ethernet oder WLAN (Technologie) transportiert wird.
 
 > 💡 Die Grenze ist nicht immer scharf: Ethernet definiert sowohl eine Technologie (Kabel, Stecker, Signale) als auch Protokolle auf Schicht 2 (Frame-Format, MAC-Adressen). Deshalb taucht es in der folgenden Tabelle auf beiden unteren Schichten auf.
 
 ---
 
-# Die relevanteste Netzwerkprotokoll-Familie: Die Internetprotokollfamilie
+# Netzwerkreferenzmodelle: ISO/OSI- und TCP/IP-Modell
 
 <table>
   <tbody>
@@ -134,6 +131,12 @@ graph TD
 
 - **OSI** erklärt, **wie** Netzwerkkommunikation theoretisch funktioniert, **TCP/IP** beschreibt, **wie das Internet tatsächlich arbeitet**.
 - Mehrere OSI-Schichten werden im TCP/IP-Stack zusammengefasst
+
+---
+
+# 2. Internetprotokollfamilie
+
+Eine Sammlung aus Protokollen, die den TCP/IP-Stack implementieren
 
 ---
 
